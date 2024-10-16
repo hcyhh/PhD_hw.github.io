@@ -4,14 +4,20 @@ project:
   execute-dir: project
 
 book:
-  title: "PhD_hw"
-  author: "Norah Jones"
-  date: "10/16/2024"
+  title: "博士期间作业"
+  author: "CongyuanHe"
+  date: now
   chapters:
     - index.qmd
-    - intro.qmd
-    - summary.qmd
-    - references.qmd
+    - part: Bayesian.qmd
+      chapters: 
+        - bayesian hw 1.qmd
+    - part: Survival.qmd
+      chapters: 
+        - survival hw 1.qmd
+    - part: Causal inference.qmd
+      chapters: 
+        - causal inference hw 1.qmd
 
 bibliography: references.bib
 

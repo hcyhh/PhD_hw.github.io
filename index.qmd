@@ -1,16 +1,4 @@
 # Preface {.unnumbered}
 
-This is a Quarto book.
-
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
-
-```{r}
-1 + 1
-
-```
-
-
-```{r}
-# 贝叶斯
-```
+博一期间课程作业 包括贝叶斯、因果推断、生存分析
 

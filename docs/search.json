@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "PhD_hw",
+    "title": "博士期间作业",
     "section": "",
-    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n1 + 1\n\n[1] 2\n\n\n\n# 贝叶斯",
+    "text": "Preface\n博一期间课程作业 包括贝叶斯、因果推断、生存分析",
     "crumbs": [
       "Preface"
     ]
@@ -37,6 +37,89 @@
     "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
     "crumbs": [
       "References"
+    ]
+  },
+  {
+    "objectID": "index.html#readme",
+    "href": "index.html#readme",
+    "title": "PhD_hw",
+    "section": "Readme",
+    "text": "Readme\n博一期间课程作业 包括贝叶斯、因果推断、生存分析（有点难）",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "bayesian.html",
+    "href": "bayesian.html",
+    "title": "(APPENDIX) 附录",
+    "section": "",
+    "text": "一些定理的证明",
+    "crumbs": [
+      "(APPENDIX) 附录"
+    ]
+  },
+  {
+    "objectID": "survival.html",
+    "href": "survival.html",
+    "title": "2  Survival",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Survival</span>"
+    ]
+  },
+  {
+    "objectID": "whatif.html",
+    "href": "whatif.html",
+    "title": "3  What if",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>What if</span>"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 1.html",
+    "href": "bayesian hw 1.html",
+    "title": "(APPENDIX) 附录",
+    "section": "",
+    "text": "一些定理的证明",
+    "crumbs": [
+      "Bayesian.html",
+      "(APPENDIX) 附录"
+    ]
+  },
+  {
+    "objectID": "survival hw 1.html",
+    "href": "survival hw 1.html",
+    "title": "survival hw 1",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2",
+    "crumbs": [
+      "Survival",
+      "survival hw 1"
+    ]
+  },
+  {
+    "objectID": "causal inference hw 1.html",
+    "href": "causal inference hw 1.html",
+    "title": "2  What if",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "crumbs": [
+      "Causal inference.html",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What if</span>"
+    ]
+  },
+  {
+    "objectID": "Bayesian.html",
+    "href": "Bayesian.html",
+    "title": "PhD_hw",
+    "section": "",
+    "text": "book: - part: “Bayesian” chapters: - basics.qmd - packages.qmd",
+    "crumbs": [
+      "Bayesian.html"
     ]
   }
 ]
