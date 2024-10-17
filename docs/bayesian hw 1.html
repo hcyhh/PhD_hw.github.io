@@ -6,6 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Congyuan He">
+<meta name="dcterms.date" content="2024-10-17">
 
 <title>博士期间作业 - bayesian hw 1</title>
 <style>
@@ -19,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -69,6 +105,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -81,7 +146,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Bayesian.html">Bayesian</a></li><li class="breadcrumb-item"><a href="./bayesian hw 1.html">bayesian hw 1</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Bayesian.html">Bayesian</a></li><li class="breadcrumb-item"><a href="./bayesian hw 1.html">Bayesian hw</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -124,7 +189,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./bayesian hw 1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">bayesian hw 1</span></a>
+ <span class="menu-text">Bayesian hw</span></a>
   </div>
 </li>
       </ul>
@@ -163,27 +228,69 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./Linear regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear regression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./linear regression hw 3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">linear regression hw 3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#exercise-3.1." id="toc-exercise-3.1." class="nav-link active" data-scroll-target="#exercise-3.1.">EXERCISE 3.1.</a></li>
+  <li><a href="#exercise-3.2." id="toc-exercise-3.2." class="nav-link" data-scroll-target="#exercise-3.2.">EXERCISE 3.2.</a></li>
+  <li><a href="#exercise-3.3." id="toc-exercise-3.3." class="nav-link" data-scroll-target="#exercise-3.3.">EXERCISE 3.3.</a></li>
+  <li><a href="#exercise-3.4." id="toc-exercise-3.4." class="nav-link" data-scroll-target="#exercise-3.4.">EXERCISE 3.4.</a></li>
+  <li><a href="#exercise-3.5." id="toc-exercise-3.5." class="nav-link" data-scroll-target="#exercise-3.5.">EXERCISE 3.5.</a></li>
+  <li><a href="#exercise-3.6." id="toc-exercise-3.6." class="nav-link" data-scroll-target="#exercise-3.6.">EXERCISE 3.6.</a></li>
+  <li><a href="#exercise-3.7." id="toc-exercise-3.7." class="nav-link" data-scroll-target="#exercise-3.7.">EXERCISE 3.7.</a></li>
+  </ul>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Bayesian.html">Bayesian</a></li><li class="breadcrumb-item"><a href="./bayesian hw 1.html">bayesian hw 1</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Bayesian.html">Bayesian</a></li><li class="breadcrumb-item"><a href="./bayesian hw 1.html">Bayesian hw</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">bayesian hw 1</h1>
+<p class="subtitle lead">chapter 3</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Congyuan He </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 17, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -193,8 +300,401 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="exercise-3.1." class="level1">
+<h1>EXERCISE 3.1.</h1>
+<p>Let prior uncertainty about a parameter <span class="math inline">\(\theta\)</span> be reflected by the density</p>
+<p><span class="math display">\[
+p(\theta) = ce^{−3\theta} I(0,\infty)(\theta).
+\]</span></p>
+<p>Find the constant c that makes this integrate to one. Also find <span class="math inline">\(Pr(\theta &gt; 2)\)</span> and <span class="math inline">\(Pr(\theta &gt; 4 | \theta &gt; 2)\)</span>. Find the median and the expected value. Finally, obtain a 95% probability interval for <span class="math inline">\(\theta\)</span></p>
+<ul>
+<li></li>
+</ul>
+<p><span class="math display">\[\begin{align}
+
+  \int_{0}^{\infty} p(\theta) d\theta &amp;= \int_{0}^{\infty} ce^{-3\theta}I_{(0,\infty)}(\theta) d\theta \\
+
+  &amp;= -\frac{c}{3}(e^{-3\theta}|^{\infty}_0) \\
+
+  &amp;= \frac{c}{3}
+
+\end{align}\]</span></p>
+<p>let <span class="math inline">\(\frac{c}{3}=1\)</span>，then we have <span class="math inline">\(c=3\)</span></p>
+<ul>
+<li></li>
+</ul>
+<p><span class="math display">\[\begin{align}
+
+  Pr(\theta &gt; x )&amp;= \int_{x}^{\infty} 3e^{-3\theta}I_{(0,\infty)}(\theta) d\theta \\
+
+  &amp;= -e^{-3\theta}|^{\infty}_x \\
+
+  &amp;= e^{-3\theta}|^{x}_\infty  \\
+  
+  &amp;= e^{-3x}
+
+\end{align}\]</span></p>
+<p>let <span class="math inline">\(x=2\)</span>, then we have <span class="math display">\[
+Pr(\theta&gt;2) = e^{-3*2} = 0.002478752
+\]</span></p>
+<p><span class="math display">\[
+Pr(\theta &gt; 4 | \theta &gt; 2) = Pr(\theta&gt;2) = e^{-3*2} = 0.002478752
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pr(theta&gt;2)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pexp</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.002478752</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Monte Carlo simulations</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">1000000</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">rexp</span>(N,<span class="dv">3</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="fu">mean</span>(samples <span class="sc">&gt;</span> <span class="dv">2</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(P)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.002496</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pr(theta&gt;4|theta&gt;2)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pexp</span>(<span class="dv">4</span>,<span class="dv">3</span>))<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pexp</span>(<span class="dv">2</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.002478752</code></pre>
+</div>
+</div>
+<ul>
+<li><p>For Exp(3) , <span class="math inline">\(Mean = \frac{1}{\theta}\)</span> ,<span class="math inline">\(Mdian = \frac{Ln2}{\theta}\)</span>, We all know <span class="math inline">\(\theta =3\)</span>, so we have <span class="math inline">\(Mean = \frac{1}{3}\)</span> , <span class="math inline">\(Median = \frac{Ln2}{3}\)</span></p></li>
+<li><p>95% probability interval for <span class="math inline">\(\theta\)</span></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qexp</span>(<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>),<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.008439269 1.229626485</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-3.2." class="level1">
+<h1>EXERCISE 3.2.</h1>
+<p>Suppose <span class="math inline">\(n\)</span> cities were sampled and for each city <span class="math inline">\(i\)</span> the number <span class="math inline">\(y_i\)</span> of deaths from ALS were recorded for a period of one year. We expect the numbers to be Poisson distributed, but the size of the city is a factor. Let <span class="math inline">\(M_i\)</span> be the known population for city <span class="math inline">\(i\)</span> and let</p>
+<p><span class="math display">\[
+y_i|\theta ～ Pois(\theta M_i), i= 1,...k
+\]</span></p>
+<p>where <span class="math inline">\(\theta\)</span> &gt; 0 is an unknown parameter measuring the common death rate for all cities. Given <span class="math inline">\(\theta\)</span>, the expected number of ALS deaths for city i is <span class="math inline">\(\theta M_i\)</span>, so <span class="math inline">\(\theta\)</span> is expected to be small. Assume that independent scientific information can be obtained about <span class="math inline">\(\theta\)</span> in the form of a gamma distribution, say <span class="math inline">\(Gamma(a, b)\)</span>. Show that this prior and posterior are conjugate in the sense that both have gamma distributions.</p>
+<ul>
+<li></li>
+</ul>
+<p><span class="math display">\[
+\theta ～ Gamma(a,b)  \Rightarrow  p(\theta) = [b^a/\Gamma(a)]\theta^{a-1}e^{-b\theta}I_{(0,\infty)}(\theta)
+\]</span></p>
+<p><span class="math display">\[
+y_i|\theta～Pois(\theta M_i)\Rightarrow P(y_i|\theta) = \frac{(\theta M_i)^{Y_i}e^{-\theta M_i}}{Y_i!}
+\]</span></p>
+<p><span class="math display">\[
+L(\theta)= (\prod \frac{M_{i}^{y_i}}{y_i !}) \theta^{\sum y_i} e^{-\theta \sum M_i }
+\]</span></p>
+<p><span class="math display">\[\begin{align}
+
+  p(\theta|y) &amp; \propto p(\theta)L(\theta) \\
+
+  &amp; \propto  \theta^{a-1}e^{-b\theta}\theta^{\sum y_i} e^{- \theta \sum M_i} \\
+
+  &amp; \propto \theta^{a+\sum y_i -1} e^{- \theta (b+\sum M_i)}
+
+\end{align}\]</span></p>
+<p>Finally, we have</p>
+<p><span class="math display">\[
+\theta|y ～ Gamma(a+\sum y_i  ,b+\sum M_i)
+\]</span></p>
+</section>
+<section id="exercise-3.3." class="level1">
+<h1>EXERCISE 3.3.</h1>
+<p>Extending Exercise 3.2, two cities are allowed different death rates. Let <span class="math inline">\(y_i ～  Pois(θ_i M_i), i = 1, 2,\)</span> where the <span class="math inline">\(M_is\)</span> are known constants. Let knowledge about <span class="math inline">\(θ_i\)</span> be reflected by independent gamma distributions, namely <span class="math inline">\(θ_i ∼ Gamma(a_i, b_i)\)</span>. Derive the joint posterior for <span class="math inline">\((\theta_1,\theta_2)\)</span>. Characterize the joint distribution as we did for sampling two independent binomials. Think of <span class="math inline">\(\theta_i\)</span> as the rate of events per 100 thousand people in city <span class="math inline">\(i\)</span>. For independent priors <span class="math inline">\(\theta_i ∼ Gamma(1, 0.1)\)</span>, give the exact joint posterior with <span class="math inline">\(y_1 = 500, y_2 = 800\)</span>in cities with populations of 100 thousand and 200 thousand, respectively.</p>
+<ul>
+<li></li>
+</ul>
+<p><span class="math display">\[
+P(\theta_1 , \theta_2)=p_1(\theta_1)p_2(\theta_2)
+\]</span></p>
+<p>According to the above conclusion, we have <span class="math display">\[
+\theta_1,\theta_2 ～ Gamma(a + y_1,b+M_1)Gamma(a + y_2,b+M_2)
+\]</span></p>
+<p>We know,</p>
+<p><span class="math display">\[\begin{align}
+
+a_1 = a_2 &amp;= 1 \\
+
+b_1 = b_2 &amp;= 0.1 \\
+
+y_1 &amp;= 500  \\
+
+y_2 &amp;= 800  \\
+
+M_1 &amp;= 100  \\
+
+M_2 &amp;= 200
+
+\end{align}\]</span></p>
+<p>Finally,</p>
+<p><span class="math display">\[\begin{align}
+p(\theta_1,\theta_2|y_1 =500,y_2=800)=[[100.1^501/\Gamma(501)]\theta_1 ^{500}e^{-100.1\theta_1}][[200.1^801/\Gamma(801)]\theta_2 ^{800-1}e^{-200.1\theta_2}]
 
 
+\end{align}\]</span></p>
+</section>
+<section id="exercise-3.4." class="level1">
+<h1>EXERCISE 3.4.</h1>
+<p>Perform Example 3.1.3 in WinBUGS with <span class="math inline">\(y_1 ∼ Bin(80,\theta1)\)</span>, <span class="math inline">\(y_2 ∼ Bin(100,\theta_2)\)</span> <span class="math inline">\(\theta1 ∼ Beta(1, 1), \theta 2 ∼ Beta(2, 1)\)</span> with observations <span class="math inline">\(y_1 = 32\)</span> and <span class="math inline">\(y_2 = 35\)</span>. Put each term in the model on a separate line. There should still be only two list statements with entries separated by commas. See Exercises 3.6 and 3.7 for WinBUGS syntax.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(rjags))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>model_string <span class="ot">&lt;-</span> <span class="st">"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">model {</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">    theta1 ~ dbeta(1, 1)</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="st">    theta2 ~ dbeta(2, 1)</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="st">    y1 ~ dbin(theta1, n1)</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="st">    y2 ~ dbin(theta2, n2)</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>data_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y1 =</span> <span class="dv">32</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">n1 =</span> <span class="dv">80</span>,</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">y2 =</span> <span class="dv">35</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">n2 =</span> <span class="dv">100</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>jags_model <span class="ot">&lt;-</span> <span class="fu">jags.model</span>(</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">textConnection</span>(model_string),</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data_list,</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.chains =</span> <span class="dv">1</span>,</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.adapt =</span> <span class="dv">1000</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 2
+   Unobserved stochastic nodes: 2
+   Total graph size: 8
+
+Initializing model</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update</span>(jags_model, <span class="dv">1000</span>)    </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mcmc_samples <span class="ot">&lt;-</span> <span class="fu">coda.samples</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">model =</span> jags_model,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">variable.names =</span> <span class="fu">c</span>(<span class="st">"theta1"</span>, <span class="st">"theta2"</span>, <span class="st">"gamma"</span>),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.iter =</span> <span class="dv">10000</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in FUN(X[[i]], ...): Failed to set trace monitor for gamma
+Variable gamma not found</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mcmc_samples[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Markov Chain Monte Carlo (MCMC) output:
+Start = 2001 
+End = 2007 
+Thinning interval = 1 
+        theta1    theta2
+[1,] 0.4524820 0.3531854
+[2,] 0.3891633 0.3054305
+[3,] 0.3456396 0.3841356
+[4,] 0.3755774 0.3666568
+[5,] 0.3561009 0.3408079
+[6,] 0.3973557 0.3599804
+[7,] 0.3842592 0.2977405</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-3.5." class="level1">
+<h1>EXERCISE 3.5.</h1>
+<p>Perform a data analysis for the model in Exercise 3.3 using the data <span class="math inline">\(y_1 = 500\)</span>, <span class="math inline">\(y_2 = 800\)</span>, <span class="math inline">\(M_1 = 100\)</span>, <span class="math inline">\(M_2 = 200\)</span>, and using independent <span class="math inline">\(Gamma(1, 0.01)\)</span> priors for the <span class="math inline">\(θ_is\)</span>. Make WinBUGS based inferences for all parameters and functions of parameters discussed there using a Monte Carlo sample size of 10,000 and a burn-in of 1,000. This may involve an excursion into the “Help” menu to find the syntax for Poisson and gamma distributions. Compare the posterior means for <span class="math inline">\(\theta_1\)</span> and <span class="math inline">\(\theta_2\)</span> based on the WinBUGS output to the exact values from the Gamma posteriors that you obtained in Exercise 3.3.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>model_string <span class="ot">&lt;-</span> <span class="st">"</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="st">model {</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="st">    theta1 ~ dgamma(a, b)</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="st">    theta2 ~ dgamma(a, b)</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="st">    y1 ~ dpois(theta1*M1)</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="st">    y2 ~ dpois(theta2*M2)</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>data_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">a =</span> <span class="dv">1</span>,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">b =</span> <span class="fl">0.01</span>,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y1 =</span> <span class="dv">500</span>,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">M1 =</span> <span class="dv">100</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y2 =</span> <span class="dv">800</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">M2 =</span> <span class="dv">200</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>jags_model <span class="ot">&lt;-</span> <span class="fu">jags.model</span>(</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">textConnection</span>(model_string),</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data_list,</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.chains =</span> <span class="dv">1</span>,</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.adapt =</span> <span class="dv">10000</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 2
+   Unobserved stochastic nodes: 2
+   Total graph size: 10
+
+Initializing model</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update</span>(jags_model, <span class="dv">1000</span>)    </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>mcmc_samples <span class="ot">&lt;-</span> <span class="fu">coda.samples</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">model =</span> jags_model,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">variable.names =</span> <span class="fu">c</span>(<span class="st">"theta1"</span>, <span class="st">"theta2"</span>),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.iter =</span> <span class="dv">10000</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mcmc_samples[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Markov Chain Monte Carlo (MCMC) output:
+Start = 1001 
+End = 1007 
+Thinning interval = 1 
+       theta1   theta2
+[1,] 5.372489 3.818596
+[2,] 5.592069 3.792485
+[3,] 4.616593 4.103390
+[4,] 4.846946 4.257532
+[5,] 4.722098 3.703571
+[6,] 4.918131 3.928458
+[7,] 5.018989 4.148727</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mcmc_samples[[<span class="dv">1</span>]],<span class="dv">2</span>,mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  theta1   theta2 
+5.010263 4.004477 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gamma分布均值为a/b</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="dv">501</span><span class="sc">/</span><span class="fl">100.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.004995</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dv">801</span><span class="sc">/</span><span class="fl">200.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.002999</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-3.6." class="level1">
+<h1>EXERCISE 3.6.</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>model_string <span class="ot">&lt;-</span> <span class="st">"</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="st">model {</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="st">    y ~ dbin(theta , n)</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="st">    ytilde ~ dbin(theta, m)</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="st">    theta ~ dbeta(a, b)</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="st">    prob &lt;- step(ytilde - 20)</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>data_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">n=</span><span class="dv">100</span>, <span class="at">m=</span><span class="dv">100</span>, <span class="at">y=</span><span class="dv">10</span>, <span class="at">a=</span><span class="dv">1</span>, <span class="at">b=</span><span class="dv">1</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>jags_model <span class="ot">&lt;-</span> <span class="fu">jags.model</span>(</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">textConnection</span>(model_string),</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data_list,</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.chains =</span> <span class="dv">1</span>,</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.adapt =</span> <span class="dv">1000</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 1
+   Unobserved stochastic nodes: 2
+   Total graph size: 10
+
+Initializing model</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update</span>(jags_model, <span class="dv">100</span>)    </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>mcmc_samples <span class="ot">&lt;-</span> <span class="fu">coda.samples</span>(</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">model =</span> jags_model,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">variable.names =</span> <span class="fu">c</span>(<span class="st">"theta"</span>,<span class="st">'prob'</span>),</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.iter =</span> <span class="dv">10000</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mcmc_samples[[<span class="dv">1</span>]],<span class="dv">2</span>,mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     prob     theta 
+0.0366000 0.1081029 </code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-3.7." class="level1">
+<h1>EXERCISE 3.7.</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>model_string <span class="ot">&lt;-</span> <span class="st">"</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="st">model{ </span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="st">  y1 ~ dbin(theta1, n1) </span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="st">  y2 ~ dbin(theta2, n2) </span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="st">  theta1 ~ dbeta(1, 1) </span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="st">  theta2 ~ dbeta(1, 1) </span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="st">  prob1 &lt;- step(theta1-theta2) </span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="st">  y1tilde ~ dbin(theta1, m1) </span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="st">  y2tilde ~ dbin(theta2, m2) </span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="st">  prob2 &lt;- step(y1tilde - y2tilde - 11) </span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="st">  gamma &lt;- theta1-theta2</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="st">} </span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>data_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">y1=</span><span class="dv">25</span>, <span class="at">y2=</span><span class="dv">10</span>, <span class="at">n1=</span><span class="dv">100</span>, <span class="at">n2=</span><span class="dv">100</span>, <span class="at">m1=</span><span class="dv">100</span>, <span class="at">m2=</span><span class="dv">100</span>) </span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>jags_model <span class="ot">&lt;-</span> <span class="fu">jags.model</span>(</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">textConnection</span>(model_string),</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data_list,</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.chains =</span> <span class="dv">1</span>,</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.adapt =</span> <span class="dv">10000</span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 2
+   Unobserved stochastic nodes: 4
+   Total graph size: 17
+
+Initializing model</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update</span>(jags_model, <span class="dv">5000</span>)    </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>mcmc_samples <span class="ot">&lt;-</span> <span class="fu">coda.samples</span>(</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">model =</span> jags_model,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">variable.names =</span> <span class="fu">c</span>(<span class="st">"theta1"</span>,<span class="st">"theta2"</span>,<span class="st">'prob1'</span>,<span class="st">'prob2'</span>,<span class="st">'gamma'</span>,<span class="st">'y1tilde'</span>,<span class="st">'y2tilde'</span>),</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.iter =</span> <span class="dv">10000</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mcmc_samples[[<span class="dv">1</span>]],<span class="dv">2</span>,mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     gamma      prob1      prob2     theta1     theta2    y1tilde    y2tilde 
+ 0.1465421  0.9979000  0.7097000  0.2543834  0.1078413 25.4349000 10.8218000 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(mcmc_samples[[<span class="dv">1</span>]][,<span class="st">'gamma'</span>],<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      2.5%      97.5% 
+0.04343084 0.25028468 </code></pre>
+</div>
+</div>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

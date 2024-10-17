@@ -18,6 +18,9 @@ book:
     - part: Causal inference.qmd
       chapters: 
         - causal inference hw 1.qmd
+    - part: Linear regression.qmd
+      chapters: 
+        - linear regression hw 3.qmd
 
 bibliography: references.bib
 

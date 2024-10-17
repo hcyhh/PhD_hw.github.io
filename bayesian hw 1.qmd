@@ -1,3 +1,386 @@
 # bayesian hw 1 {.unnumbered}
 
+---
+title: Bayesian hw
+subtitle: chapter 3
+author: Congyuan He
+date: now
+
+format: 
+  html:
+    theme: 
+      light: flatly 
+      dark: darkly 
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    toc-expand: 1
+    number-depth: 3
+---
+
+# EXERCISE 3.1.
+
+Let prior uncertainty about a parameter $\theta$ be reflected by the density
+
+$$
+p(\theta) = ce^{−3\theta} I(0,\infty)(\theta).
+$$
+
+Find the constant c that makes this integrate to one. Also find $Pr(\theta > 2)$ and $Pr(\theta > 4 | \theta > 2)$. Find the median and the expected value. Finally, obtain a 95% probability interval for $\theta$
+
+-
+
+\begin{align}
+
+  \int_{0}^{\infty} p(\theta) d\theta &= \int_{0}^{\infty} ce^{-3\theta}I_{(0,\infty)}(\theta) d\theta \\
+
+  &= -\frac{c}{3}(e^{-3\theta}|^{\infty}_0) \\
+
+  &= \frac{c}{3}
+
+\end{align} 
+
+
+let $\frac{c}{3}=1$，then we have $c=3$
+
+-
+
+\begin{align}
+
+  Pr(\theta > x )&= \int_{x}^{\infty} 3e^{-3\theta}I_{(0,\infty)}(\theta) d\theta \\
+
+  &= -e^{-3\theta}|^{\infty}_x \\
+
+  &= e^{-3\theta}|^{x}_\infty  \\
+  
+  &= e^{-3x}
+
+\end{align} 
+
+let $x=2$, then we have 
+$$
+Pr(\theta>2) = e^{-3*2} = 0.002478752
+$$
+
+$$
+Pr(\theta > 4 | \theta > 2) = Pr(\theta>2) = e^{-3*2} = 0.002478752
+$$
+
+```{r}
+# Pr(theta>2)
+1-pexp(2,3)
+
+# Monte Carlo simulations
+set.seed(2024)
+N <- 1000000 
+samples <- rexp(N,3)
+P <- mean(samples > 2)
+print(P)
+```
+
+```{r}
+# Pr(theta>4|theta>2)
+(1-pexp(4,3))/(1-pexp(2,3))
+```
+
+- 
+For Exp(3) , $Mean = \frac{1}{\theta}$ ,$Mdian = \frac{Ln2}{\theta}$,
+We all know $\theta =3$,
+so we have $Mean = \frac{1}{3}$ , $Median = \frac{Ln2}{3}$
+
+- 
+95% probability interval for $\theta$
+```{r}
+qexp(c(0.025,0.975),3)
+```
+
+
+# EXERCISE 3.2.
+Suppose $n$ cities were sampled and for each city $i$ the number $y_i$ of deaths from ALS were recorded for a period of one year. We expect the numbers to be Poisson distributed, but the size of the city is a factor. Let $M_i$ be the known population for city $i$ and let
+
+$$
+y_i|\theta ～ Pois(\theta M_i), i= 1,...k
+$$
+
+where $\theta$ > 0 is an unknown parameter measuring the common death rate for all cities. Given $\theta$, the expected number of ALS deaths for city i is $\theta M_i$, so $\theta$ is expected to be small. Assume that independent scientific information can be obtained about $\theta$ in the form of a gamma distribution, say $Gamma(a, b)$. Show that this prior and posterior are conjugate in the sense that both have gamma distributions.
+
+
+-  
+
+$$
+\theta ～ Gamma(a,b)  \Rightarrow  p(\theta) = [b^a/\Gamma(a)]\theta^{a-1}e^{-b\theta}I_{(0,\infty)}(\theta) 
+$$
+
+$$
+y_i|\theta～Pois(\theta M_i)\Rightarrow P(y_i|\theta) = \frac{(\theta M_i)^{Y_i}e^{-\theta M_i}}{Y_i!}
+$$
+
+$$
+L(\theta)= (\prod \frac{M_{i}^{y_i}}{y_i !}) \theta^{\sum y_i} e^{-\theta \sum M_i } 
+$$
+
+\begin{align}
+
+  p(\theta|y) & \propto p(\theta)L(\theta) \\
+
+  & \propto  \theta^{a-1}e^{-b\theta}\theta^{\sum y_i} e^{- \theta \sum M_i} \\
+
+  & \propto \theta^{a+\sum y_i -1} e^{- \theta (b+\sum M_i)} 
+
+\end{align} 
+
+Finally, we have 
+
+$$
+\theta|y ～ Gamma(a+\sum y_i  ,b+\sum M_i)
+$$
+
+# EXERCISE 3.3. 
+Extending Exercise 3.2, two cities are allowed different death rates. Let $y_i ～  Pois(θ_i M_i), i = 1, 2,$ where the $M_is$ are known constants. Let knowledge about $θ_i$ be reflected by independent gamma distributions, namely $θ_i ∼ Gamma(a_i, b_i)$. Derive the joint posterior for $(\theta_1,\theta_2)$. Characterize the joint distribution as we did for sampling two independent binomials. Think of $\theta_i$ as the rate of events per 100 thousand people in city $i$. For independent priors $\theta_i ∼ Gamma(1, 0.1)$, give the exact joint posterior with $y_1 = 500, y_2 = 800$in cities with populations of 100 thousand and 200 thousand, respectively.
+
+-  
+
+$$
+P(\theta_1 , \theta_2)=p_1(\theta_1)p_2(\theta_2)
+$$
+
+According to the above conclusion, we have
+$$
+\theta_1,\theta_2 ～ Gamma(a + y_1,b+M_1)Gamma(a + y_2,b+M_2)
+$$
+
+We know,
+
+\begin{align}
+
+a_1 = a_2 &= 1 \\
+
+b_1 = b_2 &= 0.1 \\
+
+y_1 &= 500  \\
+
+y_2 &= 800  \\
+
+M_1 &= 100  \\
+
+M_2 &= 200 
+
+\end{align}
+
+Finally,
+
+\begin{align}
+p(\theta_1,\theta_2|y_1 =500,y_2=800)=[[100.1^501/\Gamma(501)]\theta_1 ^{500}e^{-100.1\theta_1}][[200.1^801/\Gamma(801)]\theta_2 ^{800-1}e^{-200.1\theta_2}]
+
+
+\end{align}
+
+
+# EXERCISE 3.4.
+
+Perform Example 3.1.3 in WinBUGS with $y_1 ∼ Bin(80,\theta1)$, $y_2 ∼ Bin(100,\theta_2)$ $\theta1 ∼ Beta(1, 1), \theta 2 ∼ Beta(2, 1)$ with observations $y_1 = 32$ and $y_2 = 35$. Put each term in the model on a separate line. There should still be only two list statements with entries separated by commas. See Exercises 3.6 and 3.7 for WinBUGS syntax.
+
+
+```{r}
+suppressMessages(library(rjags))
+
+model_string <- "
+model {
+
+    theta1 ~ dbeta(1, 1)
+    theta2 ~ dbeta(2, 1)
+    
+    y1 ~ dbin(theta1, n1)
+    y2 ~ dbin(theta2, n2)
+    
+}
+"
+
+data_list <- list(
+    y1 = 32,
+    n1 = 80,
+    y2 = 35,
+    n2 = 100
+)
+
+
+jags_model <- jags.model(
+    textConnection(model_string),
+    data = data_list,
+    n.chains = 1,
+    n.adapt = 1000
+)
+
+update(jags_model, 1000)    
+
+mcmc_samples <- coda.samples(
+    model = jags_model,
+    variable.names = c("theta1", "theta2", "gamma"),
+    n.iter = 10000
+)
+
+head(mcmc_samples[[1]])
+```
+
+
+# EXERCISE 3.5.
+
+Perform a data analysis for the model in Exercise 3.3 using the data $y_1 = 500$, $y_2 = 800$, $M_1 = 100$, $M_2 = 200$, and using independent $Gamma(1, 0.01)$ priors for the $θ_is$. Make WinBUGS based inferences for all parameters and functions of parameters discussed there using a Monte Carlo sample size of 10,000 and a burn-in of 1,000. This may involve an excursion into the “Help” menu to find the syntax for Poisson and gamma distributions. Compare the posterior means for $\theta_1$ and $\theta_2$  based on the WinBUGS output to the exact values from the Gamma posteriors that you obtained in Exercise 3.3.
+
+
+```{r}
+model_string <- "
+model {
+    theta1 ~ dgamma(a, b)
+    theta2 ~ dgamma(a, b)
+    
+    y1 ~ dpois(theta1*M1)
+    y2 ~ dpois(theta2*M2)
+}
+"
+
+data_list <- list(
+    a = 1,
+    b = 0.01,
+    y1 = 500,
+    M1 = 100,
+    y2 = 800,
+    M2 = 200
+)
+
+jags_model <- jags.model(
+    textConnection(model_string),
+    data = data_list,
+    n.chains = 1,
+    n.adapt = 10000
+)
+
+update(jags_model, 1000)    
+
+mcmc_samples <- coda.samples(
+    model = jags_model,
+    variable.names = c("theta1", "theta2"),
+    n.iter = 10000
+)
+
+head(mcmc_samples[[1]])
+
+apply(mcmc_samples[[1]],2,mean)
+
+# gamma分布均值为a/b
+
+501/100.1
+
+801/200.1
+
+```
+
+# EXERCISE 3.6. 
+
+```{r}
+
+model_string <- "
+model {
+    y ~ dbin(theta , n)
+    ytilde ~ dbin(theta, m)
+    theta ~ dbeta(a, b)
+    prob <- step(ytilde - 20)
+}
+"
+
+data_list <- list(n=100, m=100, y=10, a=1, b=1)
+
+jags_model <- jags.model(
+    textConnection(model_string),
+    data = data_list,
+    n.chains = 1,
+    n.adapt = 1000
+)
+
+update(jags_model, 100)    
+
+mcmc_samples <- coda.samples(
+    model = jags_model,
+    variable.names = c("theta",'prob'),
+    n.iter = 10000
+)
+
+apply(mcmc_samples[[1]],2,mean)
+```
+
+# EXERCISE 3.7. 
+
+
+```{r}
+model_string <- "
+model{ 
+  y1 ~ dbin(theta1, n1) 
+  y2 ~ dbin(theta2, n2) 
+  theta1 ~ dbeta(1, 1) 
+  theta2 ~ dbeta(1, 1) 
+  prob1 <- step(theta1-theta2) 
+  y1tilde ~ dbin(theta1, m1) 
+  y2tilde ~ dbin(theta2, m2) 
+  prob2 <- step(y1tilde - y2tilde - 11) 
+  gamma <- theta1-theta2
+} 
+"
+data_list <- list(y1=25, y2=10, n1=100, n2=100, m1=100, m2=100) 
+
+jags_model <- jags.model(
+    textConnection(model_string),
+    data = data_list,
+    n.chains = 1,
+    n.adapt = 10000
+)
+
+update(jags_model, 5000)    
+
+mcmc_samples <- coda.samples(
+    model = jags_model,
+    variable.names = c("theta1","theta2",'prob1','prob2','gamma','y1tilde','y2tilde'),
+    n.iter = 10000
+)
+apply(mcmc_samples[[1]],2,mean)
+quantile(mcmc_samples[[1]][,'gamma'],c(0.025,0.975))
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

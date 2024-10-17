@@ -1,0 +1,6 @@
+# Linear regression
+
+
+## 线性建模大纲：
+
+<https://docs.qq.com/doc/DUG1ZRnJOeGJwUHli>

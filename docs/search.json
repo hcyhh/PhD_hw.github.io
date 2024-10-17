@@ -82,12 +82,12 @@
   {
     "objectID": "bayesian hw 1.html",
     "href": "bayesian hw 1.html",
-    "title": "(APPENDIX) 附录",
+    "title": "bayesian hw 1",
     "section": "",
-    "text": "一些定理的证明",
+    "text": "EXERCISE 3.1.\nLet prior uncertainty about a parameter \\(\\theta\\) be reflected by the density\n\\[\np(\\theta) = ce^{−3\\theta} I(0,\\infty)(\\theta).\n\\]\nFind the constant c that makes this integrate to one. Also find \\(Pr(\\theta &gt; 2)\\) and \\(Pr(\\theta &gt; 4 | \\theta &gt; 2)\\). Find the median and the expected value. Finally, obtain a 95% probability interval for \\(\\theta\\)\n\n\n\n\\[\\begin{align}\n\n  \\int_{0}^{\\infty} p(\\theta) d\\theta &= \\int_{0}^{\\infty} ce^{-3\\theta}I_{(0,\\infty)}(\\theta) d\\theta \\\\\n\n  &= -\\frac{c}{3}(e^{-3\\theta}|^{\\infty}_0) \\\\\n\n  &= \\frac{c}{3}\n\n\\end{align}\\]\nlet \\(\\frac{c}{3}=1\\)，then we have \\(c=3\\)\n\n\n\n\\[\\begin{align}\n\n  Pr(\\theta &gt; x )&= \\int_{x}^{\\infty} 3e^{-3\\theta}I_{(0,\\infty)}(\\theta) d\\theta \\\\\n\n  &= -e^{-3\\theta}|^{\\infty}_x \\\\\n\n  &= e^{-3\\theta}|^{x}_\\infty  \\\\\n  \n  &= e^{-3x}\n\n\\end{align}\\]\nlet \\(x=2\\), then we have \\[\nPr(\\theta&gt;2) = e^{-3*2} = 0.002478752\n\\]\n\\[\nPr(\\theta &gt; 4 | \\theta &gt; 2) = Pr(\\theta&gt;2) = e^{-3*2} = 0.002478752\n\\]\n\n# Pr(theta&gt;2)\n1-pexp(2,3)\n\n[1] 0.002478752\n\n# Monte Carlo simulations\nset.seed(2024)\nN &lt;- 1000000 \nsamples &lt;- rexp(N,3)\nP &lt;- mean(samples &gt; 2)\nprint(P)\n\n[1] 0.002496\n\n\n\n# Pr(theta&gt;4|theta&gt;2)\n(1-pexp(4,3))/(1-pexp(2,3))\n\n[1] 0.002478752\n\n\n\nFor Exp(3) , \\(Mean = \\frac{1}{\\theta}\\) ,\\(Mdian = \\frac{Ln2}{\\theta}\\), We all know \\(\\theta =3\\), so we have \\(Mean = \\frac{1}{3}\\) , \\(Median = \\frac{Ln2}{3}\\)\n95% probability interval for \\(\\theta\\)\n\n\nqexp(c(0.025,0.975),3)\n\n[1] 0.008439269 1.229626485\n\n\n\n\nEXERCISE 3.2.\nSuppose \\(n\\) cities were sampled and for each city \\(i\\) the number \\(y_i\\) of deaths from ALS were recorded for a period of one year. We expect the numbers to be Poisson distributed, but the size of the city is a factor. Let \\(M_i\\) be the known population for city \\(i\\) and let\n\\[\ny_i|\\theta ～ Pois(\\theta M_i), i= 1,...k\n\\]\nwhere \\(\\theta\\) &gt; 0 is an unknown parameter measuring the common death rate for all cities. Given \\(\\theta\\), the expected number of ALS deaths for city i is \\(\\theta M_i\\), so \\(\\theta\\) is expected to be small. Assume that independent scientific information can be obtained about \\(\\theta\\) in the form of a gamma distribution, say \\(Gamma(a, b)\\). Show that this prior and posterior are conjugate in the sense that both have gamma distributions.\n\n\n\n\\[\n\\theta ～ Gamma(a,b)  \\Rightarrow  p(\\theta) = [b^a/\\Gamma(a)]\\theta^{a-1}e^{-b\\theta}I_{(0,\\infty)}(\\theta)\n\\]\n\\[\ny_i|\\theta～Pois(\\theta M_i)\\Rightarrow P(y_i|\\theta) = \\frac{(\\theta M_i)^{Y_i}e^{-\\theta M_i}}{Y_i!}\n\\]\n\\[\nL(\\theta)= (\\prod \\frac{M_{i}^{y_i}}{y_i !}) \\theta^{\\sum y_i} e^{-\\theta \\sum M_i }\n\\]\n\\[\\begin{align}\n\n  p(\\theta|y) & \\propto p(\\theta)L(\\theta) \\\\\n\n  & \\propto  \\theta^{a-1}e^{-b\\theta}\\theta^{\\sum y_i} e^{- \\theta \\sum M_i} \\\\\n\n  & \\propto \\theta^{a+\\sum y_i -1} e^{- \\theta (b+\\sum M_i)}\n\n\\end{align}\\]\nFinally, we have\n\\[\n\\theta|y ～ Gamma(a+\\sum y_i  ,b+\\sum M_i)\n\\]\n\n\nEXERCISE 3.3.\nExtending Exercise 3.2, two cities are allowed different death rates. Let \\(y_i ～  Pois(θ_i M_i), i = 1, 2,\\) where the \\(M_is\\) are known constants. Let knowledge about \\(θ_i\\) be reflected by independent gamma distributions, namely \\(θ_i ∼ Gamma(a_i, b_i)\\). Derive the joint posterior for \\((\\theta_1,\\theta_2)\\). Characterize the joint distribution as we did for sampling two independent binomials. Think of \\(\\theta_i\\) as the rate of events per 100 thousand people in city \\(i\\). For independent priors \\(\\theta_i ∼ Gamma(1, 0.1)\\), give the exact joint posterior with \\(y_1 = 500, y_2 = 800\\)in cities with populations of 100 thousand and 200 thousand, respectively.\n\n\n\n\\[\nP(\\theta_1 , \\theta_2)=p_1(\\theta_1)p_2(\\theta_2)\n\\]\nAccording to the above conclusion, we have \\[\n\\theta_1,\\theta_2 ～ Gamma(a + y_1,b+M_1)Gamma(a + y_2,b+M_2)\n\\]\nWe know,\n\\[\\begin{align}\n\na_1 = a_2 &= 1 \\\\\n\nb_1 = b_2 &= 0.1 \\\\\n\ny_1 &= 500  \\\\\n\ny_2 &= 800  \\\\\n\nM_1 &= 100  \\\\\n\nM_2 &= 200\n\n\\end{align}\\]\nFinally,\n\\[\\begin{align}\np(\\theta_1,\\theta_2|y_1 =500,y_2=800)=[[100.1^501/\\Gamma(501)]\\theta_1 ^{500}e^{-100.1\\theta_1}][[200.1^801/\\Gamma(801)]\\theta_2 ^{800-1}e^{-200.1\\theta_2}]\n\n\n\\end{align}\\]\n\n\nEXERCISE 3.4.\nPerform Example 3.1.3 in WinBUGS with \\(y_1 ∼ Bin(80,\\theta1)\\), \\(y_2 ∼ Bin(100,\\theta_2)\\) \\(\\theta1 ∼ Beta(1, 1), \\theta 2 ∼ Beta(2, 1)\\) with observations \\(y_1 = 32\\) and \\(y_2 = 35\\). Put each term in the model on a separate line. There should still be only two list statements with entries separated by commas. See Exercises 3.6 and 3.7 for WinBUGS syntax.\n\nsuppressMessages(library(rjags))\n\nmodel_string &lt;- \"\nmodel {\n\n    theta1 ~ dbeta(1, 1)\n    theta2 ~ dbeta(2, 1)\n    \n    y1 ~ dbin(theta1, n1)\n    y2 ~ dbin(theta2, n2)\n    \n}\n\"\n\ndata_list &lt;- list(\n    y1 = 32,\n    n1 = 80,\n    y2 = 35,\n    n2 = 100\n)\n\n\njags_model &lt;- jags.model(\n    textConnection(model_string),\n    data = data_list,\n    n.chains = 1,\n    n.adapt = 1000\n)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 2\n   Unobserved stochastic nodes: 2\n   Total graph size: 8\n\nInitializing model\n\nupdate(jags_model, 1000)    \n\nmcmc_samples &lt;- coda.samples(\n    model = jags_model,\n    variable.names = c(\"theta1\", \"theta2\", \"gamma\"),\n    n.iter = 10000\n)\n\nWarning in FUN(X[[i]], ...): Failed to set trace monitor for gamma\nVariable gamma not found\n\nhead(mcmc_samples[[1]])\n\nMarkov Chain Monte Carlo (MCMC) output:\nStart = 2001 \nEnd = 2007 \nThinning interval = 1 \n        theta1    theta2\n[1,] 0.4524820 0.3531854\n[2,] 0.3891633 0.3054305\n[3,] 0.3456396 0.3841356\n[4,] 0.3755774 0.3666568\n[5,] 0.3561009 0.3408079\n[6,] 0.3973557 0.3599804\n[7,] 0.3842592 0.2977405\n\n\n\n\nEXERCISE 3.5.\nPerform a data analysis for the model in Exercise 3.3 using the data \\(y_1 = 500\\), \\(y_2 = 800\\), \\(M_1 = 100\\), \\(M_2 = 200\\), and using independent \\(Gamma(1, 0.01)\\) priors for the \\(θ_is\\). Make WinBUGS based inferences for all parameters and functions of parameters discussed there using a Monte Carlo sample size of 10,000 and a burn-in of 1,000. This may involve an excursion into the “Help” menu to find the syntax for Poisson and gamma distributions. Compare the posterior means for \\(\\theta_1\\) and \\(\\theta_2\\) based on the WinBUGS output to the exact values from the Gamma posteriors that you obtained in Exercise 3.3.\n\nmodel_string &lt;- \"\nmodel {\n    theta1 ~ dgamma(a, b)\n    theta2 ~ dgamma(a, b)\n    \n    y1 ~ dpois(theta1*M1)\n    y2 ~ dpois(theta2*M2)\n}\n\"\n\ndata_list &lt;- list(\n    a = 1,\n    b = 0.01,\n    y1 = 500,\n    M1 = 100,\n    y2 = 800,\n    M2 = 200\n)\n\njags_model &lt;- jags.model(\n    textConnection(model_string),\n    data = data_list,\n    n.chains = 1,\n    n.adapt = 10000\n)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 2\n   Unobserved stochastic nodes: 2\n   Total graph size: 10\n\nInitializing model\n\nupdate(jags_model, 1000)    \n\nmcmc_samples &lt;- coda.samples(\n    model = jags_model,\n    variable.names = c(\"theta1\", \"theta2\"),\n    n.iter = 10000\n)\n\nhead(mcmc_samples[[1]])\n\nMarkov Chain Monte Carlo (MCMC) output:\nStart = 1001 \nEnd = 1007 \nThinning interval = 1 \n       theta1   theta2\n[1,] 5.372489 3.818596\n[2,] 5.592069 3.792485\n[3,] 4.616593 4.103390\n[4,] 4.846946 4.257532\n[5,] 4.722098 3.703571\n[6,] 4.918131 3.928458\n[7,] 5.018989 4.148727\n\napply(mcmc_samples[[1]],2,mean)\n\n  theta1   theta2 \n5.010263 4.004477 \n\n# gamma分布均值为a/b\n\n501/100.1\n\n[1] 5.004995\n\n801/200.1\n\n[1] 4.002999\n\n\n\n\nEXERCISE 3.6.\n\nmodel_string &lt;- \"\nmodel {\n    y ~ dbin(theta , n)\n    ytilde ~ dbin(theta, m)\n    theta ~ dbeta(a, b)\n    prob &lt;- step(ytilde - 20)\n}\n\"\n\ndata_list &lt;- list(n=100, m=100, y=10, a=1, b=1)\n\njags_model &lt;- jags.model(\n    textConnection(model_string),\n    data = data_list,\n    n.chains = 1,\n    n.adapt = 1000\n)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 1\n   Unobserved stochastic nodes: 2\n   Total graph size: 10\n\nInitializing model\n\nupdate(jags_model, 100)    \n\nmcmc_samples &lt;- coda.samples(\n    model = jags_model,\n    variable.names = c(\"theta\",'prob'),\n    n.iter = 10000\n)\n\napply(mcmc_samples[[1]],2,mean)\n\n     prob     theta \n0.0366000 0.1081029 \n\n\n\n\nEXERCISE 3.7.\n\nmodel_string &lt;- \"\nmodel{ \n  y1 ~ dbin(theta1, n1) \n  y2 ~ dbin(theta2, n2) \n  theta1 ~ dbeta(1, 1) \n  theta2 ~ dbeta(1, 1) \n  prob1 &lt;- step(theta1-theta2) \n  y1tilde ~ dbin(theta1, m1) \n  y2tilde ~ dbin(theta2, m2) \n  prob2 &lt;- step(y1tilde - y2tilde - 11) \n  gamma &lt;- theta1-theta2\n} \n\"\ndata_list &lt;- list(y1=25, y2=10, n1=100, n2=100, m1=100, m2=100) \n\njags_model &lt;- jags.model(\n    textConnection(model_string),\n    data = data_list,\n    n.chains = 1,\n    n.adapt = 10000\n)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 2\n   Unobserved stochastic nodes: 4\n   Total graph size: 17\n\nInitializing model\n\nupdate(jags_model, 5000)    \n\nmcmc_samples &lt;- coda.samples(\n    model = jags_model,\n    variable.names = c(\"theta1\",\"theta2\",'prob1','prob2','gamma','y1tilde','y2tilde'),\n    n.iter = 10000\n)\napply(mcmc_samples[[1]],2,mean)\n\n     gamma      prob1      prob2     theta1     theta2    y1tilde    y2tilde \n 0.1465421  0.9979000  0.7097000  0.2543834  0.1078413 25.4349000 10.8218000 \n\nquantile(mcmc_samples[[1]][,'gamma'],c(0.025,0.975))\n\n      2.5%      97.5% \n0.04343084 0.25028468",
     "crumbs": [
-      "Bayesian.html",
-      "(APPENDIX) 附录"
+      "Bayesian",
+      "Bayesian hw"
     ]
   },
   {
@@ -120,6 +120,159 @@
     "text": "book: - part: “Bayesian” chapters: - basics.qmd - packages.qmd",
     "crumbs": [
       "Bayesian.html"
+    ]
+  },
+  {
+    "objectID": "Linear regression.html",
+    "href": "Linear regression.html",
+    "title": "Linear regression",
+    "section": "",
+    "text": "线性建模大纲：\nhttps://docs.qq.com/doc/DUG1ZRnJOeGJwUHli",
+    "crumbs": [
+      "Linear regression"
+    ]
+  },
+  {
+    "objectID": "linear regression hw 3.html",
+    "href": "linear regression hw 3.html",
+    "title": "linear regression hw 3",
+    "section": "",
+    "text": "作业内容：\nLinear Models with R (2nd Edition)第2章所有题",
+    "crumbs": [
+      "Linear regression",
+      "linear regression hw 3"
+    ]
+  },
+  {
+    "objectID": "linear regression hw 3.html#作业内容",
+    "href": "linear regression hw 3.html#作业内容",
+    "title": "linear regression hw 3",
+    "section": "",
+    "text": "1",
+    "crumbs": [
+      "Linear regression",
+      "linear regression hw 3"
+    ]
+  },
+  {
+    "objectID": "linear regression hw 3.html#for-the-prostate-data-fit-a-model-with-lpsa-as-the-response-and-the-other-variables-as-predictors-a-compute-90-and-95-cis-for-the-parameter-associated-with-age.-using-just",
+    "href": "linear regression hw 3.html#for-the-prostate-data-fit-a-model-with-lpsa-as-the-response-and-the-other-variables-as-predictors-a-compute-90-and-95-cis-for-the-parameter-associated-with-age.-using-just",
+    "title": "linear regression hw 3",
+    "section": "1. For the prostate data, fit a model with lpsa as the response and the other variables as predictors: (a) Compute 90 and 95% CIs for the parameter associated with age. Using just",
+    "text": "1. For the prostate data, fit a model with lpsa as the response and the other variables as predictors: (a) Compute 90 and 95% CIs for the parameter associated with age. Using just",
+    "crumbs": [
+      "Linear regression",
+      "linear regression hw 3"
+    ]
+  },
+  {
+    "objectID": "linear regression hw 3.html#section",
+    "href": "linear regression hw 3.html#section",
+    "title": "linear regression hw 3",
+    "section": "1.",
+    "text": "1.\nFor the prostate data, fit a model with lpsa as the response and the other variables as predictors: (a) Compute 90 and 95% CIs for the parameter associated with age. Using just",
+    "crumbs": [
+      "Linear regression",
+      "linear regression hw 3"
+    ]
+  },
+  {
+    "objectID": "linear regression hw 3.html#exercise-1",
+    "href": "linear regression hw 3.html#exercise-1",
+    "title": "linear regression hw 3",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nThe dataset teengamb concerns a study of teenage gambling in Britain. Fit a regression model with the expenditure on gambling as the response and the sex, status, income and verbal score as predictors. Present the output.\n\nrm(list=ls())\n\npkgs &lt;- c('tidyverse','faraway','skimr','ggplot2')\ninvisible(lapply(pkgs, function(x) suppressMessages(library(x,character.only = TRUE))))\n\ndata(teengamb)\nglimpse(teengamb)\n\nRows: 47\nColumns: 5\n$ sex    &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, …\n$ status &lt;int&gt; 51, 28, 37, 28, 65, 61, 28, 27, 43, 18, 18, 43, 30, 28, 38, 38,…\n$ income &lt;dbl&gt; 2.00, 2.50, 2.00, 7.00, 2.00, 3.47, 5.50, 6.42, 2.00, 6.00, 3.0…\n$ verbal &lt;int&gt; 8, 8, 6, 4, 8, 6, 7, 5, 6, 7, 6, 6, 4, 6, 6, 8, 8, 5, 8, 9, 8, …\n$ gamble &lt;dbl&gt; 0.00, 0.00, 0.00, 7.30, 19.60, 0.10, 1.45, 6.60, 1.70, 0.10, 0.…\n\n\n(a) What percentage of variation in the response is explained by these predictors?\n\nmodel &lt;- lm(gamble ~ ., data = teengamb )\nmodelsum &lt;- summary(model)\nmodelsum$r.squared\n\n[1] 0.5267234\n\n\n(b) Which observation has the largest (positive) residual? Give the case number. \n\nnum &lt;- unname(which.max(modelsum$residuals))\nnum\n\n[1] 24\n\n\n(c) Compute the mean and median of the residuals. \n\nmean(modelsum$residuals)\n\n[1] 2.645638e-16\n\nmedian(modelsum$residuals)\n\n[1] -1.451392\n\n\n(d) Compute the correlation of the residuals with the fitted values.\n\ncor(modelsum$residuals,predict(model))\n\n[1] -1.030987e-16\n\n\n(e) Compute the correlation of the residuals with the income. \n\ncor(modelsum$residuals,teengamb$income)\n\n[1] -2.006086e-17\n\n\n(f) For all other predictors held constant, what would be the difference in predicted expenditure on gambling for a male compared to a female?\n\nsummary(model)$coefficients['sex','Estimate']\n\n[1] -22.11833",
+    "crumbs": [
+      "Linear regression",
+      "linear regression hw 3"
+    ]
+  },
+  {
+    "objectID": "linear regression hw 3.html#exercise-2",
+    "href": "linear regression hw 3.html#exercise-2",
+    "title": "linear regression hw 3",
+    "section": "Exercise 2",
+    "text": "Exercise 2\nThe dataset uswages is drawn as a sample from the Current Population Survey in 1988. Fit a model with weekly wages as the response and years of education and experience as predictors. Report and give a simple interpretation to the regression coefficient for years of education. Now fit the same model but with logged weekly wages. Give an interpretation to the regression coefficient for years of education. Which interpretation is more natural?\n\ndata('uswages')\nglimpse(uswages)\n\nRows: 2,000\nColumns: 10\n$ wage  &lt;dbl&gt; 771.60, 617.28, 957.83, 617.28, 902.18, 299.15, 541.31, 148.39, …\n$ educ  &lt;int&gt; 18, 15, 16, 12, 14, 12, 16, 16, 12, 12, 9, 14, 17, 14, 14, 10, 1…\n$ exper &lt;int&gt; 18, 20, 9, 24, 12, 33, 42, 0, 36, 37, 20, 29, 16, 21, 11, 10, 8,…\n$ race  &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ smsa  &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1…\n$ ne    &lt;int&gt; 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0…\n$ mw    &lt;int&gt; 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0…\n$ so    &lt;int&gt; 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1…\n$ we    &lt;int&gt; 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0…\n$ pt    &lt;int&gt; 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0…\n\nhist(uswages$wage)\n\n\n\n\n\n\n\n# GGally::ggpairs(uswages[,c(1:3)])\nmodel &lt;- lm(wage ~ educ + exper, uswages)\nsummary(model)$coefficients['educ','Estimate']\n\n[1] 51.17527\n\n\n\nmodel &lt;- lm(log(wage) ~ educ + exper, uswages)\n#summary(model)$coefficients['educ','Estimate']\nexp(summary(model)$coefficients['educ','Estimate'])\n\n[1] 1.094728\n\n\nY偏态分布，应该log转换后在拟合模型，注意log转化后要转化回来再解释，此外该模型的R-squard很小，模型意义不大",
+    "crumbs": [
+      "Linear regression",
+      "linear regression hw 3"
+    ]
+  },
+  {
+    "objectID": "linear regression hw 3.html#exercise-3",
+    "href": "linear regression hw 3.html#exercise-3",
+    "title": "linear regression hw 3",
+    "section": "Exercise 3",
+    "text": "Exercise 3\nIn this question, we investigate the relative merits of methods for computing the coefficients. Generate some artificial data by:\n&gt; x &lt;- 1:20 \n&gt; y &lt;- x+rnorm(20)\nFit a polynomial in x for predicting y. Compute \\(\\bar \\beta\\) in two ways — by lm() and by using the direct calculation described in the chapter. At what degree of polynomial does the direct calculation method fail? (Note the need for the I() function in fitting the polynomial, that is, lm(y ~ x + I(x^2))\n\n# lm()法\nx &lt;- 1:20\ny &lt;- x + rnorm(20)\nm &lt;- lm(y ~ x + I(x^2))\nsumary(m)\n\n              Estimate Std. Error t value  Pr(&gt;|t|)\n(Intercept) -1.5210092  0.8069558 -1.8849   0.07666\nx            1.3204679  0.1769779  7.4612 9.306e-07\nI(x^2)      -0.0136309  0.0081861 -1.6651   0.11421\n\nn = 20, p = 3, Residual SE = 1.08464, R-Squared = 0.97\n\n\n\n# 直接计算法\nx &lt;- model.matrix(~ x + I(x^2))\nsolve(crossprod(x,x), crossprod(x, y))\n\n                   [,1]\n(Intercept) -1.52100923\nx            1.32046791\nI(x^2)      -0.01363089\n\n\n\n# 循环\n# 计算函数\n\nf &lt;- function(z){\nx &lt;- 1:20\ny &lt;- x + rnorm(20)\nx &lt;- model.matrix(~ x + I(x^z))\nsolve(crossprod(x,x), crossprod(x, y))\n}\n\n# map(2:10,function(z) f(z))",
+    "crumbs": [
+      "Linear regression",
+      "linear regression hw 3"
+    ]
+  },
+  {
+    "objectID": "linear regression hw 3.html#exercise-4",
+    "href": "linear regression hw 3.html#exercise-4",
+    "title": "linear regression hw 3",
+    "section": "Exercise 4",
+    "text": "Exercise 4\nThe dataset prostate comes from a study on 97 men with prostate cancer who were due to receive a radical prostatectomy. Fit a model with lpsa as the response and lcavol as the predictor. Record the residual standard error and the R2. Now add lweight, svi, lbph, age, lcp, pgg45 and gleason to the model one at a time. For each model record the residual standard error and the R2. Plot the trends in these two statistics.\n\ndata(\"prostate\")\n\nmodel &lt;- lm(lpsa ~ lcavol, prostate)\n# residual standard error\nsummary(model)$sigma\n\n[1] 0.7874994\n\n# R2\nsummary(model)$r.squared\n\n[1] 0.5394319\n\nadd_variable &lt;- c(\"lweight\", \"svi\", \"lbph\", \"age\", \"lcp\", \"pgg45\", \"gleason\")\n\nmodel &lt;- c()\nresults &lt;- data.frame(sigma=NULL,r2=NULL,formula=NULL)\nfor(i in 1:length(add_variable)){\n  model[i] &lt;- paste(ifelse(i!=1,model[i-1],'lpsa ~ lcavol'),add_variable[i],sep = '+')\n  summodel &lt;- summary(lm(formula(model[i]), prostate))\n  result &lt;- data.frame(sigma=summodel$sigma,r2=summodel$r.squared,formula=model[i])\n  results &lt;- rbind(results,result)\n}\nprint(results)\n\n      sigma        r2                                              formula\n1 0.7506469 0.5859345                                lpsa ~ lcavol+lweight\n2 0.7168094 0.6264403                            lpsa ~ lcavol+lweight+svi\n3 0.7108232 0.6366035                       lpsa ~ lcavol+lweight+svi+lbph\n4 0.7073054 0.6441024                   lpsa ~ lcavol+lweight+svi+lbph+age\n5 0.7102135 0.6451130               lpsa ~ lcavol+lweight+svi+lbph+age+lcp\n6 0.7047533 0.6544317         lpsa ~ lcavol+lweight+svi+lbph+age+lcp+pgg45\n7 0.7084155 0.6547541 lpsa ~ lcavol+lweight+svi+lbph+age+lcp+pgg45+gleason\n\n\n\n# Create a plot for sigma\nplot(1:7, results$sigma, type = 'l', col = 'blue', lwd = 2,\n     ylim = c(0.6, 0.8),  # Set the y-axis limits here\n     xlab = 'Model Number', ylab = 'Value',\n     main = 'Residual Standard Error and R-squared')\n\npoints(1:7, results$sigma, col = 'blue', pch = 19)\n\nr2_normalized &lt;- results$r2 * (max(results$sigma) / max(results$r2))\n\nlines(1:7, r2_normalized, col = 'red', lwd = 2)\n\npoints(1:7, r2_normalized, col = 'red', pch = 19)\n\nlegend('topright', legend = c('Residual Standard Error', 'R-squared (scaled)'),\n       col = c('blue', 'red'), lty = 1, pch = 19)",
+    "crumbs": [
+      "Linear regression",
+      "linear regression hw 3"
+    ]
+  },
+  {
+    "objectID": "linear regression hw 3.html#exercise-5",
+    "href": "linear regression hw 3.html#exercise-5",
+    "title": "linear regression hw 3",
+    "section": "Exercise 5",
+    "text": "Exercise 5\nUsing the prostate data, plot lpsa against lcavol. Fit the regressions of lpsa on lcavol and lcavol on lpsa. Display both regression lines on the plot. At what point do the two lines intersect?\n\nmodel1 &lt;- lm(lcavol ~ lpsa, prostate)\nmodel2 &lt;- lm(lpsa ~ lcavol, prostate)\n\n# -0.50858+0.74992*(1.50730+0.71932*x)=x\n# -0.50858+0.74992*1.50730+0.74992*0.71932*x=x\nx &lt;- (-0.50858+0.74992*1.50730)/(1-0.74992*0.71932)\ny &lt;- 1.50730+0.71932*x\n\nggplot(prostate, aes(lcavol, lpsa)) +\n  geom_point(alpha = .5) +\n  geom_line(aes(x = predict(model1), color = \"lcavol ~ lpsa\")) +\n  geom_line(aes(y = predict(model2), color = \"lpsa ~ lcavol\")) +\n  geom_point(aes(y =y, x = x), shape = 1, size = 5)\n\nWarning in geom_point(aes(y = y, x = x), shape = 1, size = 5): All aesthetics have length 1, but the data has 97 rows.\nℹ Please consider using `annotate()` or provide this layer with data containing\n  a single row.",
+    "crumbs": [
+      "Linear regression",
+      "linear regression hw 3"
+    ]
+  },
+  {
+    "objectID": "linear regression hw 3.html#exercise-6",
+    "href": "linear regression hw 3.html#exercise-6",
+    "title": "linear regression hw 3",
+    "section": "Exercise 6",
+    "text": "Exercise 6\nThirty samples of cheddar cheese were analyzed for their content of acetic acid, hydrogen sulfide and lactic acid. Each sample was tasted and scored by a panel of judges and the average taste score produced. Use the cheddar data to answer the following:\n(a) Fit a regression model with taste as the response and the three chemical contents as predictors. Report the values of the regression coefficients. \n\ndata(\"cheddar\")\nm &lt;- lm(taste ~ ., cheddar)\nsumary(m)\n\n             Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept) -28.87677   19.73542 -1.4632 0.155399\nAcetic        0.32774    4.45976  0.0735 0.941980\nH2S           3.91184    1.24843  3.1334 0.004247\nLactic       19.67054    8.62905  2.2796 0.031079\n\nn = 30, p = 4, Residual SE = 10.13071, R-Squared = 0.65\n\n\n(b) Compute the correlation between the fitted values and the response. Square it. Identify where this value appears in the regression output. \n\ncor(m$fitted.values, cheddar$taste)^2\n\n[1] 0.6517747\n\n\n(c) Fit the same regression model but without an intercept term. What is the value of R2 reported in the output? Compute a more reasonable measure of the goodness of fit for this example. \n\nm2 &lt;- update(m, . ~ -1 + .)\ncor(m2$fitted.values, cheddar$taste)^2\n\n[1] 0.6244075\n\n\n(d) Compute the regression coefficients from the original fit using the QR decomposition showing your R code.\n\nm_mat &lt;- model.matrix(m)\n\nqr_decomp &lt;- qr(m_mat)\n\nbacksolve(\n  qr.R(qr_decomp), # upper-right\n  t(qr.Q(qr_decomp)) %*% cheddar$taste\n)\n\n            [,1]\n[1,] -28.8767696\n[2,]   0.3277413\n[3,]   3.9118411\n[4,]  19.6705434",
+    "crumbs": [
+      "Linear regression",
+      "linear regression hw 3"
+    ]
+  },
+  {
+    "objectID": "linear regression hw 3.html#exercise-7",
+    "href": "linear regression hw 3.html#exercise-7",
+    "title": "linear regression hw 3",
+    "section": "Exercise 7",
+    "text": "Exercise 7\nAn experiment was conducted to determine the effect of four factors on the resistivity of a semiconductor wafer. The data is found in wafer where each of the four factors is coded as − or + depending on whether the low or the high setting for that factor was used. Fit the linear model resist ∼ x1 + x2 + x3 + x4.\n\nExtract the X matrix using the model.matrix function. Examine this to determine how the low and high levels have been coded in the model.\nCompute the correlation in the X matrix. Why are there some missing values in the matrix?\nWhat difference in resistance is expected when moving from the low to the high level of x1? (d) Refit the model without x4 and examine the regression coefficients and standard errors? What stayed the the same as the original fit and what changed?\nExplain how the change in the regression coefficients is related to the correlation matrix of X.",
+    "crumbs": [
+      "Linear regression",
+      "linear regression hw 3"
+    ]
+  },
+  {
+    "objectID": "linear regression hw 3.html#exercise-8",
+    "href": "linear regression hw 3.html#exercise-8",
+    "title": "linear regression hw 3",
+    "section": "Exercise 8",
+    "text": "Exercise 8\nAn experiment was conducted to examine factors that might affect the height of leaf springs in the suspension of trucks. The data may be found in truck. The five factors in the experiment are set to − and + but it will be more convenient for us to use −1 and +1. This can be achieved for the first factor by:\ntruck$B &lt;- sapply(truck$B, function(x) ifelse(x==\"-\",-1,1))\nRepeat for the other four factors.\n\nFit a linear model for the height in terms of the five factors. Report on the value of the regression coefficients.\nFit a linear model using just factors B, C, D and E and report the coefficients. How do these compare to the previous question? Show how we could have anticipated this result by examining the X matrix.\nConstruct a new predictor called A which is set to B+C+D+E. Fit a linear model with the predictors A, B, C, D, E and O. Do coefficients for all six predictors appear in the regression summary? Explain.\nExtract the model matrix X from the previous model. Attempt to compute \\(\\bar \\beta\\) from (XT X)−1XT y. What went wrong and why?\nUse the QR decomposition method as seen in Section 2.7 to compute \\(\\bar \\beta\\). Are the results satisfactory?\nUse the function qr.coef to correctly compute \\(\\bar \\beta\\) .",
+    "crumbs": [
+      "Linear regression",
+      "linear regression hw 3"
+    ]
+  },
+  {
+    "objectID": "linear regression hw 3.html#exercise-9",
+    "href": "linear regression hw 3.html#exercise-9",
+    "title": "linear regression hw 3",
+    "section": "Exercise 9",
+    "text": "Exercise 9",
+    "crumbs": [
+      "Linear regression",
+      "linear regression hw 3"
     ]
   }
 ]
