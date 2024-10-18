@@ -12,8 +12,6 @@ date: '20241016'
 
 The dataset teengamb concerns a study of teenage gambling in Britain. Fit a regression model with the expenditure on gambling as the response and the sex, status, income and verbal score as predictors. Present the output.
 
-
-
 ```{r}
 rm(list=ls())
 
@@ -25,7 +23,6 @@ glimpse(teengamb)
 
 ```
 
-
 **(a) What percentage of variation in the response is explained by these predictors?**
 
 ```{r}
@@ -34,22 +31,19 @@ modelsum <- summary(model)
 modelsum$r.squared
 ```
 
-
-**(b) Which observation has the largest (positive) residual? Give the case number. **
+**(b) Which observation has the largest (positive) residual? Give the case number.**
 
 ```{r}
 num <- unname(which.max(modelsum$residuals))
 num
 ```
 
-
-**(c) Compute the mean and median of the residuals. **
+**(c) Compute the mean and median of the residuals.**
 
 ```{r}
 mean(modelsum$residuals)
 median(modelsum$residuals)
 ```
-
 
 **(d) Compute the correlation of the residuals with the fitted values.**
 
@@ -57,8 +51,7 @@ median(modelsum$residuals)
 cor(modelsum$residuals,predict(model))
 ```
 
-
-**(e) Compute the correlation of the residuals with the income. **
+**(e) Compute the correlation of the residuals with the income.**
 
 ```{r}
 cor(modelsum$residuals,teengamb$income)
@@ -70,8 +63,8 @@ cor(modelsum$residuals,teengamb$income)
 summary(model)$coefficients['sex','Estimate']
 ```
 
-
 ## Exercise 2
+
 The dataset uswages is drawn as a sample from the Current Population Survey in 1988. Fit a model with weekly wages as the response and years of education and experience as predictors. Report and give a simple interpretation to the regression coefficient for years of education. Now fit the same model but with logged weekly wages. Give an interpretation to the regression coefficient for years of education. Which interpretation is more natural?
 
 ```{r}
@@ -88,18 +81,19 @@ model <- lm(log(wage) ~ educ + exper, uswages)
 #summary(model)$coefficients['educ','Estimate']
 exp(summary(model)$coefficients['educ','Estimate'])
 ```
+
 **Y偏态分布，应该log转换后在拟合模型，注意log转化后要转化回来再解释，此外该模型的R-squard很小，模型意义不大**
 
-
 ## Exercise 3
+
 In this question, we investigate the relative merits of methods for computing the coefficients. Generate some artificial data by:
 
-```{.r}
+``` r
 > x <- 1:20 
 > y <- x+rnorm(20)
 ```
 
-Fit a polynomial in x for predicting y. Compute $\bar \beta$ in two ways — by lm() and by using the direct calculation described in the chapter. At what degree of polynomial does the direct calculation method fail? (Note the need for the I() function in fitting the polynomial, that is, lm(y ~ x + I(x^2))
+Fit a polynomial in x for predicting y. Compute $\bar \beta$ in two ways — by lm() and by using the direct calculation described in the chapter. At what degree of polynomial does the direct calculation method fail? (Note the need for the I() function in fitting the polynomial, that is, lm(y \~ x + I(x\^2))
 
 ```{r}
 # lm()法
@@ -132,9 +126,8 @@ solve(crossprod(x,x), crossprod(x, y))
 
 ```
 
-
-
 ## Exercise 4
+
 The dataset prostate comes from a study on 97 men with prostate cancer who were due to receive a radical prostatectomy. Fit a model with lpsa as the response and lcavol as the predictor. Record the residual standard error and the R2. Now add lweight, svi, lbph, age, lcp, pgg45 and gleason to the model one at a time. For each model record the residual standard error and the R2. Plot the trends in these two statistics.
 
 ```{r}
@@ -183,10 +176,8 @@ legend('topright', legend = c('Residual Standard Error', 'R-squared (scaled)'),
 
 ```
 
-
-
-
 ## Exercise 5
+
 Using the prostate data, plot lpsa against lcavol. Fit the regressions of lpsa on lcavol and lcavol on lpsa. Display both regression lines on the plot. At what point do the two lines intersect?
 
 ```{r}
@@ -205,12 +196,11 @@ ggplot(prostate, aes(lcavol, lpsa)) +
   geom_point(aes(y =y, x = x), shape = 1, size = 5)
 ```
 
-
-
 ## Exercise 6
+
 Thirty samples of cheddar cheese were analyzed for their content of acetic acid, hydrogen sulfide and lactic acid. Each sample was tasted and scored by a panel of judges and the average taste score produced. Use the cheddar data to answer the following:
 
-**(a) Fit a regression model with taste as the response and the three chemical contents as predictors. Report the values of the regression coefficients. **
+**(a) Fit a regression model with taste as the response and the three chemical contents as predictors. Report the values of the regression coefficients.**
 
 ```{r}
 data("cheddar")
@@ -218,26 +208,24 @@ model <- lm(taste ~ ., cheddar)
 sumary(model)
 ```
 
-
-**(b) Compute the correlation between the fitted values and the response. Square it. Identify where this value appears in the regression output. **
+**(b) Compute the correlation between the fitted values and the response. Square it. Identify where this value appears in the regression output.**
 
 ```{r}
 cor(model$fitted.values, cheddar$taste)^2
 ```
 
-
-**(c) Fit the same regression model but without an intercept term. What is the value of R2 reported in the output? Compute a more reasonable measure of the goodness of fit for this example. **
+**(c) Fit the same regression model but without an intercept term. What is the value of R2 reported in the output? Compute a more reasonable measure of the goodness of fit for this example.**
 
 ```{r}
 model <- lm(taste ~ -1+., cheddar)
 cor(model$fitted.values, cheddar$taste)^2
 ```
 
-
 **(d) Compute the regression coefficients from the original fit using the QR decomposition showing your R code.**
-
 ```{r}
-m_mat <- model.matrix(m)
+
+model <- lm(taste ~ ., cheddar)
+m_mat <- model.matrix(model)
 
 qr_decomp <- qr(m_mat)
 
@@ -246,45 +234,126 @@ backsolve(
   t(qr.Q(qr_decomp)) %*% cheddar$taste
 )
 
-qrx <- qr(x)
-dim(qr.Q(qrx))
-(f <- t(qr.Q(qrx)) %*% y)
-backsolve(qr.R(qrx),f)
+```
 
+
+## Exercise 7
+
+An experiment was conducted to determine the effect of four factors on the resistivity of a semiconductor wafer. The data is found in wafer where each of the four factors is coded as − or + depending on whether the low or the high setting for that factor was used. Fit the linear model resist ∼ x1 + x2 + x3 + x4.
+
+(a) Extract the X matrix using the model.matrix function. Examine this to determine how the low and high levels have been coded in the model.
+
+```{r}
+data("wafer")
+glimpse(wafer)
+model <- lm(resist ~ ., wafer)
+x <- model.matrix(model)
+x
+```
+
+
+(b) Compute the correlation in the X matrix. Why are there some missing values in the matrix?
+
+```{r}
+cor(x)
+```
+因为截距项全部为1，且其余变量都是01编码
+
+(c) What difference in resistance is expected when moving from the low to the high level of x1? 
+```{r}
+sumary(model)
+```
+
+(d) Refit the model without x4 and examine the regression coefficients and standard errors? What stayed the the same as the original fit and what changed?
+
+```{r}
+model2 <- lm(resist ~ x1+x2+x3, wafer)
+sumary(model2)
+```
+
+
+(e) Explain how the change in the regression coefficients is related to the correlation matrix of X.
+```{r}
+# x <- model.matrix(model2) # 就是截距项的原因
+# solve(t(x) %*% x) #奇异矩阵，也就是矩阵不可逆 行或列是线性相关的，也就是矩阵的行列式为 0
+x <- model.matrix(model2)[,-1] # 就是截距项的原因
+solve(t(x) %*% x)
 ```
 
 
 
 
-## Exercise 7
-An experiment was conducted to determine the effect of four factors on the resistivity of a semiconductor wafer. The data is found in wafer where each of the four factors is coded as − or + depending on whether the low or the high setting for that factor was used. Fit the linear model resist ∼ x1 + x2 + x3 + x4.
 
-(a) Extract the X matrix using the model.matrix function. Examine this to determine how the low and high levels have been coded in the model. 
-(b) Compute the correlation in the X matrix. Why are there some missing values in the matrix? 
-(c) What difference in resistance is expected when moving from the low to the high level of x1? (d) Refit the model without x4 and examine the regression coefficients and standard errors? What stayed the the same as the original fit and what changed? 
-(e) Explain how the change in the regression coefficients is related to the correlation matrix of X.
 
 
 ## Exercise 8
 
 An experiment was conducted to examine factors that might affect the height of leaf springs in the suspension of trucks. The data may be found in truck. The five factors in the experiment are set to − and + but it will be more convenient for us to use −1 and +1. This can be achieved for the first factor by:
 
-```{.r}
+``` r
 truck$B <- sapply(truck$B, function(x) ifelse(x=="-",-1,1))
 ```
 
-Repeat for the other four factors. 
+Repeat for the other four factors.
 
-(a) Fit a linear model for the height in terms of the five factors. Report on the value of the regression coefficients. 
+(a) Fit a linear model for the height in terms of the five factors. Report on the value of the regression coefficients.
 
-(b) Fit a linear model using just factors B, C, D and E and report the coefficients. How do these compare to the previous question? Show how we could have anticipated this result by examining the X matrix. 
+```{r}
+data("truck")
+glimpse(truck)
+```
 
-(c) Construct a new predictor called A which is set to B+C+D+E. Fit a linear model with the predictors A, B, C, D, E and O. Do coefficients for all six predictors appear in the regression summary? Explain. 
+```{r}
+truck <- truck %>% mutate_if(is.factor, ~ ifelse(. == "-", -1, 1))
+model <- lm(height ~ ., truck)
+sumary(model)
+```
 
-(d) Extract the model matrix X from the previous model. Attempt to compute $\bar \beta$ from (XT X)−1XT y. What went wrong and why?  
 
-(e) Use the QR decomposition method as seen in Section 2.7 to compute $\bar \beta$. Are the results satisfactory? 
+(b) Fit a linear model using just factors B, C, D and E and report the coefficients. How do these compare to the previous question? Show how we could have anticipated this result by examining the X matrix.
+
+```{r}
+model2 <- update(model, . ~ . -O)
+sumary(model2)
+cor(model.matrix(model2 )) 
+```
+自变量间无相关性，系数没变
+
+(c) Construct a new predictor called A which is set to B+C+D+E. Fit a linear model with the predictors A, B, C, D, E and O. Do coefficients for all six predictors appear in the regression summary? Explain.
+
+```{r}
+truck$A <- rowSums(truck[, c("B", "C", "D", "O")])
+
+model3 <- update(model, . ~ . + A)
+sumary(model3)
+```
+
+
+(d) Extract the model matrix X from the previous model. Attempt to compute $\bar \beta$ from (XT X)−1XT y. What went wrong and why?
+
+```{.r}
+x <- model.matrix(model3)
+solve(t(x) %*% x)
+```
+
+```{r}
+x <- model.matrix(model3)[,-7] #还是因为奇异性 因为A 不对
+solve(t(x) %*% x)
+```
+
+
+(e) Use the QR decomposition method as seen in Section 2.7 to compute $\bar \beta$. Are the results satisfactory?
+```{r}
+qr_decomp <- qr(model.matrix(model3))
+backsolve(
+  qr.R(qr_decomp), # upper-right
+  t(qr.Q(qr_decomp)) %*% truck$height
+)
+```
 
 (f) Use the function qr.coef to correctly compute $\bar \beta$ .
-
+```{r}
+#qr.coef 来计算回归系数  是一种有效且稳定的方法，特别是在处理可能存在多重共线性的问题时
+qr.coef(qr_decomp, truck$height)
+```
 
