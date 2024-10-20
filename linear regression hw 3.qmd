@@ -12,6 +12,7 @@ date: '20241016'
 
 The dataset teengamb concerns a study of teenage gambling in Britain. Fit a regression model with the expenditure on gambling as the response and the sex, status, income and verbal score as predictors. Present the output.
 
+
 ```{r}
 rm(list=ls())
 
@@ -48,6 +49,7 @@ median(modelsum$residuals)
 **(d) Compute the correlation of the residuals with the fitted values.**
 
 ```{r}
+plot(modelsum$residuals,predict(model))
 cor(modelsum$residuals,predict(model))
 ```
 
@@ -100,7 +102,7 @@ Fit a polynomial in x for predicting y. Compute $\bar \beta$ in two ways — by 
 x <- 1:20
 y <- x + rnorm(20)
 m <- lm(y ~ x + I(x^2))
-sumary(m)
+summary(m)
 
 ```
 
@@ -121,7 +123,7 @@ x <- model.matrix(~ x + I(x^z))
 solve(crossprod(x,x), crossprod(x, y))
 }
 
-# map(2:10,function(z) f(z))
+ #map(2:10,function(z) f(z))
 
 
 ```
@@ -139,14 +141,20 @@ summary(model)$sigma
 # R2
 summary(model)$r.squared
 
-add_variable <- c("lweight", "svi", "lbph", "age", "lcp", "pgg45", "gleason")
+add_variable <- c("lcavol","lweight", "svi", "lbph", "age", "lcp", "pgg45", "gleason")
 
-model <- c()
 results <- data.frame(sigma=NULL,r2=NULL,formula=NULL)
 for(i in 1:length(add_variable)){
-  model[i] <- paste(ifelse(i!=1,model[i-1],'lpsa ~ lcavol'),add_variable[i],sep = '+')
-  summodel <- summary(lm(formula(model[i]), prostate))
-  result <- data.frame(sigma=summodel$sigma,r2=summodel$r.squared,formula=model[i])
+  
+if (i == 1) {
+    model_formula <- paste("lpsa ~", add_variable[i])
+  } else {
+    model_formula <- paste(model_formula, "+", add_variable[i])
+  }
+
+  summodel <- summary(lm(formula(model_formula), data = prostate))
+
+  result <- data.frame(sigma=summodel$sigma,r2=summodel$r.squared,formula=model_formula)
   results <- rbind(results,result)
 }
 print(results)
@@ -157,18 +165,18 @@ print(results)
 
 ```{r}
 # Create a plot for sigma
-plot(1:7, results$sigma, type = 'l', col = 'blue', lwd = 2,
-     ylim = c(0.6, 0.8),  # Set the y-axis limits here
+plot(1:8, results$sigma, type = 'l', col = 'blue', lwd = 2,
+     ylim = c(0.6, 0.9),  # Set the y-axis limits here
      xlab = 'Model Number', ylab = 'Value',
      main = 'Residual Standard Error and R-squared')
 
-points(1:7, results$sigma, col = 'blue', pch = 19)
+points(1:8, results$sigma, col = 'blue', pch = 19)
 
 r2_normalized <- results$r2 * (max(results$sigma) / max(results$r2))
 
-lines(1:7, r2_normalized, col = 'red', lwd = 2)
+lines(1:8, r2_normalized, col = 'red', lwd = 2)
 
-points(1:7, r2_normalized, col = 'red', pch = 19)
+points(1:8, r2_normalized, col = 'red', pch = 19)
 
 legend('topright', legend = c('Residual Standard Error', 'R-squared (scaled)'),
        col = c('blue', 'red'), lty = 1, pch = 19)
@@ -269,15 +277,17 @@ sumary(model)
 ```{r}
 model2 <- lm(resist ~ x1+x2+x3, wafer)
 sumary(model2)
+# x <-  model.matrix(model2)
+# cor(x)
 ```
 
 
 (e) Explain how the change in the regression coefficients is related to the correlation matrix of X.
 ```{r}
-# x <- model.matrix(model2) # 就是截距项的原因
-# solve(t(x) %*% x) #奇异矩阵，也就是矩阵不可逆 行或列是线性相关的，也就是矩阵的行列式为 0
-x <- model.matrix(model2)[,-1] # 就是截距项的原因
-solve(t(x) %*% x)
+x <- model.matrix(model2) # 就是截距项的原因
+solve(t(x) %*% x) #奇异矩阵，也就是矩阵不可逆 行或列是线性相关的，也就是矩阵的行列式为 0
+# x <- model.matrix(model2)[,-1] # 就是截距项的原因
+# solve(t(x) %*% x)
 ```
 
 
