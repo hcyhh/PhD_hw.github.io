@@ -1,0 +1,181 @@
+# bayesian hw 2 {.unnumbered}
+
+---
+title: Bayesian hw 2
+subtitle: chapter 5
+author: Congyuan He
+date: now
+
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    toc-expand: 1
+    number-depth: 3
+---
+
+# EXERCISE 4.15.
+
+Find Jeffreys’ prior for $\theta$ based on a random sample of size $n$ when (a) $y_i|\theta ∼ Pois(\theta)$, (b) $y_i|\theta ∼ Exp(\theta)$, (c) $y_i|\theta ∼ Weib(2,\theta)$, (d) $y_i|\theta$is negative binomial as in Example 4.3.3.
+
+**Answer:**
+
+::: callout-note
+## Definte
+
+In general, for a one parameter problem, Fisher’s information is defined to be the expected value of the negative of the second derivative of the log-likelihood. Jeffreys’ prior is defined as being proportional to the square root of the Fisher information.
+:::
+
+**(a)   $y_i|\theta ∼ Pois(\theta)$**
+
+We have,
+$$ f(y|\theta) =  \theta^y e^{-\theta y}/y! $$
+
+then,
+
+\begin{align}
+Ln(\theta) &= ln\sum \frac{\theta^y e^{-\theta y}}{y!}  \\
+Ln(\theta)' &= \frac{\sum y_i}{\theta}-\sum y_i \\
+Ln(\theta)'' &= -\frac{\sum y_i}{\theta ^2} \\
+p(\theta)&\propto \sqrt{-(-\frac{n \theta}{\theta ^2})} \propto \frac{1}{\sqrt \theta} 
+\end{align}
+
+
+**(b)  $y_i|\theta ∼ Exp(\theta)$ **
+
+we have, 
+
+$$ 
+f(y|\theta) = \theta e^{−θy}I(0,\infty)(y)
+$$
+
+then,
+
+\begin{align}
+Ln(\theta) &\propto ln\sum \theta e^{-\theta y_i}  \\
+Ln(\theta)' &\propto \frac{1}{\theta}-\sum y_i \\
+Ln(\theta)'' &\propto -\frac{1}{\theta ^2} \\
+p(\theta)&\propto \sqrt{-(-\frac{1}{\theta ^2})} \propto \frac{1}{\theta} 
+\end{align}
+
+**(c) $y_i|\theta ∼ Weib(2,\theta)$**
+
+we have,
+
+$$
+f(y|\alpha,\theta) = 2 \theta  y * exp (−\theta y^{2}) I(0,∞)(y)
+$$
+
+then,
+
+\begin{align}
+logf(y|\theta) &= log(2) + log(\theta) + log(y) - \theta y^2  \\
+logf(y|\theta)' &= \frac{1}{\theta}-y^2 \\
+logf(y|\theta)'' &=  -\frac{1}{\theta ^2} \\
+p(\theta)&\propto \sqrt{-(-\frac{1}{\theta ^2})} \propto \frac{1}{\theta} 
+\end{align}
+
+
+**(d) $y_i|\theta$ is negative binomial**
+
+we have,
+
+$$
+y_i|\theta = \binom{y_2-1}{s-1}\theta^{s}(1-\theta)^{y_2-s} 
+$$
+
+then,
+
+\begin{align}
+Ln(\theta) &\propto sln(\theta) + (y_2 -s)log(1-\theta)   \\
+Ln(\theta)' &\propto \frac{s}{\theta}-\frac{y_2-s}{1-\theta} \\
+Ln(\theta)'' &\propto  - \frac{s}{\theta^2}-\frac{y_2-s}{(1-\theta)^2} \\
+p(\theta)&\propto \sqrt{\frac{\theta -2 }{\theta(1-\theta)}} 
+\end{align}
+
+
+
+
+
+
+# EXERCISE 5.3.
+Using calculus, find the mode and 5th percentile of a Beta(10,1) distribution.
+
+\begin{align}
+beta(10,1) &= 10\theta^9 \\
+f(\theta)'&=90\theta^8
+\end{align}
+单调递增 mode = 1
+
+\begin{align}
+q&=\int_{0}^{c} f(\theta)d\theta \\
+q&= c^{10}
+\end{align}
+
+5 分位数为 $0.05^{0.1}$
+
+# EXERCISE 5.4.
+Using calculus, find a and b such that a Beta(a, b) distribution has a mode of 1 and a 5th percentile of 0.2.
+mode=$(a-1)/(a+b-2)$,令其=1，则b=1
+
+\begin{align}
+0.2 &=\int_{0}^{0.05} a \theta^{1-1} d\theta \\
+q&= c^{10} \\
+0.05^a&=0.2 \\
+a&=ln(0.2)/ln(0.05)
+\end{align}
+
+
+# EXERCISE 5.5.
+Derive formula (1), including the formula for θ0.
+
+\begin{align}
+\theta_0 &= \frac{a-1}{a+b-2} \\
+a(\theta_0 -1) &= 2\theta_0 - b\theta_0 -1 \\
+a &= \frac{2\theta_0 - b\theta_0 - 1}{\theta_0 -1}  
+\end{align}
+
+
+# EXERCISE 5.6.
+Use BetaBuster to find the Beta(a, b) priors for mode 0.75 and 5th percentile 0.60, and for mode 0.01 and 99th percentile 0.02. What is the Beta prior when the mode is 1 and the first percentile is 0.80?
+
+
+
+
+# EXERCISE 5.7.
+The distributions θ ∼ Beta(1.6, 1) and θ ∼ Beta(1, 0.577) both have a mode of 1. Find Pr[θ < 0.5] analytically for each. Does BetaBuster give the appropriate parameters for the Beta distributions?
+```{r}
+pbeta(0.5,1.6,1)
+pbeta(0.5,1,0.577)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -12,7 +12,6 @@ date: '20241016'
 
 The dataset teengamb concerns a study of teenage gambling in Britain. Fit a regression model with the expenditure on gambling as the response and the sex, status, income and verbal score as predictors. Present the output.
 
-
 ```{r}
 rm(list=ls())
 
@@ -226,10 +225,12 @@ cor(model$fitted.values, cheddar$taste)^2
 
 ```{r}
 model <- lm(taste ~ -1+., cheddar)
-cor(model$fitted.values, cheddar$taste)^2
+summary(model)$r.squared
+#cor(model$fitted.values, cheddar$taste)^2
 ```
 
 **(d) Compute the regression coefficients from the original fit using the QR decomposition showing your R code.**
+
 ```{r}
 
 model <- lm(taste ~ ., cheddar)
@@ -243,7 +244,6 @@ backsolve(
 )
 
 ```
-
 
 ## Exercise 7
 
@@ -259,15 +259,16 @@ x <- model.matrix(model)
 x
 ```
 
-
 (b) Compute the correlation in the X matrix. Why are there some missing values in the matrix?
 
 ```{r}
 cor(x)
 ```
+
 因为截距项全部为1，且其余变量都是01编码
 
-(c) What difference in resistance is expected when moving from the low to the high level of x1? 
+(c) What difference in resistance is expected when moving from the low to the high level of x1?
+
 ```{r}
 sumary(model)
 ```
@@ -281,20 +282,14 @@ sumary(model2)
 # cor(x)
 ```
 
-
 (e) Explain how the change in the regression coefficients is related to the correlation matrix of X.
+
 ```{r}
 x <- model.matrix(model2) # 就是截距项的原因
 solve(t(x) %*% x) #奇异矩阵，也就是矩阵不可逆 行或列是线性相关的，也就是矩阵的行列式为 0
 # x <- model.matrix(model2)[,-1] # 就是截距项的原因
 # solve(t(x) %*% x)
 ```
-
-
-
-
-
-
 
 ## Exercise 8
 
@@ -319,7 +314,6 @@ model <- lm(height ~ ., truck)
 sumary(model)
 ```
 
-
 (b) Fit a linear model using just factors B, C, D and E and report the coefficients. How do these compare to the previous question? Show how we could have anticipated this result by examining the X matrix.
 
 ```{r}
@@ -327,6 +321,7 @@ model2 <- update(model, . ~ . -O)
 sumary(model2)
 cor(model.matrix(model2 )) 
 ```
+
 自变量间无相关性，系数没变
 
 (c) Construct a new predictor called A which is set to B+C+D+E. Fit a linear model with the predictors A, B, C, D, E and O. Do coefficients for all six predictors appear in the regression summary? Explain.
@@ -338,10 +333,9 @@ model3 <- update(model, . ~ . + A)
 sumary(model3)
 ```
 
-
 (d) Extract the model matrix X from the previous model. Attempt to compute $\bar \beta$ from (XT X)−1XT y. What went wrong and why?
 
-```{.r}
+``` r
 x <- model.matrix(model3)
 solve(t(x) %*% x)
 ```
@@ -351,8 +345,8 @@ x <- model.matrix(model3)[,-7] #还是因为奇异性 因为A 不对
 solve(t(x) %*% x)
 ```
 
-
 (e) Use the QR decomposition method as seen in Section 2.7 to compute $\bar \beta$. Are the results satisfactory?
+
 ```{r}
 qr_decomp <- qr(model.matrix(model3))
 backsolve(
@@ -362,8 +356,8 @@ backsolve(
 ```
 
 (f) Use the function qr.coef to correctly compute $\bar \beta$ .
+
 ```{r}
 #qr.coef 来计算回归系数  是一种有效且稳定的方法，特别是在处理可能存在多重共线性的问题时
 qr.coef(qr_decomp, truck$height)
 ```
-

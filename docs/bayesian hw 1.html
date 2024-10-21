@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Congyuan He">
-<meta name="dcterms.date" content="2024-10-17">
+<meta name="dcterms.date" content="2024-10-20">
 
 <title>博士期间作业 - bayesian hw 1</title>
 <style>
@@ -66,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Survival.html" rel="next">
+<link href="./bayesian hw 2.html" rel="next">
 <link href="./Bayesian.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -146,7 +146,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Bayesian.html">Bayesian</a></li><li class="breadcrumb-item"><a href="./bayesian hw 1.html">Bayesian hw</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Bayesian.html">Bayesian</a></li><li class="breadcrumb-item"><a href="./bayesian hw 1.html">Bayesian hw 1</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -189,7 +189,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./bayesian hw 1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Bayesian hw</span></a>
+ <span class="menu-text">Bayesian hw 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bayesian hw 2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian hw 2</span></a>
   </div>
 </li>
       </ul>
@@ -268,7 +274,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Bayesian.html">Bayesian</a></li><li class="breadcrumb-item"><a href="./bayesian hw 1.html">Bayesian hw</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Bayesian.html">Bayesian</a></li><li class="breadcrumb-item"><a href="./bayesian hw 1.html">Bayesian hw 1</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">bayesian hw 1</h1>
 <p class="subtitle lead">chapter 3</p>
@@ -288,7 +294,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 17, 2024</p>
+      <p class="date">October 20, 2024</p>
     </div>
   </div>
   
@@ -310,7 +316,7 @@ p(\theta) = ce^{−3\theta} I(0,\infty)(\theta).
 <ul>
 <li></li>
 </ul>
-<p><span class="math display">\[\begin{align}
+<span class="math display">\[\begin{align}
 
   \int_{0}^{\infty} p(\theta) d\theta &amp;= \int_{0}^{\infty} ce^{-3\theta}I_{(0,\infty)}(\theta) d\theta \\
 
@@ -318,12 +324,12 @@ p(\theta) = ce^{−3\theta} I(0,\infty)(\theta).
 
   &amp;= \frac{c}{3}
 
-\end{align}\]</span></p>
+\end{align}\]</span>
 <p>let <span class="math inline">\(\frac{c}{3}=1\)</span>，then we have <span class="math inline">\(c=3\)</span></p>
 <ul>
 <li></li>
 </ul>
-<p><span class="math display">\[\begin{align}
+<span class="math display">\[\begin{align}
 
   Pr(\theta &gt; x )&amp;= \int_{x}^{\infty} 3e^{-3\theta}I_{(0,\infty)}(\theta) d\theta \\
 
@@ -333,7 +339,7 @@ p(\theta) = ce^{−3\theta} I(0,\infty)(\theta).
   
   &amp;= e^{-3x}
 
-\end{align}\]</span></p>
+\end{align}\]</span>
 <p>let <span class="math inline">\(x=2\)</span>, then we have <span class="math display">\[
 Pr(\theta&gt;2) = e^{-3*2} = 0.002478752
 \]</span></p>
@@ -393,7 +399,7 @@ y_i|\theta～Pois(\theta M_i)\Rightarrow P(y_i|\theta) = \frac{(\theta M_i)^{Y_i
 <p><span class="math display">\[
 L(\theta)= (\prod \frac{M_{i}^{y_i}}{y_i !}) \theta^{\sum y_i} e^{-\theta \sum M_i }
 \]</span></p>
-<p><span class="math display">\[\begin{align}
+<span class="math display">\[\begin{align}
 
   p(\theta|y) &amp; \propto p(\theta)L(\theta) \\
 
@@ -401,7 +407,7 @@ L(\theta)= (\prod \frac{M_{i}^{y_i}}{y_i !}) \theta^{\sum y_i} e^{-\theta \sum M
 
   &amp; \propto \theta^{a+\sum y_i -1} e^{- \theta (b+\sum M_i)}
 
-\end{align}\]</span></p>
+\end{align}\]</span>
 <p>Finally, we have</p>
 <p><span class="math display">\[
 \theta|y ～ Gamma(a+\sum y_i  ,b+\sum M_i)
@@ -420,7 +426,7 @@ P(\theta_1 , \theta_2)=p_1(\theta_1)p_2(\theta_2)
 \theta_1,\theta_2 ～ Gamma(a + y_1,b+M_1)Gamma(a + y_2,b+M_2)
 \]</span></p>
 <p>We know,</p>
-<p><span class="math display">\[\begin{align}
+<span class="math display">\[\begin{align}
 
 a_1 = a_2 &amp;= 1 \\
 
@@ -434,13 +440,13 @@ M_1 &amp;= 100  \\
 
 M_2 &amp;= 200
 
-\end{align}\]</span></p>
+\end{align}\]</span>
 <p>Finally,</p>
-<p><span class="math display">\[\begin{align}
+<span class="math display">\[\begin{align}
 p(\theta_1,\theta_2|y_1 =500,y_2=800)=[[100.1^501/\Gamma(501)]\theta_1 ^{500}e^{-100.1\theta_1}][[200.1^801/\Gamma(801)]\theta_2 ^{800-1}e^{-200.1\theta_2}]
 
 
-\end{align}\]</span></p>
+\end{align}\]</span>
 </section>
 <section id="exercise-3.4." class="level1">
 <h1>EXERCISE 3.4.</h1>
@@ -503,13 +509,13 @@ Start = 2001
 End = 2007 
 Thinning interval = 1 
         theta1    theta2
-[1,] 0.4524820 0.3531854
-[2,] 0.3891633 0.3054305
-[3,] 0.3456396 0.3841356
-[4,] 0.3755774 0.3666568
-[5,] 0.3561009 0.3408079
-[6,] 0.3973557 0.3599804
-[7,] 0.3842592 0.2977405</code></pre>
+[1,] 0.3782756 0.3203757
+[2,] 0.3510693 0.4141539
+[3,] 0.3469242 0.4108567
+[4,] 0.3430796 0.3478022
+[5,] 0.4337306 0.5253206
+[6,] 0.3876139 0.1976964
+[7,] 0.3882022 0.3558850</code></pre>
 </div>
 </div>
 </section>
@@ -568,18 +574,18 @@ Start = 1001
 End = 1007 
 Thinning interval = 1 
        theta1   theta2
-[1,] 5.372489 3.818596
-[2,] 5.592069 3.792485
-[3,] 4.616593 4.103390
-[4,] 4.846946 4.257532
-[5,] 4.722098 3.703571
-[6,] 4.918131 3.928458
-[7,] 5.018989 4.148727</code></pre>
+[1,] 5.070821 4.262920
+[2,] 4.569544 4.102459
+[3,] 4.776823 4.002332
+[4,] 4.463259 4.373990
+[5,] 4.746862 4.214575
+[6,] 4.790108 3.908534
+[7,] 4.694922 3.949689</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mcmc_samples[[<span class="dv">1</span>]],<span class="dv">2</span>,mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  theta1   theta2 
-5.010263 4.004477 </code></pre>
+5.008165 4.005131 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gamma分布均值为a/b</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -635,7 +641,7 @@ Initializing model</code></pre>
 <span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mcmc_samples[[<span class="dv">1</span>]],<span class="dv">2</span>,mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     prob     theta 
-0.0366000 0.1081029 </code></pre>
+0.0365000 0.1078626 </code></pre>
 </div>
 </div>
 </section>
@@ -684,12 +690,12 @@ Initializing model</code></pre>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mcmc_samples[[<span class="dv">1</span>]],<span class="dv">2</span>,mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     gamma      prob1      prob2     theta1     theta2    y1tilde    y2tilde 
- 0.1465421  0.9979000  0.7097000  0.2543834  0.1078413 25.4349000 10.8218000 </code></pre>
+ 0.1458695  0.9978000  0.7128000  0.2541089  0.1082394 25.5567000 10.8349000 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(mcmc_samples[[<span class="dv">1</span>]][,<span class="st">'gamma'</span>],<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%      97.5% 
-0.04343084 0.25028468 </code></pre>
+0.04275986 0.24893181 </code></pre>
 </div>
 </div>
 
@@ -1113,8 +1119,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Survival.html" class="pagination-link" aria-label="Survival">
-        <span class="nav-page-text">Survival</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./bayesian hw 2.html" class="pagination-link" aria-label="Bayesian hw 2">
+        <span class="nav-page-text">Bayesian hw 2</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
