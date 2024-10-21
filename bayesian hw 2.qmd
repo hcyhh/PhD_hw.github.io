@@ -141,6 +141,8 @@ Use BetaBuster to find the Beta(a, b) priors for mode 0.75 and 5th percentile 0.
 
 ![](images/clipboard-3962816524.png)
 
+![](images/clipboard-210616965.png)
+
 ![](images/clipboard-211411037.png)
 
 # EXERCISE 5.7.
