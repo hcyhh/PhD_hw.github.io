@@ -322,51 +322,51 @@ Definte
 <p>In general, for a one parameter problem, Fisher’s information is defined to be the expected value of the negative of the second derivative of the log-likelihood. Jeffreys’ prior is defined as being proportional to the square root of the Fisher information.</p>
 </div>
 </div>
-<p><strong>(a) <span class="math inline">\(y_i|\theta ∼ Pois(\theta)\)</span></strong></p>
+<p><strong>(a)</strong> <span class="math inline">\(y_i|\theta ∼ Pois(\theta)\)</span></p>
 <p>We have, <span class="math display">\[ f(y|\theta) =  \theta^y e^{-\theta y}/y! \]</span></p>
 <p>then,</p>
-<p><span class="math display">\[\begin{align}
+<span class="math display">\[\begin{align}
 Ln(\theta) &amp;= ln\sum \frac{\theta^y e^{-\theta y}}{y!}  \\
 Ln(\theta)' &amp;= \frac{\sum y_i}{\theta}-\sum y_i \\
 Ln(\theta)'' &amp;= -\frac{\sum y_i}{\theta ^2} \\
 p(\theta)&amp;\propto \sqrt{-(-\frac{n \theta}{\theta ^2})} \propto \frac{1}{\sqrt \theta}
-\end{align}\]</span></p>
-<p><strong>(b) <span class="math inline">\(y_i|\theta ∼ Exp(\theta)\)</span> </strong></p>
+\end{align}\]</span>
+<p><strong>(b)</strong> <span class="math inline">\(y_i|\theta ∼ Exp(\theta)\)</span></p>
 <p>we have,</p>
 <p><span class="math display">\[
 f(y|\theta) = \theta e^{−θy}I(0,\infty)(y)
 \]</span></p>
 <p>then,</p>
-<p><span class="math display">\[\begin{align}
+<span class="math display">\[\begin{align}
 Ln(\theta) &amp;\propto ln\sum \theta e^{-\theta y_i}  \\
 Ln(\theta)' &amp;\propto \frac{1}{\theta}-\sum y_i \\
 Ln(\theta)'' &amp;\propto -\frac{1}{\theta ^2} \\
 p(\theta)&amp;\propto \sqrt{-(-\frac{1}{\theta ^2})} \propto \frac{1}{\theta}
-\end{align}\]</span></p>
-<p><strong>(c) <span class="math inline">\(y_i|\theta ∼ Weib(2,\theta)\)</span></strong></p>
+\end{align}\]</span>
+<p><strong>(c)</strong> <span class="math inline">\(y_i|\theta ∼ Weib(2,\theta)\)</span></p>
 <p>we have,</p>
 <p><span class="math display">\[
 f(y|\alpha,\theta) = 2 \theta  y * exp (−\theta y^{2}) I(0,∞)(y)
 \]</span></p>
 <p>then,</p>
-<p><span class="math display">\[\begin{align}
+<span class="math display">\[\begin{align}
 logf(y|\theta) &amp;= log(2) + log(\theta) + log(y) - \theta y^2  \\
 logf(y|\theta)' &amp;= \frac{1}{\theta}-y^2 \\
 logf(y|\theta)'' &amp;=  -\frac{1}{\theta ^2} \\
 p(\theta)&amp;\propto \sqrt{-(-\frac{1}{\theta ^2})} \propto \frac{1}{\theta}
-\end{align}\]</span></p>
-<p><strong>(d) <span class="math inline">\(y_i|\theta\)</span> is negative binomial</strong></p>
+\end{align}\]</span>
+<p><strong>(d)</strong> <span class="math inline">\(y_i|\theta\)</span> is negative binomial</p>
 <p>we have,</p>
 <p><span class="math display">\[
 y_i|\theta = \binom{y_2-1}{s-1}\theta^{s}(1-\theta)^{y_2-s}
 \]</span></p>
 <p>then,</p>
-<p><span class="math display">\[\begin{align}
+<span class="math display">\[\begin{align}
 Ln(\theta) &amp;\propto sln(\theta) + (y_2 -s)log(1-\theta)   \\
 Ln(\theta)' &amp;\propto \frac{s}{\theta}-\frac{y_2-s}{1-\theta} \\
 Ln(\theta)'' &amp;\propto  - \frac{s}{\theta^2}-\frac{y_2-s}{(1-\theta)^2} \\
 p(\theta)&amp;\propto \sqrt{\frac{\theta -2 }{\theta(1-\theta)}}
-\end{align}\]</span></p>
+\end{align}\]</span>
 </section>
 <section id="exercise-5.3." class="level1">
 <h1>EXERCISE 5.3.</h1>
@@ -375,34 +375,36 @@ p(\theta)&amp;\propto \sqrt{\frac{\theta -2 }{\theta(1-\theta)}}
 beta(10,1) &amp;= 10\theta^9 \\
 f(\theta)'&amp;=90\theta^8
 \end{align}\]</span> 单调递增 mode = 1</p>
-<p><span class="math display">\[\begin{align}
+<span class="math display">\[\begin{align}
 q&amp;=\int_{0}^{c} f(\theta)d\theta \\
 q&amp;= c^{10}
-\end{align}\]</span></p>
+\end{align}\]</span>
 <p>5 分位数为 <span class="math inline">\(0.05^{0.1}\)</span></p>
 </section>
 <section id="exercise-5.4." class="level1">
 <h1>EXERCISE 5.4.</h1>
 <p>Using calculus, find a and b such that a Beta(a, b) distribution has a mode of 1 and a 5th percentile of 0.2. mode=<span class="math inline">\((a-1)/(a+b-2)\)</span>,令其=1，则b=1</p>
-<p><span class="math display">\[\begin{align}
+<span class="math display">\[\begin{align}
 0.2 &amp;=\int_{0}^{0.05} a \theta^{1-1} d\theta \\
 q&amp;= c^{10} \\
 0.05^a&amp;=0.2 \\
 a&amp;=ln(0.2)/ln(0.05)
-\end{align}\]</span></p>
+\end{align}\]</span>
 </section>
 <section id="exercise-5.5." class="level1">
 <h1>EXERCISE 5.5.</h1>
 <p>Derive formula (1), including the formula for θ0.</p>
-<p><span class="math display">\[\begin{align}
+<span class="math display">\[\begin{align}
 \theta_0 &amp;= \frac{a-1}{a+b-2} \\
 a(\theta_0 -1) &amp;= 2\theta_0 - b\theta_0 -1 \\
 a &amp;= \frac{2\theta_0 - b\theta_0 - 1}{\theta_0 -1}  
-\end{align}\]</span></p>
+\end{align}\]</span>
 </section>
 <section id="exercise-5.6." class="level1">
 <h1>EXERCISE 5.6.</h1>
 <p>Use BetaBuster to find the Beta(a, b) priors for mode 0.75 and 5th percentile 0.60, and for mode 0.01 and 99th percentile 0.02. What is the Beta prior when the mode is 1 and the first percentile is 0.80?</p>
+<p><img src="images/clipboard-3962816524.png" class="img-fluid"></p>
+<p><img src="images/clipboard-211411037.png" class="img-fluid"></p>
 </section>
 <section id="exercise-5.7." class="level1">
 <h1>EXERCISE 5.7.</h1>
