@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Congyuan He">
-<meta name="dcterms.date" content="2024-10-20">
+<meta name="dcterms.date" content="2024-10-21">
 
 <title>博士期间作业 - bayesian hw 1</title>
 <style>
@@ -294,7 +294,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 20, 2024</p>
+      <p class="date">October 21, 2024</p>
     </div>
   </div>
   
@@ -509,13 +509,13 @@ Start = 2001
 End = 2007 
 Thinning interval = 1 
         theta1    theta2
-[1,] 0.3782756 0.3203757
-[2,] 0.3510693 0.4141539
-[3,] 0.3469242 0.4108567
-[4,] 0.3430796 0.3478022
-[5,] 0.4337306 0.5253206
-[6,] 0.3876139 0.1976964
-[7,] 0.3882022 0.3558850</code></pre>
+[1,] 0.3811697 0.3100928
+[2,] 0.4263209 0.3351632
+[3,] 0.3978155 0.4041844
+[4,] 0.4233860 0.3635713
+[5,] 0.3501913 0.2555364
+[6,] 0.3817331 0.4577439
+[7,] 0.3806202 0.3138595</code></pre>
 </div>
 </div>
 </section>
@@ -574,18 +574,18 @@ Start = 1001
 End = 1007 
 Thinning interval = 1 
        theta1   theta2
-[1,] 5.070821 4.262920
-[2,] 4.569544 4.102459
-[3,] 4.776823 4.002332
-[4,] 4.463259 4.373990
-[5,] 4.746862 4.214575
-[6,] 4.790108 3.908534
-[7,] 4.694922 3.949689</code></pre>
+[1,] 4.885572 3.927707
+[2,] 5.566531 3.968726
+[3,] 5.021217 4.262928
+[4,] 5.317858 3.826001
+[5,] 4.918822 3.912928
+[6,] 4.987216 4.334692
+[7,] 5.307356 3.633826</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mcmc_samples[[<span class="dv">1</span>]],<span class="dv">2</span>,mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  theta1   theta2 
-5.008165 4.005131 </code></pre>
+5.008658 4.006906 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gamma分布均值为a/b</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -641,7 +641,7 @@ Initializing model</code></pre>
 <span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mcmc_samples[[<span class="dv">1</span>]],<span class="dv">2</span>,mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     prob     theta 
-0.0365000 0.1078626 </code></pre>
+0.0355000 0.1078159 </code></pre>
 </div>
 </div>
 </section>
@@ -690,12 +690,12 @@ Initializing model</code></pre>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mcmc_samples[[<span class="dv">1</span>]],<span class="dv">2</span>,mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     gamma      prob1      prob2     theta1     theta2    y1tilde    y2tilde 
- 0.1458695  0.9978000  0.7128000  0.2541089  0.1082394 25.5567000 10.8349000 </code></pre>
+ 0.1475529  0.9979000  0.7170000  0.2551727  0.1076198 25.4967000 10.7936000 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(mcmc_samples[[<span class="dv">1</span>]][,<span class="st">'gamma'</span>],<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%      97.5% 
-0.04275986 0.24893181 </code></pre>
+0.04550297 0.25071823 </code></pre>
 </div>
 </div>
 
