@@ -104,12 +104,12 @@
   {
     "objectID": "causal inference hw 1.html",
     "href": "causal inference hw 1.html",
-    "title": "2  What if",
+    "title": "causal inference hw 1",
     "section": "",
-    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "text": "作业内容：\n作业1： 将B书6.1.2节（Standardization with a parametric outcome model）的2个案例代码翻译为计算公式，需标明代码与公式的对应关系。 截止时间：10月24日晚上10点\n作业2： 查看10.24“需阅读材料”，提前阅读文献，准备当次课讲解文献（无需做ppt）。\nB书《Fundamentals of Causal Inference With R (Babette A. Brumback) 》\n数据:\nhttps://s3-eu-west-1.amazonaws.com/s3-euw1-ap-pe-ws4-cws-documents.ri-prod/9780367705053/Brumback_FOCI_Website_Material.zip",
     "crumbs": [
-      "Causal inference.html",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What if</span>"
+      "Causal inference",
+      "causal inference hw 1"
     ]
   },
   {
@@ -284,6 +284,28 @@
     "crumbs": [
       "Bayesian",
       "Bayesian hw 2"
+    ]
+  },
+  {
+    "objectID": "causal inference hw 1.html#作业1",
+    "href": "causal inference hw 1.html#作业1",
+    "title": "causal inference hw 1",
+    "section": "作业1",
+    "text": "作业1",
+    "crumbs": [
+      "Causal inference",
+      "causal inference hw 1"
+    ]
+  },
+  {
+    "objectID": "causal inference hw 1.html#作业2",
+    "href": "causal inference hw 1.html#作业2",
+    "title": "causal inference hw 1",
+    "section": "作业2",
+    "text": "作业2\n\nrm(list=ls())\nsuppressMessages(library(tidyverse))\n\nload('/Users/hcy/Documents/MyKeyData/300hobby/370professional_class_note/PhD_hw/Brumback FOCI Website Material/Chapter 6/simdr.r.RData')\n\nload('/Users/hcy/Documents/MyKeyData/300hobby/370professional_class_note/PhD_hw/Brumback FOCI Website Material/Chapter 6/whatif2dat.RData')\n\nglimpse(whatif2dat)\n\nRows: 165\nColumns: 11\n$ vl0      &lt;int&gt; 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0…\n$ vlcont0  &lt;int&gt; 20, 20, 61420, 600, 75510, 20, 40, 86200, 20, 20, 20, 20, 657…\n$ artad0   &lt;int&gt; 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, NA, 1, 0, 1, 1, NA, 1,…\n$ vl4      &lt;int&gt; 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1…\n$ vlcont4  &lt;int&gt; 420, 20, 20, 20, 184420, 30, 20, 1480, 20, 20, 100, 20, 59820…\n$ artad4   &lt;int&gt; 1, 1, 1, 1, 0, 0, 1, 1, 1, NA, 0, 1, 1, 1, 0, 1, 0, 1, NA, 1,…\n$ audit0   &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1…\n$ T        &lt;int&gt; 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0…\n$ A        &lt;int&gt; 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0…\n$ lvlcont0 &lt;dbl&gt; 2.995732, 2.995732, 11.025491, 6.396930, 11.232020, 2.995732,…\n$ lvlcont4 &lt;dbl&gt; 6.040255, 2.995732, 2.995732, 2.995732, 12.124971, 3.401197, …",
+    "crumbs": [
+      "Causal inference",
+      "causal inference hw 1"
     ]
   }
 ]

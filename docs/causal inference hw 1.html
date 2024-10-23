@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -124,7 +158,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./bayesian hw 1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">bayesian hw 1</span></a>
+ <span class="menu-text">Bayesian hw 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bayesian hw 2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian hw 2</span></a>
   </div>
 </li>
       </ul>
@@ -186,7 +226,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#作业内容" id="toc-作业内容" class="nav-link active" data-scroll-target="#作业内容">作业内容：</a></li>
+  <li><a href="#作业1" id="toc-作业1" class="nav-link" data-scroll-target="#作业1">作业1</a></li>
+  <li><a href="#作业2" id="toc-作业2" class="nav-link" data-scroll-target="#作业2">作业2</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -210,8 +258,47 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="作业内容" class="level2">
+<h2 class="anchored" data-anchor-id="作业内容">作业内容：</h2>
+<p>作业1： 将B书6.1.2节（Standardization with a parametric outcome model）的2个案例代码翻译为计算公式，需标明代码与公式的对应关系。 截止时间：10月24日晚上10点</p>
+<p>作业2： 查看10.24“需阅读材料”，提前阅读文献，准备当次课讲解文献（无需做ppt）。</p>
+<p>B书《Fundamentals of Causal Inference With R (Babette A. Brumback) 》</p>
+<p>数据:</p>
+<p><a href="https://s3-eu-west-1.amazonaws.com/s3-euw1-ap-pe-ws4-cws-documents.ri-prod/9780367705053/Brumback_FOCI_Website_Material.zip" class="uri">https://s3-eu-west-1.amazonaws.com/s3-euw1-ap-pe-ws4-cws-documents.ri-prod/9780367705053/Brumback_FOCI_Website_Material.zip</a></p>
+</section>
+<section id="作业1" class="level2">
+<h2 class="anchored" data-anchor-id="作业1">作业1</h2>
+</section>
+<section id="作业2" class="level2">
+<h2 class="anchored" data-anchor-id="作业2">作业2</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">'/Users/hcy/Documents/MyKeyData/300hobby/370professional_class_note/PhD_hw/Brumback FOCI Website Material/Chapter 6/simdr.r.RData'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">'/Users/hcy/Documents/MyKeyData/300hobby/370professional_class_note/PhD_hw/Brumback FOCI Website Material/Chapter 6/whatif2dat.RData'</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(whatif2dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 165
+Columns: 11
+$ vl0      &lt;int&gt; 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0…
+$ vlcont0  &lt;int&gt; 20, 20, 61420, 600, 75510, 20, 40, 86200, 20, 20, 20, 20, 657…
+$ artad0   &lt;int&gt; 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, NA, 1, 0, 1, 1, NA, 1,…
+$ vl4      &lt;int&gt; 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1…
+$ vlcont4  &lt;int&gt; 420, 20, 20, 20, 184420, 30, 20, 1480, 20, 20, 100, 20, 59820…
+$ artad4   &lt;int&gt; 1, 1, 1, 1, 0, 0, 1, 1, 1, NA, 0, 1, 1, 1, 0, 1, 0, 1, NA, 1,…
+$ audit0   &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1…
+$ T        &lt;int&gt; 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0…
+$ A        &lt;int&gt; 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0…
+$ lvlcont0 &lt;dbl&gt; 2.995732, 2.995732, 11.025491, 6.396930, 11.232020, 2.995732,…
+$ lvlcont4 &lt;dbl&gt; 6.040255, 2.995732, 2.995732, 2.995732, 12.124971, 3.401197, …</code></pre>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
