@@ -16,6 +16,7 @@ book:
     - part: Survival.qmd
       chapters: 
         - survival hw 1.qmd
+        - survival hw 2.qmd
     - part: Causal inference.qmd
       chapters: 
         - causal inference hw 1.qmd
