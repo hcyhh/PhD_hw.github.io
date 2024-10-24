@@ -103,6 +103,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -158,7 +187,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./bayesian hw 1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">bayesian hw 1</span></a>
+ <span class="menu-text">Bayesian hw 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bayesian hw 2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian hw 2</span></a>
   </div>
 </li>
       </ul>
@@ -197,13 +232,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./Linear regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear regression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./linear regression hw 3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">linear regression hw 3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#km-8.1" id="toc-km-8.1" class="nav-link active" data-scroll-target="#km-8.1">KM 8.1</a></li>
+  <li><a href="#km-8.5" id="toc-km-8.5" class="nav-link" data-scroll-target="#km-8.5">KM 8.5</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -227,15 +286,400 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>In summary, this book has no content whatsoever.</p>
+<p>KK书，chapter 3 Practice Exercises KM书 8.1，8.5 1）使用软件built-in函数，完成题目 2）使用自编code，完成题目中的Wald test, Likelihood ratio test 3）使用软件built-in函数，相持计算的argument更换为“exact”、“efron”、“descrete”，重复分析，看看结果差得大不大 R user 可加载下面的包导入数据 library(KMsurv) data(hodg)</p>
+<section id="km-8.1" class="level2">
+<h2 class="anchored" data-anchor-id="km-8.1">KM 8.1</h2>
+<p>In section 1.10, times to death or relapse (in days) are given for 23 nonHodgkin’s lymphoma (NHL) patients, 11 receiving an allogenic (Allo) transplant from an HLA-matched sibling donor and 12 patients receiving an autologous (Auto) transplant. Also, data on 20 Hodgkin’s lymphoma (HOD) patients, 5 receiving an allogenic (Allo) transplant from an HLAmatched sibling donor and 15 patients receiving an autologous (Auto) transplant is given.</p>
+<p><strong>(a) Treating NHL Allo as the baseline hazard function, state the appropriate coding which would allow the investigator to test for any difference in survival functions for the four groups, treating them as four independent groups.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pkgs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'tidyverse'</span>,<span class="st">'skimr'</span>,<span class="st">'survival'</span>,<span class="st">'KMsurv'</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">lapply</span>(pkgs, <span class="cf">function</span>(x) <span class="fu">suppressMessages</span>(<span class="fu">library</span>(x,<span class="at">character.only =</span> <span class="cn">TRUE</span>)) ))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(hodg)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(hodg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">hodg</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 12%">
+<col style="width: 17%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">gtype</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.63</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">▅▁▁▁▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dtype</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.47</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">▇▁▁▁▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">time</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">429.74</td>
+<td style="text-align: right;">570.54</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">504.0</td>
+<td style="text-align: right;">2144</td>
+<td style="text-align: left;">▇▂▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">delta</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.60</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">▅▁▁▁▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">score</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">76.28</td>
+<td style="text-align: right;">21.05</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">90.0</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: left;">▁▂▂▃▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">wtime</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">37.70</td>
+<td style="text-align: right;">33.62</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">55.5</td>
+<td style="text-align: right;">171</td>
+<td style="text-align: left;">▇▃▂▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>hodg<span class="sc">$</span>new <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(hodg<span class="sc">$</span>gtype<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span> hodg<span class="sc">$</span>dtype<span class="sc">==</span><span class="dv">1</span>,<span class="st">'allo_nhl'</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">ifelse</span>(hodg<span class="sc">$</span>gtype<span class="sc">==</span><span class="dv">2</span> <span class="sc">&amp;</span> hodg<span class="sc">$</span>dtype<span class="sc">==</span><span class="dv">1</span>,<span class="st">'autlo_nhl'</span>,<span class="fu">ifelse</span>(hodg<span class="sc">$</span>gtype<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span> hodg<span class="sc">$</span>dtype<span class="sc">==</span><span class="dv">2</span>,<span class="st">'allo_hod'</span>,<span class="st">'auto_hod'</span>))) <span class="sc">%&gt;%</span> <span class="fu">factor</span>() <span class="sc">%&gt;%</span> <span class="fu">relevel</span>(.,<span class="at">ref =</span> <span class="st">"allo_nhl"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time,delta)<span class="sc">~</span>new,<span class="at">data=</span>hodg,<span class="at">ties =</span> <span class="st">'breslow'</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<pre><code>Call:
+coxph(formula = Surv(time, delta) ~ new, data = hodg, ties = "breslow")
+
+  n= 43, number of events= 26 
+
+               coef exp(coef) se(coef)     z Pr(&gt;|z|)   
+newallo_hod  1.8297    6.2323   0.6753 2.709  0.00674 **
+newautlo_nhl 0.6639    1.9423   0.5643 1.177  0.23939   
+newauto_hod  0.1537    1.1662   0.5888 0.261  0.79406   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+             exp(coef) exp(-coef) lower .95 upper .95
+newallo_hod      6.232     0.1605    1.6589    23.414
+newautlo_nhl     1.942     0.5149    0.6427     5.870
+newauto_hod      1.166     0.8575    0.3677     3.698
+
+Concordance= 0.605  (se = 0.061 )
+Likelihood ratio test= 7.89  on 3 df,   p=0.05
+Wald test            = 9.26  on 3 df,   p=0.03
+Score (logrank) test = 11.08  on 3 df,   p=0.01</code></pre>
+</div>
+</div>
+<p><strong>(b) Treating NHL Allo as the baseline hazard function, state the appropriate coding which would allow the investigator to test for an interaction between type of transplant and disease type using main effects and interaction terms.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time,delta)<span class="sc">~</span>gtype <span class="sc">*</span> dtype,<span class="at">data=</span>hodg,<span class="at">ties =</span> <span class="st">'breslow'</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(time, delta) ~ gtype * dtype, data = hodg, 
+    ties = "breslow")
+
+  n= 43, number of events= 26 
+
+                coef exp(coef) se(coef)      z Pr(&gt;|z|)   
+gtype        3.00377  20.16134  1.30504  2.302  0.02135 * 
+dtype        4.16964  64.69233  1.45172  2.872  0.00408 **
+gtype:dtype -2.33990   0.09634  0.85168 -2.747  0.00601 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+            exp(coef) exp(-coef) lower .95 upper .95
+gtype        20.16134    0.04960   1.56196  260.2361
+dtype        64.69233    0.01546   3.75963 1113.1660
+gtype:dtype   0.09634   10.38019   0.01815    0.5114
+
+Concordance= 0.605  (se = 0.061 )
+Likelihood ratio test= 7.89  on 3 df,   p=0.05
+Wald test            = 9.26  on 3 df,   p=0.03
+Score (logrank) test = 11.08  on 3 df,   p=0.01</code></pre>
+</div>
+</div>
+<p><strong>(c) Suppose that we have the following model for the hazard rates in the four groups:</strong></p>
+<span class="math display">\[\begin{align}
+h(t|NHL Allo) &amp;= h_0(t) \\
+h(t|HOD Allo) &amp;= h_0(t)exp(2) \\
+h(t|NHL Auto) &amp;= h_0(t)exp(1.5) \\
+h(t|HOD Auto) &amp;= h_0(t)exp(0.5) \\
+\end{align}\]</span>
+<p>What are the risk coefficients, <span class="math inline">\(\beta_i\)</span> , i = 1, 2, 3, for the interaction model in part b ?</p>
+<p><span class="math display">\[
+h(t)=h_0(t)exp(\beta_1Auto + \beta_2 HOD + \beta3 Auto*HOD)
+\]</span> allo_nhl 0 0</p>
+<p>allo_hod 0 1</p>
+<p>nhl_auto 1 0</p>
+<p>hod__auto 1 1</p>
+<p><span class="math display">\[\begin{align}
+\beta_1 &amp; = 1.5 \\
+\beta_2 &amp;= 2 \\
+\beta_1 + beta_2 +\beta_3 &amp;= 0.5 \\
+\beta_3 &amp;= 0.5-1.5-2 =-3
+\end{align}\]</span></p>
+</section>
+<section id="km-8.5" class="level2">
+<h2 class="anchored" data-anchor-id="km-8.5">KM 8.5</h2>
+<p>Using the data set in Exercise 1, using the Breslow method of handling ties,</p>
+<ol type="a">
+<li>Analyze the data by performing a global test of no effect of group as defined in Exercise 8.1(a) on survival. Construct an ANOVA table to summarize estimates of the risk coefficients and the results of the one degree of freedom tests for each covariate in the model.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time,delta)<span class="sc">~</span>new,<span class="at">data=</span>hodg,<span class="at">ties =</span> <span class="st">'breslow'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(time, delta) ~ gtype * dtype, data = hodg, 
+    ties = "breslow")
+
+  n= 43, number of events= 26 
+
+                coef exp(coef) se(coef)      z Pr(&gt;|z|)   
+gtype        3.00377  20.16134  1.30504  2.302  0.02135 * 
+dtype        4.16964  64.69233  1.45172  2.872  0.00408 **
+gtype:dtype -2.33990   0.09634  0.85168 -2.747  0.00601 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+            exp(coef) exp(-coef) lower .95 upper .95
+gtype        20.16134    0.04960   1.56196  260.2361
+dtype        64.69233    0.01546   3.75963 1113.1660
+gtype:dtype   0.09634   10.38019   0.01815    0.5114
+
+Concordance= 0.605  (se = 0.061 )
+Likelihood ratio test= 7.89  on 3 df,   p=0.05
+Wald test            = 9.26  on 3 df,   p=0.03
+Score (logrank) test = 11.08  on 3 df,   p=0.01</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, delta) <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">ties=</span><span class="st">"breslow"</span>, <span class="at">data =</span> hodg)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model1, model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+ Cox model: response is  Surv(time, delta)
+ Model 1: ~ new
+ Model 2: ~ 1
+   loglik  Chisq Df Pr(&gt;|Chi|)  
+1 -83.350                       
+2 -87.298 7.8942  3    0.04825 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># anova(model1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="a">
+<li>Repeat part (a) using the coding as described in Exercise 8.1(b). Furthermore, test the hypothesis of disease type by transplant interaction using a likelihood ratio rest based on this coding. Repeat using the Wald test.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time,delta)<span class="sc">~</span>gtype <span class="sc">*</span> dtype,<span class="at">data=</span>hodg,<span class="at">ties =</span> <span class="st">'breslow'</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(time, delta) ~ gtype * dtype, data = hodg, 
+    ties = "breslow")
+
+  n= 43, number of events= 26 
+
+                coef exp(coef) se(coef)      z Pr(&gt;|z|)   
+gtype        3.00377  20.16134  1.30504  2.302  0.02135 * 
+dtype        4.16964  64.69233  1.45172  2.872  0.00408 **
+gtype:dtype -2.33990   0.09634  0.85168 -2.747  0.00601 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+            exp(coef) exp(-coef) lower .95 upper .95
+gtype        20.16134    0.04960   1.56196  260.2361
+dtype        64.69233    0.01546   3.75963 1113.1660
+gtype:dtype   0.09634   10.38019   0.01815    0.5114
+
+Concordance= 0.605  (se = 0.061 )
+Likelihood ratio test= 7.89  on 3 df,   p=0.05
+Wald test            = 9.26  on 3 df,   p=0.03
+Score (logrank) test = 11.08  on 3 df,   p=0.01</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model2, model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+ Cox model: response is  Surv(time, delta)
+ Model 1: ~ 1
+ Model 2: ~ gtype * dtype
+   loglik  Chisq Df Pr(&gt;|Chi|)  
+1 -87.298                       
+2 -83.350 7.8942  3    0.04825 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<ol start="3" type="a">
+<li>Find point estimates and 95% confidence intervals for the relative risk of death for an NHL Auto transplant patient as compared to an NHL Allo transplant patient.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(model1)[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>newautlo_nhl 
+    0.663868 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(model1)[<span class="dv">2</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    2.5 %    97.5 % 
+-0.442074  1.769810 </code></pre>
+</div>
+</div>
+<ol start="4" type="a">
+<li>Find the p-value of a test of the hypothesis that the hazard rates are the same for HOD Allo transplants and NHL Allo patients, using the Wald test. Repeat a similar test for Auto patients.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(aod) <span class="co"># wald.test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'aod'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:survival':
+
+    rats</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wald.test</span>(<span class="at">b =</span> <span class="fu">coef</span>(model3), <span class="at">Sigma =</span> <span class="fu">vcov</span>(model3), <span class="at">Terms =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Wald test:
+----------
+
+Chi-squared test:
+X2 = 5.3, df = 1, P(&gt; X2) = 0.021</code></pre>
+</div>
+</div>
+<ol start="5" type="a">
+<li>Test the hypothesis, using the Wald test, that the hazard rates for Auto transplant and Allo transplant patients are the same for each disease group against the alternative that the hazard rates for Auto transplant and Allo transplant patients for at least one group are different using a two-degree of freedom test of H0 : h(t | NHL Allo)  h(t | NHL Auto) and H0 : h(t | HOD Allo)  h(t | HOD Auto).</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(aod) <span class="co"># wald.test</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wald.test</span>(<span class="at">b =</span> <span class="fu">coef</span>(model3), <span class="at">Sigma =</span> <span class="fu">vcov</span>(model3), <span class="at">Terms =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Wald test:
+----------
+
+Chi-squared test:
+X2 = 8.3, df = 2, P(&gt; X2) = 0.016</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ws.e <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">coef</span>(model3)[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]<span class="sc">-</span><span class="dv">0</span>) <span class="sc">%*%</span> <span class="fu">solve</span>(<span class="fu">vcov</span>(model3)[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]) <span class="sc">%*%</span> (<span class="fu">coef</span>(model3)[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]<span class="sc">-</span><span class="dv">0</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="at">q =</span> ws.e, <span class="at">df =</span> <span class="dv">2</span>, <span class="at">lower.tail =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]
+[1,] 0.01614822</code></pre>
 </div>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
