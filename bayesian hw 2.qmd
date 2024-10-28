@@ -35,10 +35,14 @@ then,
 
 ```{=tex}
 \begin{align}
-Ln(\theta) &= ln\sum \frac{\theta^y e^{-\theta y}}{y!}  \\
-Ln(\theta)' &= \frac{\sum y_i}{\theta}-\sum y_i \\
-Ln(\theta)'' &= -\frac{\sum y_i}{\theta ^2} \\
-p(\theta)&\propto \sqrt{-(-\frac{n \theta}{\theta ^2})} \propto \frac{1}{\sqrt \theta} 
+L(y |\theta) &= ln \frac{\theta^{\sum y} e^{-\theta y}}{\prod y!}  \\
+log[L(y |\theta)] &= \sum y * ln\theta - \theta *\sum y - ln(\prod y_i !) \\
+log[L(y |\theta)]' &= \frac{\sum y}{\theta} + \sum y \\
+log[L(y |\theta)]'' &= - \frac{\sum y}{\theta^2} \\
+-E[log[L(y |\theta)]''] &= -E[- \frac{\sum y}{\theta^2} ] \\
+J(\theta) &= \frac{n \theta }{\theta^2} \\
+f(\theta) &\propto \theta^{-0.5}
+
 \end{align}
 ```
 **(b)** $y_i|\theta ∼ Exp(\theta)$
@@ -53,10 +57,14 @@ then,
 
 ```{=tex}
 \begin{align}
-Ln(\theta) &\propto ln\sum \theta e^{-\theta y_i}  \\
-Ln(\theta)' &\propto \frac{1}{\theta}-\sum y_i \\
-Ln(\theta)'' &\propto -\frac{1}{\theta ^2} \\
-p(\theta)&\propto \sqrt{-(-\frac{1}{\theta ^2})} \propto \frac{1}{\theta} 
+L(y |\theta) &= \prod \theta e^{-\theta y}  \\
+log[L(y |\theta)] &= nln\theta - \theta \sum y \\
+log[L(y |\theta)]' &= \frac{n}{\theta} - \sum y \\
+log[L(y |\theta)]'' &= - \frac{n}{\theta^2} \\
+-E[log[L(y |\theta)]''] &= -E[- \frac{n}{\theta^2}] \\
+J(\theta) &= \frac{n}{\theta^2} \\
+f(\theta) &\propto \theta^{-1}
+
 \end{align}
 ```
 **(c)** $y_i|\theta ∼ Weib(2,\theta)$
@@ -71,10 +79,15 @@ then,
 
 ```{=tex}
 \begin{align}
-logf(y|\theta) &= log(2) + log(\theta) + log(y) - \theta y^2  \\
-logf(y|\theta)' &= \frac{1}{\theta}-y^2 \\
-logf(y|\theta)'' &=  -\frac{1}{\theta ^2} \\
-p(\theta)&\propto \sqrt{-(-\frac{1}{\theta ^2})} \propto \frac{1}{\theta} 
+
+L(y |\theta) &= 2\theta ^n \prod y exp(-n \theta \sum y^2) \\
+log[L(y |\theta)] &= nln2\theta + ln\prod y -n\theta \sum y^2 \\
+log[L(y |\theta)]' &= \frac{2n}{2\theta} -n  \sum y^2 \\
+log[L(y |\theta)]'' &= - \frac{n}{\theta^2} \\
+-E[log[Ln(y |\theta)]''] &= -E[- \frac{n}{\theta^2}] \\
+J(\theta) &= \frac{n}{\theta^2} \\
+f(\theta) &\propto \theta^{-1}
+
 \end{align}
 ```
 **(d)** $y_i|\theta$ is negative binomial
@@ -82,19 +95,74 @@ p(\theta)&\propto \sqrt{-(-\frac{1}{\theta ^2})} \propto \frac{1}{\theta}
 we have,
 
 $$
-y_i|\theta = \binom{y_2-1}{s-1}\theta^{s}(1-\theta)^{y_2-s} 
+L(\theta｜y_2) = \binom{y_2-1}{s-1}\theta^{s}(1-\theta)^{y_2-s} 
 $$
 
 then,
 
 ```{=tex}
 \begin{align}
-Ln(\theta) &\propto sln(\theta) + (y_2 -s)log(1-\theta)   \\
-Ln(\theta)' &\propto \frac{s}{\theta}-\frac{y_2-s}{1-\theta} \\
-Ln(\theta)'' &\propto  - \frac{s}{\theta^2}-\frac{y_2-s}{(1-\theta)^2} \\
-p(\theta)&\propto \sqrt{\frac{\theta -2 }{\theta(1-\theta)}} 
+Log(L(\theta｜y_2)) &\propto sln(\theta) + (y_2 -s)ln(1-\theta)   \\
+Log(L(\theta｜y_2))' &\propto \frac{s}{\theta}-\frac{y_2-s}{1-\theta} \\
+Log(L(\theta｜y_2))'' &\propto  - \frac{s}{\theta^2}-\frac{y_2-s}{(1-\theta)^2} \\
+-E[Log(L(\theta｜y_2))''] &\propto -E[- \frac{s}{\theta^2}-\frac{y_2-s}{(1-\theta)^2}] \\
+J(\theta) &\propto \frac{y_2}{\theta}  + \frac{y_2}{1-\theta}\\
+p(\theta)&\propto \sqrt{\frac{1}{\theta(1-\theta)}} 
 \end{align}
 ```
+# EXERCISE 5.2.
+
+```{r}
+suppressMessages(library(rjags))
+library(coda)
+
+model_string <- "
+  model {
+    y ~ dbin(theta, n)
+    theta ~ dbeta(12.05, 116.06)
+  }
+"
+
+data_list <- list(n = 2430, y = 219)
+
+jags_model <- jags.model(textConnection(model_string), 
+                         data = data_list, 
+                         n.chains = 1,    
+                         n.adapt = 5000)
+
+update(jags_model, n.iter = 5000)
+
+samples <- coda.samples(jags_model, 
+                        variable.names = c("theta"), 
+                        n.iter = 5000)  
+
+summary(samples)
+
+# plot(samples)
+
+```
+
+```{r}
+# Plot the Beta(12.05, 116.06) distribution
+plot(seq(0, 1, length.out = 1000), dbeta(seq(0, 1, length.out = 1000), 12.05, 116.06), 
+     type = "l", col = "#4169E1", lwd = 2, 
+     main = "Beta(12.05, 116.06) vs Beta(231.05, 2327.06)", 
+     ylim = c(0,70),
+     xlab = expression(theta), ylab = "Density")
+
+# Add the Beta(231.05, 2327.06) distribution
+lines(seq(0, 1, length.out = 1000), dbeta(seq(0, 1, length.out = 1000),231.05, 2327.06), 
+      col = "red", lwd = 2, lty = 2)  # Use dashed line type for differentiation
+
+# Add a legend
+legend("topright", legend = c("Beta(12.05, 116.06)", "Beta(231.05, 2327.06)"), 
+       col = c("#4169E1", "red"), lwd = 2, lty = c(1, 2))
+
+
+
+
+```
+
 # EXERCISE 5.3.
 
 Using calculus, find the mode and 5th percentile of a Beta(10,1) distribution.
@@ -153,3 +221,962 @@ The distributions θ ∼ Beta(1.6, 1) and θ ∼ Beta(1, 0.577) both have a mode
 pbeta(0.5,1.6,1)
 pbeta(0.5,1,0.577)
 ```
+
+# EXERCISE 5.8.
+
+```{r}
+
+model_string <- "
+  model{ 
+  gamma[1] ~ dbeta(a1,b1) 
+  gamma[2] ~ dbeta(a2,b2) 
+  theta <- w*gamma[1] + (1-w)*gamma[2]
+  w ~ dbern(p) }
+"
+
+data_list <- list(a1 = 10, b1 = 20, a2 = 20, b2 = 10, p=0.5 )
+
+jags_model <- jags.model(textConnection(model_string), 
+                         data = data_list, 
+                         n.chains = 1,    
+                         n.adapt = 5000)
+
+update(jags_model, n.iter = 5000)
+
+samples <- coda.samples(jags_model, 
+                        variable.names = c("theta"), 
+                        n.iter = 5000)  
+
+# summary(samples)
+
+hist(samples[[1]])
+
+
+```
+
+```{r}
+model_string <- "
+  model{ 
+  gamma[1] ~ dbeta(a1,b1) 
+  gamma[2] ~ dbeta(a2,b2) 
+  theta <- w*gamma[1] + (1-w)*gamma[2]
+  w ~ dbern(p) }
+"
+
+data_list <- list(a1 = 10, b1 = 20, a2 = 20, b2 = 10, p=0.2 )
+
+jags_model <- jags.model(textConnection(model_string), 
+                         data = data_list, 
+                         n.chains = 1,    
+                         n.adapt = 5000)
+
+update(jags_model, n.iter = 5000)
+
+samples <- coda.samples(jags_model, 
+                        variable.names = c("theta"), 
+                        n.iter = 5000)  
+
+# summary(samples)
+
+hist(samples[[1]])
+```
+
+```{r}
+model_string <- "
+  model{ 
+  gamma[1] ~ dbeta(a1,b1) 
+  gamma[2] ~ dbeta(a2,b2) 
+  theta <- w*gamma[1] + (1-w)*gamma[2]
+  w ~ dbern(p) }
+"
+
+data_list <- list(a1 = 1, b1 = 1, a2 = 20, b2 = 10, p=0.5 )
+
+jags_model <- jags.model(textConnection(model_string), 
+                         data = data_list, 
+                         n.chains = 1,    
+                         n.adapt = 5000)
+
+update(jags_model, n.iter = 5000)
+
+samples <- coda.samples(jags_model, 
+                        variable.names = c("theta"), 
+                        n.iter = 5000)  
+
+# summary(samples)
+
+hist(samples[[1]])
+```
+
+```{r}
+model_string <- "
+  model{ 
+  gamma[1] ~ dbeta(a1,b1) 
+  gamma[2] ~ dbeta(a2,b2) 
+  theta <- w*gamma[1] + (1-w)*gamma[2]
+  w ~ dbern(p) }
+"
+
+data_list <- list(a1 = 0.1, b1 =0.2, a2 = 20, b2 = 10, p=0.5 )
+
+jags_model <- jags.model(textConnection(model_string), 
+                         data = data_list, 
+                         n.chains = 1,    
+                         n.adapt = 5000)
+
+update(jags_model, n.iter = 5000)
+
+samples <- coda.samples(jags_model, 
+                        variable.names = c("theta"), 
+                        n.iter = 5000)  
+
+# summary(samples)
+
+hist(samples[[1]])
+```
+
+# EXERCISE 5.9.
+
+各种调整参数 测试
+
+```{r}
+model_string <- "
+model{
+theta ~ dbeta(a,b)I(,t)
+}
+"
+data_list <- list(a=2,b=3,t=0.9)
+inits <- list(theta = 0.5)
+jags_model <- jags.model(textConnection(model_string),
+                      data=data_list,
+                      n.chains=1,
+                      n.adapt = 1000,
+                      inits = inits)
+update(jags_model,n.iter = 1000)
+samples <- coda.samples(jags_model,
+                        variable.names = c('theta'),
+                        n.iter = 5000)
+hist(samples[[1]])
+
+
+```
+
+# EXERCISE 5.12.
+
+```{r}
+model_string <- "
+model{
+y[1] ~ dbin(theta[1],n[1]) 
+y[2] ~ dbin(theta[2],n[2]) 
+
+# betabuster
+theta[1] ~ dbeta(3.2846,6.3307) 
+
+theta[2] ~ dbeta(1.5317,1.5317) 
+
+
+odds[1] <- theta[1]/(1-theta[1]) 
+odds[2] <- theta[2]/(1-theta[2]) 
+RD <- theta[2]-theta[1] 
+RR <- theta[2]/theta[1] 
+OR <- odds[2]/odds[1] 
+test <- step(RD)
+}
+"
+
+data_list <- list(n=c(134,400), y=c(54,224)) 
+
+jags_model <- jags.model(textConnection(model_string),
+                      data=data_list,
+                      n.chains=1,
+                      n.adapt = 5000)
+
+update(jags_model,n.iter = 5000)
+
+samples <- coda.samples(jags_model,
+                        variable.names = c('theta'),
+                        n.iter = 5000)
+summary(samples)
+
+```
+
+对比发现区别不大，收数据影响大
+
+# EXERCISE 5.14.
+
+```{r}
+model_string <- "
+model{
+y[1] ~ dbin(theta[1],n[1]) 
+y[2] ~ dbin(theta[2],n[2]) 
+
+theta[1] ~ dunif(0,1) 
+theta[2] ~ dunif(0,1) 
+
+odds[1] <- theta[1]/(1-theta[1]) 
+odds[2] <- theta[2]/(1-theta[2]) 
+
+OR <- odds[2]/odds[1] 
+}
+"
+
+data_list <- list(n=c(7,16), y=c(7,8)) 
+
+jags_model <- jags.model(textConnection(model_string),
+                      data=data_list,
+                      n.chains=1,
+                      n.adapt = 5000)
+
+update(jags_model,n.iter = 5000)
+
+samples <- coda.samples(jags_model,
+                        variable.names = c('OR'),
+                        n.iter = 5000)
+summary(samples)
+
+
+
+
+```
+
+关联并不能代表因果
+
+# EXERCISE 5.15.
+
+```{r}
+model_string <- "
+model{ 
+for(i in 1:2){ y[i] ~ dbin(theta[i],n[i]) } 
+theta[2] ~ dbeta(a,b) 
+delta ~ dnorm(mu, prec) 
+theta[1] <- exp(delta)*theta[2]/(1-theta[2]*(1-exp(delta))) 
+OR <- theta[1]/(1-theta[1])/(theta[2]/(1-theta[2])) }
+"
+
+data_list <- list(n=c(7,16), y=c(7,8),a=0.5,b=0.5,mu=2, prec=1/2)
+
+jags_model <- jags.model(textConnection(model_string),
+                      data=data_list,
+                      n.chains=1,
+                      n.adapt = 5000)
+
+update(jags_model,n.iter = 5000)
+
+samples <- coda.samples(jags_model,
+                        variable.names = c('OR'),
+                        n.iter = 5000)
+summary(samples)
+
+mean(samples[[1]]>1)
+mean(samples[[1]]>2)
+```
+
+# EXERCISE 5.16.
+
+```{r}
+model_string <- "
+model {
+  for (i in 1:2) {
+    y[i] ~ dbin(theta[i], n[i]) 
+  }
+
+  theta_t1 ~ dbeta(13.3221, 6.2809)  
+  theta_t2 ~ dbeta(6.2809,13.3221)              
+  gamma ~ dbeta(2, 2)                
+
+  theta[1] <- theta_t1 * gamma / (theta_t1 * gamma + theta_t2 * (1 - gamma))  
+  theta[2] <- (1 - theta_t1) * gamma / ((1 - theta_t1) * gamma + (1 - theta_t2) * (1 - gamma))  
+  
+  OR <- theta[1]/(1-theta[1])/(theta[2]/(1-theta[2])) }
+
+"
+
+data_list <- list(n=c(7,16), y=c(7,8))
+
+jags_model <- jags.model(textConnection(model_string),
+                      data=data_list,
+                      n.chains=1,
+                      n.adapt = 5000)
+
+update(jags_model,n.iter = 5000)
+
+samples <- coda.samples(jags_model,
+                        variable.names = c('OR'),
+                        n.iter = 5000)
+summary(samples)
+mean(samples[[1]]>1)
+mean(samples[[1]]>2)
+```
+
+```{r}
+model_string <- "
+model {
+  for (i in 1:2) {
+    y[i] ~ dbin(theta[i], n[i]) 
+  }
+
+  theta_t1 ~ dbeta(28.3393, 42.009)  
+  theta_t2 ~ dbeta(42.009,28.3393)              
+  gamma ~ dbeta(2, 2)                
+
+  theta[1] <- theta_t1 * gamma / (theta_t1 * gamma + theta_t2 * (1 - gamma))  
+  theta[2] <- (1 - theta_t1) * gamma / ((1 - theta_t1) * gamma + (1 - theta_t2) * (1 - gamma))  
+  
+  OR <- theta[1]/(1-theta[1])/(theta[2]/(1-theta[2])) }
+
+"
+
+data_list <- list(n=c(7,16), y=c(7,8))
+
+jags_model <- jags.model(textConnection(model_string),
+                      data=data_list,
+                      n.chains=1,
+                      n.adapt = 5000)
+
+update(jags_model,n.iter = 5000)
+
+samples <- coda.samples(jags_model,
+                        variable.names = c('OR'),
+                        n.iter = 5000)
+summary(samples)
+mean(samples[[1]]>1)
+mean(samples[[1]]>2)
+```
+
+# EXERCISE 5.17.
+
+直接在代码了里面添加对应的需要的参数即可
+
+# EXERCISE 5.18.
+
+```{r}
+# 重复5.14 计算出 theta1 2 的后验分布
+model_string <- "
+model{
+y[1] ~ dbin(theta[1],n[1]) 
+y[2] ~ dbin(theta[2],n[2]) 
+
+theta[1] ~ dunif(0,1) 
+theta[2] ~ dunif(0,1) 
+
+}
+"
+
+data_list <- list(n=c(7,16), y=c(7,8)) 
+
+jags_model <- jags.model(textConnection(model_string),
+                      data=data_list,
+                      n.chains=1,
+                      n.adapt = 5000)
+
+update(jags_model,n.iter = 5000)
+
+samples <- coda.samples(jags_model,
+                        variable.names = c('theta[1]','theta[2]'),
+                        n.iter = 5000)
+summary(samples)
+
+```
+
+```{r}
+# 更新
+model_string <- "
+model{
+y[1] ~ dbin(theta[1],n[1]) 
+y[2] ~ dbin(theta[2],n[2]) 
+
+theta[1] ~ dunif(0,0.9169) 
+theta[2] ~ dunif(0,0.5027) 
+
+odds[1] <- theta[1]/(1-theta[1]) 
+odds[2] <- theta[2]/(1-theta[2]) 
+
+OR <- odds[2]/odds[1] 
+}
+"
+
+data_list <- list(n=c(37,75), y=c(35,32)) 
+
+jags_model <- jags.model(textConnection(model_string),
+                      data=data_list,
+                      n.chains=1,
+                      n.adapt = 5000)
+
+update(jags_model,n.iter = 5000)
+
+samples <- coda.samples(jags_model,
+                        variable.names = c('OR'),
+                        n.iter = 5000)
+summary(samples)
+```
+
+敏感性分析 换不同的先验 结果差不多
+
+# EXERCISE 5.23.
+
+```{r}
+model_string <- "
+model{ 
+for(i in 1:n){ y[i] ~ dnorm(mu, tau) } 
+# mu ~ dnorm(0, 1/1000000) 
+ mu ~ dnorm(4.75, 1/0.0163) 
+tau ~ dgamma(c,d) 
+sigma <- 1/sqrt(tau)
+gamma <- phi((4.4-mu)/sqrt(1/tau)) 
+prob <- step(4.4 - y[13]) }  
+"
+
+data_list <- list(y=c(4.20,4.36,4.11,3.96,5.63,4.50, 5.64,4.38,4.45,3.67,5.26,4.66,NA),
+                  c=0.001, d=0.001,n=13) 
+
+
+jags_model <- jags.model(textConnection(model_string),
+                      data=data_list,
+                      n.chains=1,
+                      n.adapt = 5000)
+
+update(jags_model,n.iter = 5000)
+
+samples <- coda.samples(jags_model,
+                        variable.names = c('mu','sigma','y[13]','gamma','prob'),
+                        n.iter = 5000)
+summary(samples[[1]])
+
+plot(samples[[1]][,'gamma'])
+
+
+
+
+
+
+
+
+
+
+
+```
+
+```{r}
+
+model_string <- "
+model{ 
+for(i in 1:n){ y[i] ~ dnorm(mu, tau) } 
+ mu ~ dnorm(0, 1/1000000) 
+# mu ~ dnorm(4.75, 1/0.0163) 
+tau ~ dgamma(c,d) 
+sigma <- 1/sqrt(tau)
+gamma <- phi((4.4-mu)/sqrt(1/tau)) 
+prob <- step(4.4 - y[13]) }  
+"
+
+data_list <- list(y=c(4.20,4.36,4.11,3.96,5.63,4.50, 5.64,4.38,4.45,3.67,5.26,4.66,NA),
+                  c=0.001, d=0.001,n=13) 
+
+
+jags_model <- jags.model(textConnection(model_string),
+                      data=data_list,
+                      n.chains=1,
+                      n.adapt = 5000)
+
+update(jags_model,n.iter = 5000)
+
+samples <- coda.samples(jags_model,
+                        variable.names = c('mu','sigma','y[13]','gamma','prob'),
+                        n.iter = 5000)
+summary(samples[[1]])
+
+plot(samples[[1]][,'gamma'])
+```
+
+# EXERCISE 5.24.
+
+Solve for b above when the lower 5th percentile is specified by the expert. $$
+a − 1.645 \sqrt \frac{1}{b} = l
+$$
+
+90% upper
+
+$$
+a + 1.281552 \sqrt \frac{1}{b} = u
+$$
+
+90% lower $$
+a - 1.281552 \sqrt \frac{1}{b} = l
+$$
+
+find the bs for u = 70 and l = 58
+
+```{r}
+a <- 65
+b <- 1/0.0163
+u <- 70
+l <- 58
+b_u = (1.281552/(u - a))^2
+
+b_l = (1.281552/(a - l))^2
+
+b_u
+b_l
+
+```
+
+# EXERCISE 5.25.
+
+-   在设置先验的时候，$\mu$ 单独一个分布 $\tau$ 单独一个分布 ，两者是独立的
+-   后验分布更新的时候 两者概率也是独立的$p(μ,τ) = p(μ)p(τ).$
+
+# EXERCISE 5.26.
+
+(a) 
+
+```{r}
+#1 R Code for finding prior on sigma 
+alpha <- 0.90 
+beta <- 0.95 
+a <- 65 # Best guess for mu 
+tildegamma <- 85 # Best guess for gamma_alpha
+tildeu <- 91 # Best guess percentile of gamma_alpha 
+zalpha <- 1.28 # qnorm(0.90,0,1) 
+f <- 2.588 # Initial value for f 
+# Could use a sequence of values, say f <- seq(1,50,1) 
+sigma0 <- (tildegamma - a)/zalpha
+e <- 1 + sigma0*f 
+# We must find the Gamma(e,f) distribution that
+# has beta-percentile = tildesigmabeta 
+tildesigmabeta <- (tildeu - a)/zalpha 
+trialq <- qgamma(beta,e,f) # Return beta-percentile for the 
+                           # selected gamma distribution 
+trialq # If trialq = tildesigmabeta 
+tildesigmabeta # stop and pick corresponding f
+```
+
+(b) 
+
+```{r}
+#2 R Code for finding prior on tau 
+alpha <- 0.90
+beta <- 0.95
+zalpha <- 1.28 
+a <- 65 
+tildegamma <- 85 
+tildel <- 79  # 最后一问这里改成70
+d <- 1328
+tau0 = (zalpha/(tildegamma - a))^2
+c = 1 + tau0*d 
+tildetaubeta = (zalpha/(tildel - a))^2 
+trialq = qgamma(beta,c,d) 
+trialq 
+tildetaubeta
+```
+
+(c) 
+
+```{r}
+plot(seq(0, 60, length.out = 1000), 
+     dgamma(seq(0, 100, length.out = 1000), shape = 41.4375, rate = 2.588), 
+     type = "l", main = "Density of σ ~ Gamma(41.4375, 2.588)", col = "blue", lwd = 2)
+
+tau_samples <- rgamma(10000, shape = 6.439, rate = 1328)
+sigma_samples <- (1 / tau_samples)^0.5
+
+# 绘制 σ 的密度图
+lines(density(sigma_samples), col = "red", lwd = 2)
+
+# 添加图例
+legend("topright", legend = c(" σ ~ Gamma(41.4375, 2.588)", 
+                               "τ ~ Gamma(6.439, 1328)"),
+       col = c("blue", "red"), lwd = 2)
+
+
+
+```
+
+(d) 
+
+-   your best guess for the mean exam score is 60,
+
+```{r}
+#1 R Code for finding prior on sigma 
+alpha <- 0.90 
+beta <- 0.95 
+a <- 60 # Best guess for mu 
+tildegamma <- 85 # Best guess for gamma_alpha
+tildeu <- 91 # Best guess percentile of gamma_alpha 
+zalpha <- 1.28 # qnorm(0.90,0,1) 
+f <- 3.068 # Initial value for f   # 二分法手调 懒得写函数了
+# Could use a sequence of values, say f <- seq(1,50,1) 
+sigma0 <- (tildegamma - a)/zalpha
+e <- 1 + sigma0*f 
+# We must find the Gamma(e,f) distribution that
+# has beta-percentile = tildesigmabeta 
+tildesigmabeta <- (tildeu - a)/zalpha 
+trialq <- qgamma(beta,e,f) # Return beta-percentile for the 
+                           # selected gamma distribution 
+trialq # If trialq = tildesigmabeta 
+tildesigmabeta # stop and pick corresponding f
+e
+```
+
+```{r}
+a=60
+u=70
+b <- (1.645/(u-a))^2 
+b
+```
+
+
+::: callout-note
+
+$\mu ～ N(60, 1/0.02706025)$
+
+$\sigma ～ Gamma(60.92188, 3.068)$
+:::
+
+
+-   you are 95% sure that the mean exam score is less than 65,
+
+
+```{r}
+a=60
+u=65
+b <- (1.645/(u-a))^2 
+b
+```
+
+```{r}
+#1 R Code for finding prior on sigma 
+alpha <- 0.90 
+beta <- 0.95 
+a <- 60 # Best guess for mu 
+tildegamma <- 85 # Best guess for gamma_alpha
+tildeu <- 91 # Best guess percentile of gamma_alpha 
+zalpha <- 1.28 # qnorm(0.90,0,1) 
+f <- 3.068 # Initial value for f   # 二分法手调 懒得写函数了
+# Could use a sequence of values, say f <- seq(1,50,1) 
+sigma0 <- (tildegamma - a)/zalpha
+e <- 1 + sigma0*f 
+# We must find the Gamma(e,f) distribution that
+# has beta-percentile = tildesigmabeta 
+tildesigmabeta <- (tildeu - a)/zalpha 
+trialq <- qgamma(beta,e,f) # Return beta-percentile for the 
+                           # selected gamma distribution 
+trialq # If trialq = tildesigmabeta 
+tildesigmabeta # stop and pick corresponding f
+e
+```
+
+::: callout-note
+
+$\mu ～ N(60, 1/0.108241)$
+
+$\sigma ～ Gamma(60.92188, 3.068)$
+:::
+
+
+-   your best guess for the 90th percentile of exam scores is 80, and
+
+```{r}
+a=60
+u=65
+b <- (1.645/(u-a))^2 
+b
+```
+
+```{r}
+#1 R Code for finding prior on sigma 
+alpha <- 0.90 
+beta <- 0.95 
+a <- 60 # Best guess for mu 
+tildegamma <- 80 # Best guess for gamma_alpha
+tildeu <- 91 # Best guess percentile of gamma_alpha 
+zalpha <- 1.28 # qnorm(0.90,0,1) 
+f <- 0.932# Initial value for f   # 二分法手调 懒得写函数了
+# Could use a sequence of values, say f <- seq(1,50,1) 
+sigma0 <- (tildegamma - a)/zalpha
+e <- 1 + sigma0*f 
+# We must find the Gamma(e,f) distribution that
+# has beta-percentile = tildesigmabeta 
+tildesigmabeta <- (tildeu - a)/zalpha 
+trialq <- qgamma(beta,e,f) # Return beta-percentile for the 
+                           # selected gamma distribution 
+trialq # If trialq = tildesigmabeta 
+tildesigmabeta # stop and pick corresponding f
+e
+```
+
+::: callout-note
+
+$\mu ～ N(60, 1/0.108241)$
+
+$\sigma ～ Gamma(15.5625, 0.932)$
+:::
+
+
+
+-   you are 95% sure that the 90th percentile is less than 90
+
+
+
+```{r}
+a=60
+u=65
+b <- (1.645/(u-a))^2 
+b
+```
+
+```{r}
+#1 R Code for finding prior on sigma 
+alpha <- 0.90 
+beta <- 0.95 
+a <- 60 # Best guess for mu 
+tildegamma <- 80 # Best guess for gamma_alpha
+tildeu <- 90 # Best guess percentile of gamma_alpha 
+zalpha <- 1.28 # qnorm(0.90,0,1) 
+f <- 1.089 # Initial value for f   # 二分法手调 懒得写函数了
+# Could use a sequence of values, say f <- seq(1,50,1) 
+sigma0 <- (tildegamma - a)/zalpha
+e <- 1 + sigma0*f 
+# We must find the Gamma(e,f) distribution that
+# has beta-percentile = tildesigmabeta 
+tildesigmabeta <- (tildeu - a)/zalpha 
+trialq <- qgamma(beta,e,f) # Return beta-percentile for the 
+                           # selected gamma distribution 
+trialq # If trialq = tildesigmabeta 
+tildesigmabeta # stop and pick corresponding f
+e
+```
+
+::: callout-note
+
+$\mu ～ N(60, 1/0.108241)$
+
+$\sigma ～ Gamma(18.01562, 1.089)$
+:::
+
+(e) 
+
+b中对应部分修改为70
+
+```         
+ tildel <- 79  # 最后一问这里改成70
+```
+
+# EXERCISE 5.29.
+
+
+```{r}
+
+
+run_jags_model <- function(n1, mu1, tau1, n2, mu2, tau2, a1, b1, c1, d1, a2, b2, c2, d2) {
+
+  y <- rnorm(n1, mu1, sqrt(1/tau1))
+  x <- rnorm(n2, mu2, sqrt(1/tau2))
+  
+  model_string <- "
+  model {
+    for (i in 1:n[1]) {
+      y[i] ~ dnorm(mu[1], tau[1])
+    }
+    for (j in 1:n[2]) {
+      x[j] ~ dnorm(mu[2], tau[2])
+    }
+    
+    for (r in 1:2) {
+      mu[r] ~ dnorm(a[r], b[r])
+      tau[r] ~ dgamma(c[r], d[r])
+      sigma[r] <- sqrt(1/tau[r])
+    }
+    
+    meandiff <- mu[1] - mu[2]
+    sdratio <- sigma[1] / sigma[2]
+    
+    prob[1] <- step(meandiff) # Pr(meandiff > 0 | data)
+    prob[2] <- step(sdratio - 1) # Pr(sdratio > 1 | data)
+  }"
+  
+    data_list <- list(y = y, x = x, n = c(n1, n2), 
+                    a = c(a1, a2), b = c(b1, b2), 
+                    c = c(c1, c2), d = c(d1, d2))
+  
+  
+  # 运行JAGS模型
+  jags_model <- jags.model(textConnection(model_string), data = data_list, 
+                            n.chains = 1, n.adapt = 5000)
+  
+  update(jags_model , n.iter = 5000)
+  
+  # 提取结果
+  results <- coda.samples(jags_model, variable.names = c("mu", "tau", "meandiff", "sdratio", "prob"), n.iter = 5000)
+  
+  return(results)
+}
+
+set.seed(2024) 
+n1 <- 30     # 第一组的样本大小
+mu1 <- 5     # 第一组的均值
+tau1 <- 1    # 第一组的精度
+
+n2 <- 20     # 第二组的样本大小
+mu2 <- 3     # 第二组的均值
+tau2 <- 0.5  # 第二组的精度
+
+# 两个分布的参考先验参数
+a1 <- 0; b1 <- 0.001; c1 <- 0.001; d1 <- 0.001
+a2 <- 0; b2 <- 0.001; c2 <- 0.001; d2 <- 0.001
+
+# 运行JAGS模型
+results <- run_jags_model(n1, mu1, tau1, n2, mu2, tau2, a1, b1, c1, d1, a2, b2, c2, d2)
+
+# 结果总结
+summary(results)
+
+```
+
+
+# EXERCISE 5.30.
+
+```{r}
+model_string <- "
+model {
+  for(i in 1:n[1]) {
+    low[i] ~ dlnorm(mu[1], tau[1])
+  }
+  for(i in 1:n[2]) {
+    normal[i] ~ dlnorm(mu[2], tau[2])
+  }
+
+  # 使用不同的先验分布
+  mu[1] ~ dnorm(0, 0.00001) # 非信息性先验
+  mu[2] ~ dnorm(0, 0.00001) # 非信息性先验
+  
+  tau[1] ~ dgamma(0.001, 0.001) # 非信息性先验
+  tau[2] ~ dgamma(0.001, 0.001) # 非信息性先验
+  
+  med[1] <- exp(mu[1]) 
+  med[2] <- exp(mu[2]) 
+  rmed <- med[2] / med[1] 
+
+  test[1] <- step(med[2] - med[1]) 
+  test[2] <- step(Nf - Lf) 
+  
+  Lf ~ dlnorm(mu[1], tau[1]) 
+  Nf ~ dlnorm(mu[2], tau[2]) 
+  
+  dmu <- mu[2] - mu[1] 
+  rtau <- tau[2] / tau[1] 
+}
+"
+
+
+data_list <- list(
+  n = c(19, 15),
+  low = c(91, 46, 95, 60, 33, 410, 105, 43, 189, 1097, 54, 178, 114, 137, 233, 101, 25, 70, 357),
+  normal = c(370, 267, 99, 157, 75, 1281, 48, 298, 268, 62, 804, 430, 171, 694, 404),
+  Lf = 50,
+  Nf = 50
+)
+
+
+run_jags_model <- function(data_list, n.iter = 10000) {
+  jags_model <- jags.model(textConnection(model_string), data = data_list, n.chains = 1, n.adapt = 5000)
+  update(jags_model, n.iter = 5000)
+  results <- coda.samples(jags_model, variable.names = c("mu", "tau", "med", "rmed", "test"), n.iter = n.iter)
+  return(results)
+}
+
+# 运行模型
+results <- run_jags_model(data_list)
+
+# 结果总结
+summary(results)
+
+# 绘制结果（可选）
+plot(results)
+```
+
+
+```{r}
+# 选择不同的先验分布
+sensitivity_analysis <- function(mu1_prior, mu2_prior, tau1_prior, tau2_prior) {
+  model_string <- sprintf("
+  model {
+    for(i in 1:n[1]) {
+      low[i] ~ dlnorm(mu[1], tau[1])
+    }
+    for(i in 1:n[2]) {
+      normal[i] ~ dlnorm(mu[2], tau[2])
+    }
+
+    mu[1] ~ %s
+    mu[2] ~ %s
+
+    tau[1] ~ %s
+    tau[2] ~ %s
+    
+    med[1] <- exp(mu[1]) 
+    med[2] <- exp(mu[2]) 
+    rmed <- med[2] / med[1] 
+
+    test[1] <- step(med[2] - med[1]) 
+    test[2] <- step(Nf - Lf) 
+
+    Lf ~ dlnorm(mu[1], tau[1]) 
+    Nf ~ dlnorm(mu[2], tau[2]) 
+
+    dmu <- mu[2] - mu[1] 
+    rtau <- tau[2] / tau[1] 
+  }
+  ", mu1_prior, mu2_prior, tau1_prior, tau2_prior)
+
+  jags_model <- jags.model(textConnection(model_string), data = data_list, n.chains = 1, n.adapt = 5000)
+  update(jags_model, n.iter = 5000)
+  results <- coda.samples(jags_model, variable.names = c("mu", "tau", "med", "rmed", "test"), n.iter = 10000)
+  return(results)
+}
+
+# 运行敏感性分析示例
+sensitivity_results <- sensitivity_analysis("dunif(-10000, 10000)", "dunif(-10000, 10000)", "dunif(0, 10000)", "dunif(0, 10000)")
+
+# 总结敏感性分析结果
+ summary(sensitivity_results)
+
+plot(sensitivity_results)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
