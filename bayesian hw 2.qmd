@@ -178,7 +178,7 @@ q&=\int_{0}^{c} f(\theta)d\theta \\
 q&= c^{10}
 \end{align}
 ```
-5 分位数为 $0.05^{0.1}$
+5 分位数为 $0.05^{10}$
 
 # EXERCISE 5.4.
 
@@ -824,17 +824,13 @@ b <- (1.645/(u-a))^2
 b
 ```
 
-
 ::: callout-note
-
 $\mu ～ N(60, 1/0.02706025)$
 
 $\sigma ～ Gamma(60.92188, 3.068)$
 :::
 
-
 -   you are 95% sure that the mean exam score is less than 65,
-
 
 ```{r}
 a=60
@@ -866,12 +862,10 @@ e
 ```
 
 ::: callout-note
-
 $\mu ～ N(60, 1/0.108241)$
 
 $\sigma ～ Gamma(60.92188, 3.068)$
 :::
-
 
 -   your best guess for the 90th percentile of exam scores is 80, and
 
@@ -905,17 +899,12 @@ e
 ```
 
 ::: callout-note
-
 $\mu ～ N(60, 1/0.108241)$
 
 $\sigma ～ Gamma(15.5625, 0.932)$
 :::
 
-
-
 -   you are 95% sure that the 90th percentile is less than 90
-
-
 
 ```{r}
 a=60
@@ -947,7 +936,6 @@ e
 ```
 
 ::: callout-note
-
 $\mu ～ N(60, 1/0.108241)$
 
 $\sigma ～ Gamma(18.01562, 1.089)$
@@ -962,7 +950,6 @@ b中对应部分修改为70
 ```
 
 # EXERCISE 5.29.
-
 
 ```{r}
 
@@ -1032,7 +1019,6 @@ summary(results)
 
 ```
 
-
 # EXERCISE 5.30.
 
 ```{r}
@@ -1094,7 +1080,6 @@ summary(results)
 plot(results)
 ```
 
-
 ```{r}
 # 选择不同的先验分布
 sensitivity_analysis <- function(mu1_prior, mu2_prior, tau1_prior, tau2_prior) {
@@ -1142,41 +1127,3 @@ sensitivity_results <- sensitivity_analysis("dunif(-10000, 10000)", "dunif(-1000
 
 plot(sensitivity_results)
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -7,6 +7,7 @@ book:
   title: "博士期间作业"
   author: "CongyuanHe"
   date: now
+  
   chapters:
     - index.qmd
     - part: Bayesian.qmd

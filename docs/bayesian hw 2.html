@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Congyuan He">
-<meta name="dcterms.date" content="2024-10-28">
+<meta name="dcterms.date" content="2024-11-01">
 
 <title>博士期间作业 - bayesian hw 2</title>
 <style>
@@ -314,7 +314,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 28, 2024</p>
+      <p class="date">November 1, 2024</p>
     </div>
   </div>
   
@@ -452,12 +452,12 @@ Sample size per chain = 5000
    plus standard error of the mean:
 
           Mean             SD       Naive SE Time-series SE 
-     0.0904730      0.0056357      0.0000797      0.0001014 
+     9.021e-02      5.644e-03      7.982e-05      1.043e-04 
 
 2. Quantiles for each variable:
 
    2.5%     25%     50%     75%   97.5% 
-0.07969 0.08670 0.09046 0.09422 0.10169 </code></pre>
+0.07964 0.08633 0.09017 0.09398 0.10136 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(samples)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -496,7 +496,7 @@ f(\theta)'&amp;=90\theta^8
 q&amp;=\int_{0}^{c} f(\theta)d\theta \\
 q&amp;= c^{10}
 \end{align}\]</span>
-<p>5 分位数为 <span class="math inline">\(0.05^{0.1}\)</span></p>
+<p>5 分位数为 <span class="math inline">\(0.05^{10}\)</span></p>
 </section>
 <section id="exercise-5.4." class="level1">
 <h1>EXERCISE 5.4.</h1>
@@ -811,14 +811,14 @@ Sample size per chain = 5000
    plus standard error of the mean:
 
            Mean      SD  Naive SE Time-series SE
-theta[1] 0.3991 0.04087 0.0005779      0.0007819
-theta[2] 0.5595 0.02504 0.0003541      0.0004658
+theta[1] 0.3992 0.04088 0.0005781      0.0007396
+theta[2] 0.5596 0.02470 0.0003493      0.0004355
 
 2. Quantiles for each variable:
 
            2.5%    25%    50%    75%  97.5%
-theta[1] 0.3189 0.3717 0.3992 0.4260 0.4787
-theta[2] 0.5099 0.5424 0.5600 0.5771 0.6070</code></pre>
+theta[1] 0.3189 0.3719 0.3987 0.4263 0.4800
+theta[2] 0.5107 0.5432 0.5598 0.5759 0.6076</code></pre>
 </div>
 </div>
 <p>对比发现区别不大，收数据影响大</p>
@@ -875,12 +875,12 @@ Sample size per chain = 5000
    plus standard error of the mean:
 
           Mean             SD       Naive SE Time-series SE 
-      0.158258       0.239440       0.003386       0.006700 
+      0.147890       0.205371       0.002904       0.004971 
 
 2. Quantiles for each variable:
 
     2.5%      25%      50%      75%    97.5% 
-0.003009 0.032237 0.084400 0.193145 0.721002 </code></pre>
+0.002124 0.029880 0.080170 0.186287 0.683988 </code></pre>
 </div>
 </div>
 <p>关联并不能代表因果</p>
@@ -931,20 +931,20 @@ Sample size per chain = 5000
    plus standard error of the mean:
 
           Mean             SD       Naive SE Time-series SE 
-        34.881         59.047          0.835          1.115 
+       38.4742        69.0256         0.9762         1.4440 
 
 2. Quantiles for each variable:
 
    2.5%     25%     50%     75%   97.5% 
-  2.771   8.804  17.651  37.504 178.452 </code></pre>
+  2.392   8.873  18.488  39.392 207.883 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samples[[<span class="dv">1</span>]]<span class="sc">&gt;</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9996</code></pre>
+<pre><code>[1] 0.9974</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samples[[<span class="dv">1</span>]]<span class="sc">&gt;</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.991</code></pre>
+<pre><code>[1] 0.9842</code></pre>
 </div>
 </div>
 </section>
@@ -1002,20 +1002,20 @@ Sample size per chain = 5000
    plus standard error of the mean:
 
           Mean             SD       Naive SE Time-series SE 
-       8.03452        5.97393        0.08448        0.11609 
+       8.10275        6.02819        0.08525        0.10830 
 
 2. Quantiles for each variable:
 
   2.5%    25%    50%    75%  97.5% 
- 2.036  4.285  6.403  9.951 23.659 </code></pre>
+ 2.041  4.297  6.535  9.969 23.207 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samples[[<span class="dv">1</span>]]<span class="sc">&gt;</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9998</code></pre>
+<pre><code>[1] 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samples[[<span class="dv">1</span>]]<span class="sc">&gt;</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9768</code></pre>
+<pre><code>[1] 0.9766</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -1070,16 +1070,16 @@ Sample size per chain = 5000
    plus standard error of the mean:
 
           Mean             SD       Naive SE Time-series SE 
-      0.660914       0.215981       0.003054       0.003645 
+      0.669130       0.220485       0.003118       0.003779 
 
 2. Quantiles for each variable:
 
   2.5%    25%    50%    75%  97.5% 
-0.3323 0.5090 0.6258 0.7777 1.1808 </code></pre>
+0.3427 0.5120 0.6352 0.7941 1.1902 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samples[[<span class="dv">1</span>]]<span class="sc">&gt;</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0744</code></pre>
+<pre><code>[1] 0.0718</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samples[[<span class="dv">1</span>]]<span class="sc">&gt;</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1140,14 +1140,14 @@ Sample size per chain = 5000
    plus standard error of the mean:
 
            Mean      SD Naive SE Time-series SE
-theta[1] 0.8922 0.09775 0.001382       0.002760
-theta[2] 0.4992 0.11433 0.001617       0.002137
+theta[1] 0.8885 0.09962 0.001409       0.002807
+theta[2] 0.4992 0.11522 0.001629       0.001980
 
 2. Quantiles for each variable:
 
            2.5%    25%    50%    75%  97.5%
-theta[1] 0.6370 0.8469 0.9201 0.9649 0.9971
-theta[2] 0.2788 0.4189 0.4992 0.5790 0.7175</code></pre>
+theta[1] 0.6291 0.8398 0.9164 0.9646 0.9964
+theta[2] 0.2745 0.4210 0.5003 0.5784 0.7202</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -1201,12 +1201,12 @@ Sample size per chain = 5000
    plus standard error of the mean:
 
           Mean             SD       Naive SE Time-series SE 
-     0.0984128      0.0377044      0.0005332      0.0009514 
+     0.1017486      0.0398543      0.0005636      0.0010154 
 
 2. Quantiles for each variable:
 
    2.5%     25%     50%     75%   97.5% 
-0.05096 0.07296 0.08974 0.11362 0.20331 </code></pre>
+0.05120 0.07443 0.09265 0.11903 0.20158 </code></pre>
 </div>
 </div>
 <p>敏感性分析 换不同的先验 结果差不多</p>
@@ -1261,20 +1261,20 @@ Sample size per chain = 5000
    plus standard error of the mean:
 
         Mean      SD  Naive SE Time-series SE
-gamma 0.3272 0.06246 0.0008833      0.0008429
-mu    4.6927 0.10531 0.0014893      0.0013843
-prob  0.3258 0.46872 0.0066287      0.0066287
-sigma 0.6671 0.15278 0.0021607      0.0020670
-y[13] 4.6970 0.69120 0.0097750      0.0099959
+gamma 0.3279 0.06218 0.0008794      0.0008532
+mu    4.6926 0.10581 0.0014963      0.0015487
+prob  0.3342 0.47176 0.0066717      0.0066717
+sigma 0.6689 0.15071 0.0021314      0.0021951
+y[13] 4.7024 0.68050 0.0096237      0.0096237
 
 2. Quantiles for each variable:
 
         2.5%    25%    50%    75%  97.5%
-gamma 0.2036 0.2863 0.3270 0.3697 0.4492
-mu    4.4892 4.6203 4.6915 4.7630 4.9031
+gamma 0.2079 0.2864 0.3287 0.3703 0.4476
+mu    4.4919 4.6211 4.6904 4.7631 4.9070
 prob  0.0000 0.0000 0.0000 1.0000 1.0000
-sigma 0.4445 0.5596 0.6422 0.7462 1.0253
-y[13] 3.2977 4.2626 4.6955 5.1379 6.0691</code></pre>
+sigma 0.4438 0.5628 0.6451 0.7521 1.0240
+y[13] 3.4037 4.2408 4.7074 5.1384 6.0625</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(samples[[<span class="dv">1</span>]][,<span class="st">'gamma'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1333,20 +1333,20 @@ Sample size per chain = 5000
    plus standard error of the mean:
 
         Mean     SD Naive SE Time-series SE
-gamma 0.4027 0.1111 0.001571       0.001571
-mu    4.5672 0.2055 0.002907       0.002907
-prob  0.3992 0.4898 0.006927       0.006927
-sigma 0.6801 0.1610 0.002277       0.002594
-y[13] 4.5763 0.7484 0.010584       0.010584
+gamma 0.4022 0.1089 0.001540       0.001540
+mu    4.5674 0.2034 0.002876       0.002876
+prob  0.3912 0.4881 0.006902       0.006902
+sigma 0.6810 0.1665 0.002355       0.002617
+y[13] 4.5814 0.7251 0.010255       0.010255
 
 2. Quantiles for each variable:
 
         2.5%    25%    50%    75%  97.5%
-gamma 0.1944 0.3223 0.4010 0.4781 0.6254
-mu    4.1658 4.4363 4.5662 4.6952 4.9836
+gamma 0.2032 0.3233 0.3973 0.4778 0.6247
+mu    4.1764 4.4355 4.5672 4.6932 4.9676
 prob  0.0000 0.0000 0.0000 1.0000 1.0000
-sigma 0.4475 0.5670 0.6546 0.7629 1.0713
-y[13] 3.1302 4.1115 4.5721 5.0379 6.0644</code></pre>
+sigma 0.4453 0.5664 0.6528 0.7657 1.0713
+y[13] 3.1581 4.1241 4.5776 5.0337 6.0350</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(samples[[<span class="dv">1</span>]][,<span class="st">'gamma'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1797,27 +1797,27 @@ Sample size per chain = 5000
 1. Empirical mean and standard deviation for each variable,
    plus standard error of the mean:
 
-           Mean     SD Naive SE Time-series SE
-meandiff 1.5974 0.3797 0.005370       0.005370
-mu[1]    4.7846 0.2165 0.003062       0.003062
-mu[2]    3.1872 0.3068 0.004338       0.004338
-prob[1]  1.0000 0.0000 0.000000       0.000000
-prob[2]  0.2776 0.4479 0.006334       0.006226
-sdratio  0.9009 0.1917 0.002711       0.002882
-tau[1]   0.7602 0.2003 0.002832       0.003003
-tau[2]   0.6009 0.1938 0.002741       0.002870
+           Mean      SD Naive SE Time-series SE
+meandiff 1.5972 0.37132 0.005251       0.004945
+mu[1]    4.7872 0.22017 0.003114       0.003114
+mu[2]    3.1900 0.30329 0.004289       0.004289
+prob[1]  0.9998 0.01414 0.000200       0.000200
+prob[2]  0.2760 0.44706 0.006322       0.006511
+sdratio  0.8987 0.19271 0.002725       0.002801
+tau[1]   0.7645 0.20307 0.002872       0.003044
+tau[2]   0.6009 0.19615 0.002774       0.002884
 
 2. Quantiles for each variable:
 
            2.5%    25%    50%    75% 97.5%
-meandiff 0.8303 1.3542 1.5946 1.8400 2.354
-mu[1]    4.3583 4.6455 4.7879 4.9240 5.220
-mu[2]    2.5778 2.9857 3.1876 3.3786 3.808
+meandiff 0.8772 1.3493 1.5947 1.8490 2.319
+mu[1]    4.3581 4.6398 4.7879 4.9276 5.224
+mu[2]    2.6007 2.9884 3.1900 3.3908 3.786
 prob[1]  1.0000 1.0000 1.0000 1.0000 1.000
 prob[2]  0.0000 0.0000 0.0000 1.0000 1.000
-sdratio  0.5697 0.7657 0.8846 1.0175 1.307
-tau[1]   0.4208 0.6172 0.7450 0.8862 1.199
-tau[2]   0.2793 0.4607 0.5794 0.7198 1.033</code></pre>
+sdratio  0.5712 0.7621 0.8823 1.0184 1.323
+tau[1]   0.4177 0.6169 0.7491 0.8916 1.209
+tau[2]   0.2781 0.4585 0.5799 0.7219 1.039</code></pre>
 </div>
 </div>
 </section>
@@ -1898,26 +1898,26 @@ Sample size per chain = 10000
    plus standard error of the mean:
 
             Mean      SD Naive SE Time-series SE
-med[1]  108.4536 23.7938 0.237938       0.300917
-med[2]  226.5756 65.0273 0.650273       0.889041
-mu[1]     4.6630  0.2160 0.002160       0.002712
-mu[2]     5.3842  0.2786 0.002786       0.003811
-rmed      2.1890  0.8004 0.008004       0.010970
-tau[1]    1.1443  0.3700 0.003700       0.003992
-tau[2]    0.9642  0.3484 0.003484       0.004024
-test[1]   0.9802  0.1393 0.001393       0.001800
+med[1]  108.9977 24.5102 0.245102       0.316528
+med[2]  226.9479 63.3989 0.633989       0.816293
+mu[1]     4.6669  0.2211 0.002211       0.002836
+mu[2]     5.3875  0.2729 0.002729       0.003485
+rmed      2.1877  0.7986 0.007986       0.010310
+tau[1]    1.1475  0.3721 0.003721       0.003897
+tau[2]    0.9681  0.3575 0.003575       0.003922
+test[1]   0.9776  0.1480 0.001480       0.001776
 test[2]   1.0000  0.0000 0.000000       0.000000
 
 2. Quantiles for each variable:
 
             2.5%      25%      50%     75%   97.5%
-med[1]   68.8709  91.9833 106.0356 122.078 161.969
-med[2]  124.4784 182.8192 218.0278 259.546 380.837
-mu[1]     4.2322   4.5216   4.6638   4.805   5.087
-mu[2]     4.8241   5.2085   5.3846   5.559   5.942
-rmed      1.0341   1.6259   2.0569   2.599   4.116
-tau[1]    0.5412   0.8774   1.1025   1.370   1.980
-tau[2]    0.4032   0.7142   0.9191   1.177   1.763
+med[1]   68.4281  91.9259 106.1203 122.658 164.640
+med[2]  126.3116 183.6873 219.5296 261.522 372.923
+mu[1]     4.2258   4.5210   4.6646   4.809   5.104
+mu[2]     4.8388   5.2132   5.3915   5.567   5.921
+rmed      1.0242   1.6259   2.0676   2.598   4.060
+tau[1]    0.5360   0.8847   1.1113   1.367   1.982
+tau[2]    0.4043   0.7080   0.9219   1.175   1.792
 test[1]   1.0000   1.0000   1.0000   1.000   1.000
 test[2]   1.0000   1.0000   1.0000   1.000   1.000</code></pre>
 </div>
@@ -2010,26 +2010,26 @@ Sample size per chain = 10000
    plus standard error of the mean:
 
             Mean      SD Naive SE Time-series SE
-med[1]  108.0055 22.8743 0.228743       0.293984
-med[2]  225.7297 58.0564 0.580564       0.754008
-mu[1]     4.6603  0.2089 0.002089       0.002662
-mu[2]     5.3874  0.2529 0.002529       0.003286
-rmed      2.1842  0.7410 0.007410       0.009618
-tau[1]    1.2619  0.3885 0.003885       0.005309
-tau[2]    1.1060  0.3824 0.003824       0.005368
-test[1]   0.9845  0.1235 0.001235       0.001549
+med[1]  108.6348 22.4151 0.224151       0.289638
+med[2]  226.8488 58.3761 0.583761       0.750814
+mu[1]     4.6672  0.2037 0.002037       0.002613
+mu[2]     5.3922  0.2537 0.002537       0.003261
+rmed      2.1760  0.7262 0.007262       0.009261
+tau[1]    1.2658  0.3806 0.003806       0.005006
+tau[2]    1.1041  0.3745 0.003745       0.005075
+test[1]   0.9853  0.1204 0.001204       0.001581
 test[2]   1.0000  0.0000 0.000000       0.000000
 
 2. Quantiles for each variable:
 
             2.5%      25%     50%     75%   97.5%
-med[1]   69.9296  91.9336 105.855 121.018 159.765
-med[2]  131.2725 186.0899 218.767 257.108 361.617
-mu[1]     4.2475   4.5211   4.662   4.796   5.074
-mu[2]     4.8773   5.2262   5.388   5.549   5.891
-rmed      1.0717   1.6650   2.058   2.575   3.977
-tau[1]    0.6281   0.9815   1.222   1.500   2.139
-tau[2]    0.4884   0.8334   1.061   1.328   1.988
+med[1]   71.1583  93.1652 106.641 121.682 158.511
+med[2]  132.5750 187.1773 220.053 258.254 361.766
+mu[1]     4.2649   4.5344   4.669   4.801   5.066
+mu[2]     4.8871   5.2321   5.394   5.554   5.891
+rmed      1.0834   1.6729   2.060   2.560   3.909
+tau[1]    0.6343   0.9907   1.224   1.508   2.099
+tau[2]    0.4989   0.8341   1.062   1.332   1.950
 test[1]   1.0000   1.0000   1.000   1.000   1.000
 test[2]   1.0000   1.0000   1.000   1.000   1.000</code></pre>
 </div>
