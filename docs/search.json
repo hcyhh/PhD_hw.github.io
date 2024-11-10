@@ -84,7 +84,7 @@
     "href": "bayesian hw 1.html",
     "title": "bayesian hw 1",
     "section": "",
-    "text": "EXERCISE 3.1.\nLet prior uncertainty about a parameter \\(\\theta\\) be reflected by the density\n\\[\np(\\theta) = ce^{−3\\theta} I(0,\\infty)(\\theta).\n\\]\nFind the constant c that makes this integrate to one. Also find \\(Pr(\\theta &gt; 2)\\) and \\(Pr(\\theta &gt; 4 | \\theta &gt; 2)\\). Find the median and the expected value. Finally, obtain a 95% probability interval for \\(\\theta\\)\n\n\n\n\\[\\begin{align}\n\n  \\int_{0}^{\\infty} p(\\theta) d\\theta &= \\int_{0}^{\\infty} ce^{-3\\theta}I_{(0,\\infty)}(\\theta) d\\theta \\\\\n\n  &= -\\frac{c}{3}(e^{-3\\theta}|^{\\infty}_0) \\\\\n\n  &= \\frac{c}{3}\n\n\\end{align}\\]\nlet \\(\\frac{c}{3}=1\\)，then we have \\(c=3\\)\n\n\n\n\\[\\begin{align}\n\n  Pr(\\theta &gt; x )&= \\int_{x}^{\\infty} 3e^{-3\\theta}I_{(0,\\infty)}(\\theta) d\\theta \\\\\n\n  &= -e^{-3\\theta}|^{\\infty}_x \\\\\n\n  &= e^{-3\\theta}|^{x}_\\infty  \\\\\n  \n  &= e^{-3x}\n\n\\end{align}\\]\nlet \\(x=2\\), then we have \\[\nPr(\\theta&gt;2) = e^{-3*2} = 0.002478752\n\\]\n\\[\nPr(\\theta &gt; 4 | \\theta &gt; 2) = Pr(\\theta&gt;2) = e^{-3*2} = 0.002478752\n\\]\n\n# Pr(theta&gt;2)\n1-pexp(2,3)\n\n[1] 0.002478752\n\n# Monte Carlo simulations\nset.seed(2024)\nN &lt;- 1000000 \nsamples &lt;- rexp(N,3)\nP &lt;- mean(samples &gt; 2)\nprint(P)\n\n[1] 0.002496\n\n\n\n# Pr(theta&gt;4|theta&gt;2)\n(1-pexp(4,3))/(1-pexp(2,3))\n\n[1] 0.002478752\n\n\n\nFor Exp(3) , \\(Mean = \\frac{1}{\\theta}\\) ,\\(Mdian = \\frac{Ln2}{\\theta}\\), We all know \\(\\theta =3\\), so we have \\(Mean = \\frac{1}{3}\\) , \\(Median = \\frac{Ln2}{3}\\)\n95% probability interval for \\(\\theta\\)\n\n\nqexp(c(0.025,0.975),3)\n\n[1] 0.008439269 1.229626485\n\n\n\n\nEXERCISE 3.2.\nSuppose \\(n\\) cities were sampled and for each city \\(i\\) the number \\(y_i\\) of deaths from ALS were recorded for a period of one year. We expect the numbers to be Poisson distributed, but the size of the city is a factor. Let \\(M_i\\) be the known population for city \\(i\\) and let\n\\[\ny_i|\\theta ～ Pois(\\theta M_i), i= 1,...k\n\\]\nwhere \\(\\theta\\) &gt; 0 is an unknown parameter measuring the common death rate for all cities. Given \\(\\theta\\), the expected number of ALS deaths for city i is \\(\\theta M_i\\), so \\(\\theta\\) is expected to be small. Assume that independent scientific information can be obtained about \\(\\theta\\) in the form of a gamma distribution, say \\(Gamma(a, b)\\). Show that this prior and posterior are conjugate in the sense that both have gamma distributions.\n\n\n\n\\[\n\\theta ～ Gamma(a,b)  \\Rightarrow  p(\\theta) = [b^a/\\Gamma(a)]\\theta^{a-1}e^{-b\\theta}I_{(0,\\infty)}(\\theta)\n\\]\n\\[\ny_i|\\theta～Pois(\\theta M_i)\\Rightarrow P(y_i|\\theta) = \\frac{(\\theta M_i)^{Y_i}e^{-\\theta M_i}}{Y_i!}\n\\]\n\\[\nL(\\theta)= (\\prod \\frac{M_{i}^{y_i}}{y_i !}) \\theta^{\\sum y_i} e^{-\\theta \\sum M_i }\n\\]\n\\[\\begin{align}\n\n  p(\\theta|y) & \\propto p(\\theta)L(\\theta) \\\\\n\n  & \\propto  \\theta^{a-1}e^{-b\\theta}\\theta^{\\sum y_i} e^{- \\theta \\sum M_i} \\\\\n\n  & \\propto \\theta^{a+\\sum y_i -1} e^{- \\theta (b+\\sum M_i)}\n\n\\end{align}\\]\nFinally, we have\n\\[\n\\theta|y ～ Gamma(a+\\sum y_i  ,b+\\sum M_i)\n\\]\n\n\nEXERCISE 3.3.\nExtending Exercise 3.2, two cities are allowed different death rates. Let \\(y_i ～  Pois(θ_i M_i), i = 1, 2,\\) where the \\(M_is\\) are known constants. Let knowledge about \\(θ_i\\) be reflected by independent gamma distributions, namely \\(θ_i ∼ Gamma(a_i, b_i)\\). Derive the joint posterior for \\((\\theta_1,\\theta_2)\\). Characterize the joint distribution as we did for sampling two independent binomials. Think of \\(\\theta_i\\) as the rate of events per 100 thousand people in city \\(i\\). For independent priors \\(\\theta_i ∼ Gamma(1, 0.1)\\), give the exact joint posterior with \\(y_1 = 500, y_2 = 800\\)in cities with populations of 100 thousand and 200 thousand, respectively.\n\n\n\n\\[\nP(\\theta_1 , \\theta_2)=p_1(\\theta_1)p_2(\\theta_2)\n\\]\nAccording to the above conclusion, we have \\[\n\\theta_1,\\theta_2 ～ Gamma(a + y_1,b+M_1)Gamma(a + y_2,b+M_2)\n\\]\nWe know,\n\\[\\begin{align}\n\na_1 = a_2 &= 1 \\\\\n\nb_1 = b_2 &= 0.1 \\\\\n\ny_1 &= 500  \\\\\n\ny_2 &= 800  \\\\\n\nM_1 &= 100  \\\\\n\nM_2 &= 200\n\n\\end{align}\\]\nFinally,\n\\[\\begin{align}\np(\\theta_1,\\theta_2|y_1 =500,y_2=800)=[[100.1^501/\\Gamma(501)]\\theta_1 ^{500}e^{-100.1\\theta_1}][[200.1^801/\\Gamma(801)]\\theta_2 ^{800-1}e^{-200.1\\theta_2}]\n\n\n\\end{align}\\]\n\n\nEXERCISE 3.4.\nPerform Example 3.1.3 in WinBUGS with \\(y_1 ∼ Bin(80,\\theta1)\\), \\(y_2 ∼ Bin(100,\\theta_2)\\) \\(\\theta1 ∼ Beta(1, 1), \\theta 2 ∼ Beta(2, 1)\\) with observations \\(y_1 = 32\\) and \\(y_2 = 35\\). Put each term in the model on a separate line. There should still be only two list statements with entries separated by commas. See Exercises 3.6 and 3.7 for WinBUGS syntax.\n\nsuppressMessages(library(rjags))\n\nmodel_string &lt;- \"\nmodel {\n\n    theta1 ~ dbeta(1, 1)\n    theta2 ~ dbeta(2, 1)\n    \n    y1 ~ dbin(theta1, n1)\n    y2 ~ dbin(theta2, n2)\n    \n}\n\"\n\ndata_list &lt;- list(\n    y1 = 32,\n    n1 = 80,\n    y2 = 35,\n    n2 = 100\n)\n\n\njags_model &lt;- jags.model(\n    textConnection(model_string),\n    data = data_list,\n    n.chains = 1,\n    n.adapt = 1000\n)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 2\n   Unobserved stochastic nodes: 2\n   Total graph size: 8\n\nInitializing model\n\nupdate(jags_model, 1000)    \n\nmcmc_samples &lt;- coda.samples(\n    model = jags_model,\n    variable.names = c(\"theta1\", \"theta2\", \"gamma\"),\n    n.iter = 10000\n)\n\nWarning in FUN(X[[i]], ...): Failed to set trace monitor for gamma\nVariable gamma not found\n\nhead(mcmc_samples[[1]])\n\nMarkov Chain Monte Carlo (MCMC) output:\nStart = 2001 \nEnd = 2007 \nThinning interval = 1 \n        theta1    theta2\n[1,] 0.3811697 0.3100928\n[2,] 0.4263209 0.3351632\n[3,] 0.3978155 0.4041844\n[4,] 0.4233860 0.3635713\n[5,] 0.3501913 0.2555364\n[6,] 0.3817331 0.4577439\n[7,] 0.3806202 0.3138595\n\n\n\n\nEXERCISE 3.5.\nPerform a data analysis for the model in Exercise 3.3 using the data \\(y_1 = 500\\), \\(y_2 = 800\\), \\(M_1 = 100\\), \\(M_2 = 200\\), and using independent \\(Gamma(1, 0.01)\\) priors for the \\(θ_is\\). Make WinBUGS based inferences for all parameters and functions of parameters discussed there using a Monte Carlo sample size of 10,000 and a burn-in of 1,000. This may involve an excursion into the “Help” menu to find the syntax for Poisson and gamma distributions. Compare the posterior means for \\(\\theta_1\\) and \\(\\theta_2\\) based on the WinBUGS output to the exact values from the Gamma posteriors that you obtained in Exercise 3.3.\n\nmodel_string &lt;- \"\nmodel {\n    theta1 ~ dgamma(a, b)\n    theta2 ~ dgamma(a, b)\n    \n    y1 ~ dpois(theta1*M1)\n    y2 ~ dpois(theta2*M2)\n}\n\"\n\ndata_list &lt;- list(\n    a = 1,\n    b = 0.01,\n    y1 = 500,\n    M1 = 100,\n    y2 = 800,\n    M2 = 200\n)\n\njags_model &lt;- jags.model(\n    textConnection(model_string),\n    data = data_list,\n    n.chains = 1,\n    n.adapt = 10000\n)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 2\n   Unobserved stochastic nodes: 2\n   Total graph size: 10\n\nInitializing model\n\nupdate(jags_model, 1000)    \n\nmcmc_samples &lt;- coda.samples(\n    model = jags_model,\n    variable.names = c(\"theta1\", \"theta2\"),\n    n.iter = 10000\n)\n\nhead(mcmc_samples[[1]])\n\nMarkov Chain Monte Carlo (MCMC) output:\nStart = 1001 \nEnd = 1007 \nThinning interval = 1 \n       theta1   theta2\n[1,] 4.885572 3.927707\n[2,] 5.566531 3.968726\n[3,] 5.021217 4.262928\n[4,] 5.317858 3.826001\n[5,] 4.918822 3.912928\n[6,] 4.987216 4.334692\n[7,] 5.307356 3.633826\n\napply(mcmc_samples[[1]],2,mean)\n\n  theta1   theta2 \n5.008658 4.006906 \n\n# gamma分布均值为a/b\n\n501/100.1\n\n[1] 5.004995\n\n801/200.1\n\n[1] 4.002999\n\n\n\n\nEXERCISE 3.6.\n\nmodel_string &lt;- \"\nmodel {\n    y ~ dbin(theta , n)\n    ytilde ~ dbin(theta, m)\n    theta ~ dbeta(a, b)\n    prob &lt;- step(ytilde - 20)\n}\n\"\n\ndata_list &lt;- list(n=100, m=100, y=10, a=1, b=1)\n\njags_model &lt;- jags.model(\n    textConnection(model_string),\n    data = data_list,\n    n.chains = 1,\n    n.adapt = 1000\n)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 1\n   Unobserved stochastic nodes: 2\n   Total graph size: 10\n\nInitializing model\n\nupdate(jags_model, 100)    \n\nmcmc_samples &lt;- coda.samples(\n    model = jags_model,\n    variable.names = c(\"theta\",'prob'),\n    n.iter = 10000\n)\n\napply(mcmc_samples[[1]],2,mean)\n\n     prob     theta \n0.0355000 0.1078159 \n\n\n\n\nEXERCISE 3.7.\n\nmodel_string &lt;- \"\nmodel{ \n  y1 ~ dbin(theta1, n1) \n  y2 ~ dbin(theta2, n2) \n  theta1 ~ dbeta(1, 1) \n  theta2 ~ dbeta(1, 1) \n  prob1 &lt;- step(theta1-theta2) \n  y1tilde ~ dbin(theta1, m1) \n  y2tilde ~ dbin(theta2, m2) \n  prob2 &lt;- step(y1tilde - y2tilde - 11) \n  gamma &lt;- theta1-theta2\n} \n\"\ndata_list &lt;- list(y1=25, y2=10, n1=100, n2=100, m1=100, m2=100) \n\njags_model &lt;- jags.model(\n    textConnection(model_string),\n    data = data_list,\n    n.chains = 1,\n    n.adapt = 10000\n)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 2\n   Unobserved stochastic nodes: 4\n   Total graph size: 17\n\nInitializing model\n\nupdate(jags_model, 5000)    \n\nmcmc_samples &lt;- coda.samples(\n    model = jags_model,\n    variable.names = c(\"theta1\",\"theta2\",'prob1','prob2','gamma','y1tilde','y2tilde'),\n    n.iter = 10000\n)\napply(mcmc_samples[[1]],2,mean)\n\n     gamma      prob1      prob2     theta1     theta2    y1tilde    y2tilde \n 0.1475529  0.9979000  0.7170000  0.2551727  0.1076198 25.4967000 10.7936000 \n\nquantile(mcmc_samples[[1]][,'gamma'],c(0.025,0.975))\n\n      2.5%      97.5% \n0.04550297 0.25071823",
+    "text": "EXERCISE 3.1.\nLet prior uncertainty about a parameter \\(\\theta\\) be reflected by the density\n\\[\np(\\theta) = ce^{−3\\theta} I(0,\\infty)(\\theta).\n\\]\nFind the constant c that makes this integrate to one. Also find \\(Pr(\\theta &gt; 2)\\) and \\(Pr(\\theta &gt; 4 | \\theta &gt; 2)\\). Find the median and the expected value. Finally, obtain a 95% probability interval for \\(\\theta\\)\n\n\n\n\\[\\begin{align}\n\n  \\int_{0}^{\\infty} p(\\theta) d\\theta &= \\int_{0}^{\\infty} ce^{-3\\theta}I_{(0,\\infty)}(\\theta) d\\theta \\\\\n\n  &= -\\frac{c}{3}(e^{-3\\theta}|^{\\infty}_0) \\\\\n\n  &= \\frac{c}{3}\n\n\\end{align}\\]\nlet \\(\\frac{c}{3}=1\\)，then we have \\(c=3\\)\n\n\n\n\\[\\begin{align}\n\n  Pr(\\theta &gt; x )&= \\int_{x}^{\\infty} 3e^{-3\\theta}I_{(0,\\infty)}(\\theta) d\\theta \\\\\n\n  &= -e^{-3\\theta}|^{\\infty}_x \\\\\n\n  &= e^{-3\\theta}|^{x}_\\infty  \\\\\n  \n  &= e^{-3x}\n\n\\end{align}\\]\nlet \\(x=2\\), then we have \\[\nPr(\\theta&gt;2) = e^{-3*2} = 0.002478752\n\\]\n\\[\nPr(\\theta &gt; 4 | \\theta &gt; 2) = Pr(\\theta&gt;2) = e^{-3*2} = 0.002478752\n\\]\n\n# Pr(theta&gt;2)\n1-pexp(2,3)\n\n[1] 0.002478752\n\n# Monte Carlo simulations\nset.seed(2024)\nN &lt;- 1000000 \nsamples &lt;- rexp(N,3)\nP &lt;- mean(samples &gt; 2)\nprint(P)\n\n[1] 0.002496\n\n\n\n# Pr(theta&gt;4|theta&gt;2)\n(1-pexp(4,3))/(1-pexp(2,3))\n\n[1] 0.002478752\n\n\n\nFor Exp(3) , \\(Mean = \\frac{1}{\\theta}\\) ,\\(Mdian = \\frac{Ln2}{\\theta}\\), We all know \\(\\theta =3\\), so we have \\(Mean = \\frac{1}{3}\\) , \\(Median = \\frac{Ln2}{3}\\)\n95% probability interval for \\(\\theta\\)\n\n\nqexp(c(0.025,0.975),3)\n\n[1] 0.008439269 1.229626485\n\n\n\n\nEXERCISE 3.2.\nSuppose \\(n\\) cities were sampled and for each city \\(i\\) the number \\(y_i\\) of deaths from ALS were recorded for a period of one year. We expect the numbers to be Poisson distributed, but the size of the city is a factor. Let \\(M_i\\) be the known population for city \\(i\\) and let\n\\[\ny_i|\\theta ～ Pois(\\theta M_i), i= 1,...k\n\\]\nwhere \\(\\theta\\) &gt; 0 is an unknown parameter measuring the common death rate for all cities. Given \\(\\theta\\), the expected number of ALS deaths for city i is \\(\\theta M_i\\), so \\(\\theta\\) is expected to be small. Assume that independent scientific information can be obtained about \\(\\theta\\) in the form of a gamma distribution, say \\(Gamma(a, b)\\). Show that this prior and posterior are conjugate in the sense that both have gamma distributions.\n\n\n\n\\[\n\\theta ～ Gamma(a,b)  \\Rightarrow  p(\\theta) = [b^a/\\Gamma(a)]\\theta^{a-1}e^{-b\\theta}I_{(0,\\infty)}(\\theta)\n\\]\n\\[\ny_i|\\theta～Pois(\\theta M_i)\\Rightarrow P(y_i|\\theta) = \\frac{(\\theta M_i)^{Y_i}e^{-\\theta M_i}}{Y_i!}\n\\]\n\\[\nL(\\theta)= (\\prod \\frac{M_{i}^{y_i}}{y_i !}) \\theta^{\\sum y_i} e^{-\\theta \\sum M_i }\n\\]\n\\[\\begin{align}\n\n  p(\\theta|y) & \\propto p(\\theta)L(\\theta) \\\\\n\n  & \\propto  \\theta^{a-1}e^{-b\\theta}\\theta^{\\sum y_i} e^{- \\theta \\sum M_i} \\\\\n\n  & \\propto \\theta^{a+\\sum y_i -1} e^{- \\theta (b+\\sum M_i)}\n\n\\end{align}\\]\nFinally, we have\n\\[\n\\theta|y ～ Gamma(a+\\sum y_i  ,b+\\sum M_i)\n\\]\n\n\nEXERCISE 3.3.\nExtending Exercise 3.2, two cities are allowed different death rates. Let \\(y_i ～  Pois(θ_i M_i), i = 1, 2,\\) where the \\(M_is\\) are known constants. Let knowledge about \\(θ_i\\) be reflected by independent gamma distributions, namely \\(θ_i ∼ Gamma(a_i, b_i)\\). Derive the joint posterior for \\((\\theta_1,\\theta_2)\\). Characterize the joint distribution as we did for sampling two independent binomials. Think of \\(\\theta_i\\) as the rate of events per 100 thousand people in city \\(i\\). For independent priors \\(\\theta_i ∼ Gamma(1, 0.1)\\), give the exact joint posterior with \\(y_1 = 500, y_2 = 800\\)in cities with populations of 100 thousand and 200 thousand, respectively.\n\n\n\n\\[\nP(\\theta_1 , \\theta_2)=p_1(\\theta_1)p_2(\\theta_2)\n\\]\nAccording to the above conclusion, we have \\[\n\\theta_1,\\theta_2 ～ Gamma(a + y_1,b+M_1)Gamma(a + y_2,b+M_2)\n\\]\nWe know,\n\\[\\begin{align}\n\na_1 = a_2 &= 1 \\\\\n\nb_1 = b_2 &= 0.1 \\\\\n\ny_1 &= 500  \\\\\n\ny_2 &= 800  \\\\\n\nM_1 &= 100  \\\\\n\nM_2 &= 200\n\n\\end{align}\\]\nFinally,\n\\[\\begin{align}\np(\\theta_1,\\theta_2|y_1 =500,y_2=800)=[[100.1^501/\\Gamma(501)]\\theta_1 ^{500}e^{-100.1\\theta_1}][[200.1^801/\\Gamma(801)]\\theta_2 ^{800-1}e^{-200.1\\theta_2}]\n\n\n\\end{align}\\]\n\n\nEXERCISE 3.4.\nPerform Example 3.1.3 in WinBUGS with \\(y_1 ∼ Bin(80,\\theta1)\\), \\(y_2 ∼ Bin(100,\\theta_2)\\) \\(\\theta1 ∼ Beta(1, 1), \\theta 2 ∼ Beta(2, 1)\\) with observations \\(y_1 = 32\\) and \\(y_2 = 35\\). Put each term in the model on a separate line. There should still be only two list statements with entries separated by commas. See Exercises 3.6 and 3.7 for WinBUGS syntax.\n\nsuppressMessages(library(rjags))\n\nmodel_string &lt;- \"\nmodel {\n\n    theta1 ~ dbeta(1, 1)\n    theta2 ~ dbeta(2, 1)\n    \n    y1 ~ dbin(theta1, n1)\n    y2 ~ dbin(theta2, n2)\n    \n}\n\"\n\ndata_list &lt;- list(\n    y1 = 32,\n    n1 = 80,\n    y2 = 35,\n    n2 = 100\n)\n\n\njags_model &lt;- jags.model(\n    textConnection(model_string),\n    data = data_list,\n    n.chains = 1,\n    n.adapt = 1000\n)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 2\n   Unobserved stochastic nodes: 2\n   Total graph size: 8\n\nInitializing model\n\nupdate(jags_model, 1000)    \n\nmcmc_samples &lt;- coda.samples(\n    model = jags_model,\n    variable.names = c(\"theta1\", \"theta2\", \"gamma\"),\n    n.iter = 10000\n)\n\nWarning in FUN(X[[i]], ...): Failed to set trace monitor for gamma\nVariable gamma not found\n\nhead(mcmc_samples[[1]])\n\nMarkov Chain Monte Carlo (MCMC) output:\nStart = 2001 \nEnd = 2007 \nThinning interval = 1 \n        theta1    theta2\n[1,] 0.5082423 0.3153096\n[2,] 0.4995938 0.3589142\n[3,] 0.4962379 0.3091079\n[4,] 0.4325777 0.3250655\n[5,] 0.4181803 0.3353077\n[6,] 0.3788849 0.4116635\n[7,] 0.3470925 0.3698580\n\n\n\n\nEXERCISE 3.5.\nPerform a data analysis for the model in Exercise 3.3 using the data \\(y_1 = 500\\), \\(y_2 = 800\\), \\(M_1 = 100\\), \\(M_2 = 200\\), and using independent \\(Gamma(1, 0.01)\\) priors for the \\(θ_is\\). Make WinBUGS based inferences for all parameters and functions of parameters discussed there using a Monte Carlo sample size of 10,000 and a burn-in of 1,000. This may involve an excursion into the “Help” menu to find the syntax for Poisson and gamma distributions. Compare the posterior means for \\(\\theta_1\\) and \\(\\theta_2\\) based on the WinBUGS output to the exact values from the Gamma posteriors that you obtained in Exercise 3.3.\n\nmodel_string &lt;- \"\nmodel {\n    theta1 ~ dgamma(a, b)\n    theta2 ~ dgamma(a, b)\n    \n    y1 ~ dpois(theta1*M1)\n    y2 ~ dpois(theta2*M2)\n}\n\"\n\ndata_list &lt;- list(\n    a = 1,\n    b = 0.01,\n    y1 = 500,\n    M1 = 100,\n    y2 = 800,\n    M2 = 200\n)\n\njags_model &lt;- jags.model(\n    textConnection(model_string),\n    data = data_list,\n    n.chains = 1,\n    n.adapt = 10000\n)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 2\n   Unobserved stochastic nodes: 2\n   Total graph size: 10\n\nInitializing model\n\nupdate(jags_model, 1000)    \n\nmcmc_samples &lt;- coda.samples(\n    model = jags_model,\n    variable.names = c(\"theta1\", \"theta2\"),\n    n.iter = 10000\n)\n\nhead(mcmc_samples[[1]])\n\nMarkov Chain Monte Carlo (MCMC) output:\nStart = 1001 \nEnd = 1007 \nThinning interval = 1 \n       theta1   theta2\n[1,] 5.068278 4.187043\n[2,] 5.484848 3.970771\n[3,] 5.158063 3.949658\n[4,] 4.720652 3.929965\n[5,] 4.692881 4.068471\n[6,] 4.858593 4.245358\n[7,] 5.125394 4.188519\n\napply(mcmc_samples[[1]],2,mean)\n\n  theta1   theta2 \n5.007827 4.007279 \n\n# gamma分布均值为a/b\n\n501/100.1\n\n[1] 5.004995\n\n801/200.1\n\n[1] 4.002999\n\n\n\n\nEXERCISE 3.6.\n\nmodel_string &lt;- \"\nmodel {\n    y ~ dbin(theta , n)\n    ytilde ~ dbin(theta, m)\n    theta ~ dbeta(a, b)\n    prob &lt;- step(ytilde - 20)\n}\n\"\n\ndata_list &lt;- list(n=100, m=100, y=10, a=1, b=1)\n\njags_model &lt;- jags.model(\n    textConnection(model_string),\n    data = data_list,\n    n.chains = 1,\n    n.adapt = 1000\n)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 1\n   Unobserved stochastic nodes: 2\n   Total graph size: 10\n\nInitializing model\n\nupdate(jags_model, 100)    \n\nmcmc_samples &lt;- coda.samples(\n    model = jags_model,\n    variable.names = c(\"theta\",'prob'),\n    n.iter = 10000\n)\n\napply(mcmc_samples[[1]],2,mean)\n\n     prob     theta \n0.0341000 0.1073693 \n\n\n\n\nEXERCISE 3.7.\n\nmodel_string &lt;- \"\nmodel{ \n  y1 ~ dbin(theta1, n1) \n  y2 ~ dbin(theta2, n2) \n  theta1 ~ dbeta(1, 1) \n  theta2 ~ dbeta(1, 1) \n  prob1 &lt;- step(theta1-theta2) \n  y1tilde ~ dbin(theta1, m1) \n  y2tilde ~ dbin(theta2, m2) \n  prob2 &lt;- step(y1tilde - y2tilde - 11) \n  gamma &lt;- theta1-theta2\n} \n\"\ndata_list &lt;- list(y1=25, y2=10, n1=100, n2=100, m1=100, m2=100) \n\njags_model &lt;- jags.model(\n    textConnection(model_string),\n    data = data_list,\n    n.chains = 1,\n    n.adapt = 10000\n)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 2\n   Unobserved stochastic nodes: 4\n   Total graph size: 17\n\nInitializing model\n\nupdate(jags_model, 5000)    \n\nmcmc_samples &lt;- coda.samples(\n    model = jags_model,\n    variable.names = c(\"theta1\",\"theta2\",'prob1','prob2','gamma','y1tilde','y2tilde'),\n    n.iter = 10000\n)\napply(mcmc_samples[[1]],2,mean)\n\n     gamma      prob1      prob2     theta1     theta2    y1tilde    y2tilde \n 0.1466940  0.9964000  0.7109000  0.2543524  0.1076584 25.4371000 10.8075000 \n\nquantile(mcmc_samples[[1]][,'gamma'],c(0.025,0.975))\n\n      2.5%      97.5% \n0.04619207 0.25089176",
     "crumbs": [
       "Bayesian",
       "Bayesian hw 1"
@@ -339,6 +339,204 @@
     "crumbs": [
       "Survival",
       "survival hw 2"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html",
+    "href": "bayesian hw 3.html",
+    "title": "bayesian hw 3",
+    "section": "",
+    "text": "第一题",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#第二题",
+    "href": "bayesian hw 3.html#第二题",
+    "title": "bayesian hw 3",
+    "section": "第二题",
+    "text": "第二题",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#第三题",
+    "href": "bayesian hw 3.html#第三题",
+    "title": "bayesian hw 3",
+    "section": "第三题",
+    "text": "第三题",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#a",
+    "href": "bayesian hw 3.html#a",
+    "title": "bayesian hw 3",
+    "section": "a",
+    "text": "a\n临床试验的例子，\n安慰剂服从\\(Y～N(\\mu,\\sigma^2) ,i=1,..,n\\) ,\n实验药服从\\(N～N(\\mu + \\delta,\\sigma^2),i=1+n,..,n+m\\)",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#b",
+    "href": "bayesian hw 3.html#b",
+    "title": "bayesian hw 3",
+    "section": "b",
+    "text": "b",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#c",
+    "href": "bayesian hw 3.html#c",
+    "title": "bayesian hw 3",
+    "section": "c",
+    "text": "c\n\n# 先验参数\nn &lt;- m &lt;- 50\nmu &lt;- 10\ndelta &lt;- 1\nsigma &lt;- 2\n\n# 模拟数据\ny1 &lt;- rnorm(n,mu,sigma)\ny2 &lt;- rnorm(m,mu+delta,sigma)\ny &lt;- c(y1,y2)\n\n# Gibbs\nset.seed(2024)\nS&lt;-1000\nPHI&lt;-matrix(nrow=S,ncol=3)\nPHI[1,]&lt;-phi&lt;-c(0, 0, 4) # sigma2\n\n## Gibbs sampling algorithm\nfor(s in 2:S) {\n\n# generate a new mu value from its full conditional\nmu_n&lt;- n*100*100*mean(y1)/(4+n*100*100)\ns2_n&lt;- (100*100*4)/(4+n*100*100)\nphi[1]&lt;-rnorm(1, mu_n, sqrt(s2_n) )\n\n# generate a new delta value from its full conditional\ndelta_m&lt;-  ( m*100*100*mean(y2)/(4+m*100*100))-( n*100*100*mean(y1)/(4+n*100*100))\ns2_m&lt;- (100*100*4)/(4+m*100*100)\nphi[2]&lt;-rnorm(1, delta_m, sqrt(s2_m) )\n\n# generate a new sigma^2 value from its full conditional\na &lt;- 0.01+(m+n)*0.5\nb &lt;-0.01+(m+n)*0.5*((sum((y-mean(y))^2)/(m+n))+((mean(y)-(n*mu+m*(mu+delta))/(m+n))^2))\nphi[3]&lt;- 1/rgamma(1, a, b)\n\nPHI[s,]&lt;-phi         }\n\n\nplot(density(PHI[,1]),main='mu')\n\n\n\n\n\n\n\nplot(density(PHI[,2]),main='delta')\n\n\n\n\n\n\n\nplot(density(PHI[,3]),main='sigma2')",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#d",
+    "href": "bayesian hw 3.html#d",
+    "title": "bayesian hw 3",
+    "section": "d",
+    "text": "d\n\nlibrary('rjags')\n\nLoading required package: coda\n\n\nLinked to JAGS 4.3.2\n\n\nLoaded modules: basemod,bugs\n\nlibrary(\"coda\")\n\n\nmodel_code &lt;- \"\nmodel {\n\n  for (i in 1:n) {\n    Y[i] ~ dnorm(mu, 1/sigma2)\n  }\n  \n  for (i in (n+1):(n+m)) {\n    Y[i] ~ dnorm(mu + delta, 1/sigma2)\n  }\n\n  mu ~ dnorm(0, 1/10000)\n  delta ~ dnorm(0, 1/10000)\n  tau ~ dgamma(0.01, 0.01)\n  sigma2 = 1/tau\n}\n\"\n\nn &lt;- 50\nm &lt;- 50\nmu_n &lt;- 10\ndelta &lt;- 1\nsigma &lt;- 2\n\nset.seed(2024)\nY &lt;- c(rnorm(n, mu_n, sigma), rnorm(m, mu_n + delta, sigma))\n\ndata_list &lt;- list(Y = Y, n = n, m = m)\n\n\n\nmodel &lt;- jags.model(textConnection(model_code), data = data_list, n.chains = 3, n.adapt = 1000)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 100\n   Unobserved stochastic nodes: 3\n   Total graph size: 113\n\nInitializing model\n\n# 运行 MCMC 采样\nupdate(model, 1000) # Burn-in阶段\nsamples &lt;- coda.samples(model, variable.names = c(\"mu\", \"delta\", \"sigma2\"), n.iter = 5000)\n\nplot(samples)",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#e",
+    "href": "bayesian hw 3.html#e",
+    "title": "bayesian hw 3",
+    "section": "e",
+    "text": "e\n\ngelman.diag(samples)\n\nPotential scale reduction factors:\n\n       Point est. Upper C.I.\ndelta           1          1\nmu              1          1\nsigma2          1          1\n\nMultivariate psrf\n\n1\n\n\n\n# 自相关\nacf(as.matrix(samples)[, \"mu\"])\n\n\n\n\n\n\n\nacf(as.matrix(samples)[, \"delta\"])\n\n\n\n\n\n\n\nacf(as.matrix(samples)[, \"sigma2\"])\n\n\n\n\n\n\n\n\n\n# 有效样本量\neffectiveSize(samples)\n\n   delta       mu   sigma2 \n5128.764 5055.603 8764.290",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#a-1",
+    "href": "bayesian hw 3.html#a-1",
+    "title": "bayesian hw 3",
+    "section": "a",
+    "text": "a\nbeta分布对于概率\\(\\theta\\)来说是常规的先验分布设置手段。因为其足够灵活并且在0，1之间变化; 其次，这样设置还有现实意义的解释，即beta分布中，a=命中多少个，b=未能命中的个数; 最后，添加了一个exp(m)这样一个调节的量，表示在常规命中率的基础上引入变化\n\nset.seed(2024)\ntheta_i &lt;- c(0.845, 0.847, 0.880, 0.674, 0.909, 0.898, 0.770, 0.801, 0.802, 0.875)\nm_samples &lt;- rnorm(1000, mean = 0, sd = 10)\n\nprobabilities &lt;- numeric(10000)\n\nfor (i in 1:1000) {\n  m &lt;- m_samples[i] \n\n  for (j in 1:10) {\n    shape1 &lt;- exp(m) * theta_i[j]       \n    shape2 &lt;- exp(m) * (1 - theta_i[j]) \n    probability &lt;- rbeta(1, shape1, shape2)\n    probabilities[(i - 1) * 10 + j] &lt;- probability\n  }\n}\n\n\nhist(probabilities,probability = TRUE)\nlines(density(probabilities), col = \"red\", lwd = 2)",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#b-1",
+    "href": "bayesian hw 3.html#b-1",
+    "title": "bayesian hw 3",
+    "section": "b",
+    "text": "b\nm引入了不确定性",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#c-1",
+    "href": "bayesian hw 3.html#c-1",
+    "title": "bayesian hw 3",
+    "section": "c",
+    "text": "c\n后验： $$\nbeta(y+exp(m)q_{i} , exp(m)(1-q_i)+n-y)\n$$",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#d-1",
+    "href": "bayesian hw 3.html#d-1",
+    "title": "bayesian hw 3",
+    "section": "d",
+    "text": "d\n\ntheta_i &lt;- c(0.845, 0.847, 0.880, 0.674, 0.909, 0.898, 0.770, 0.801, 0.802, 0.875)\nclutch_makes &lt;- c(64, 72, 55, 27, 75, 24, 28, 66, 40, 13)\nclutch_attempts &lt;- c(75, 95, 63, 39, 83, 26, 41, 82, 54, 16)\nn_players &lt;- length(theta_i)\n\nset.seed(2024)\nS&lt;-1000000\nTHETA&lt;-matrix(nrow=S,ncol=11)\nTHETA[1,]&lt;-theta&lt;-c(0,rep(0.8,10)) # theta\n\n\nfor(s in 2:S) {\n\ntheta[1]&lt;- m &lt;- rnorm(1, 0, sqrt(10))\n\nfor(i in 1:10){\n\ntheta[i+1] &lt;- rbeta(1,\n                  clutch_makes[i]+exp(m)*theta_i[i],\n                  exp(m)*(1-theta_i[i])+clutch_attempts[i]-clutch_makes[i])\n}\n\nTHETA[s,]&lt;-theta   }\n\ncolnames(THETA) &lt;- c('m',paste0('theta',1:10))\nm  &lt;- apply(THETA,2,function(x){\n  quantile(x,0.5)\n})\nl &lt;- apply(THETA,2,function(x){\n  quantile(x,0.025)\n})\nh &lt;- apply(THETA,2,function(x){\n  quantile(x,0.975)\n})\n\nt(rbind(l,m,h))\n\n                 l           m         h\nm       -6.1908236 0.001690084 6.2067146\ntheta1   0.7694963 0.854152849 0.9206071\ntheta2   0.6741323 0.768909606 0.8476116\ntheta3   0.7863799 0.877737520 0.9402216\ntheta4   0.5491007 0.689603429 0.8171368\ntheta5   0.8359270 0.907343843 0.9552716\ntheta6   0.8051724 0.924314204 0.9876626\ntheta7   0.5476745 0.702025546 0.8137787\ntheta8   0.7169512 0.805951434 0.8797382\ntheta9   0.6270672 0.754245031 0.8463356\ntheta10  0.6228891 0.843445009 0.9521655",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#e-1",
+    "href": "bayesian hw 3.html#e-1",
+    "title": "bayesian hw 3",
+    "section": "e",
+    "text": "e\n\nlibrary(rjags)\nlibrary(coda)\n\nmodel_string &lt;- \"\nmodel {\n  for (i in 1:n_players) {\n\n    clutch_makes[i] ~ dbin(theta[i], clutch_attempts[i])\n\n    theta[i] ~ dbeta(alpha[i], beta[i])\n\n    alpha[i] &lt;- exp(m[i]) * theta_i[i]\n    beta[i] &lt;- exp(m[i]) * (1 - theta_i[i]) \n  }\n}\n\"\n\ntheta_i &lt;- c(0.845, 0.847, 0.880, 0.674, 0.909, 0.898, 0.770, 0.801, 0.802, 0.875)\nclutch_makes &lt;- c(64, 72, 55, 27, 75, 24, 28, 66, 40, 13)\nclutch_attempts &lt;- c(75, 95, 63, 39, 83, 26, 41, 82, 54, 16)\nn_players &lt;- length(theta_i)\nm &lt;- rnorm(n_players*10,0,sqrt(10))\n\n\ndata_jags &lt;- list(\n  theta_i = theta_i,         \n  clutch_makes = clutch_makes,\n  clutch_attempts = clutch_attempts,\n  n_players = n_players,\n  m=m\n)\n\n\n\nmodel &lt;- jags.model(textConnection(model_string), data = data_jags,  n.chains = 3)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 10\n   Unobserved stochastic nodes: 10\n   Total graph size: 182\n\nInitializing model\n\nupdate(model, 10000)\n\nn_samples &lt;- 10000\nsamples &lt;- coda.samples(model, variable.names = c('theta'), n.iter = n_samples)\n\nplot(samples)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsummary(samples)\n\n\nIterations = 11001:21000\nThinning interval = 1 \nNumber of chains = 3 \nSample size per chain = 10000 \n\n1. Empirical mean and standard deviation for each variable,\n   plus standard error of the mean:\n\n            Mean      SD  Naive SE Time-series SE\ntheta[1]  0.8535 0.04051 0.0002339      0.0003160\ntheta[2]  0.7615 0.04278 0.0002470      0.0003085\ntheta[3]  0.8733 0.04152 0.0002397      0.0003130\ntheta[4]  0.6915 0.07111 0.0004106      0.0005305\ntheta[5]  0.9034 0.03213 0.0001855      0.0002524\ntheta[6]  0.9226 0.05102 0.0002946      0.0004932\ntheta[7]  0.7322 0.04522 0.0002611      0.0003317\ntheta[8]  0.8048 0.04271 0.0002466      0.0003280\ntheta[9]  0.7403 0.05888 0.0003399      0.0004356\ntheta[10] 0.8186 0.08984 0.0005187      0.0007585\n\n2. Quantiles for each variable:\n\n            2.5%    25%    50%    75%  97.5%\ntheta[1]  0.7657 0.8283 0.8564 0.8824 0.9230\ntheta[2]  0.6734 0.7333 0.7629 0.7914 0.8410\ntheta[3]  0.7815 0.8477 0.8774 0.9031 0.9426\ntheta[4]  0.5447 0.6451 0.6951 0.7418 0.8207\ntheta[5]  0.8317 0.8838 0.9068 0.9267 0.9560\ntheta[6]  0.7962 0.8953 0.9329 0.9609 0.9897\ntheta[7]  0.6395 0.7027 0.7338 0.7637 0.8165\ntheta[8]  0.7157 0.7770 0.8073 0.8351 0.8808\ntheta[9]  0.6156 0.7023 0.7431 0.7816 0.8471\ntheta[10] 0.6110 0.7646 0.8310 0.8864 0.9560",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#f",
+    "href": "bayesian hw 3.html#f",
+    "title": "bayesian hw 3",
+    "section": "f",
+    "text": "f\n自己的代码需要推导后验分布",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#g",
+    "href": "bayesian hw 3.html#g",
+    "title": "bayesian hw 3",
+    "section": "g",
+    "text": "g\n\ngelman.diag(samples)\n\nPotential scale reduction factors:\n\n          Point est. Upper C.I.\ntheta[1]           1          1\ntheta[2]           1          1\ntheta[3]           1          1\ntheta[4]           1          1\ntheta[5]           1          1\ntheta[6]           1          1\ntheta[7]           1          1\ntheta[8]           1          1\ntheta[9]           1          1\ntheta[10]          1          1\n\nMultivariate psrf\n\n1\n\n\n\neffectiveSize(samples)\n\n theta[1]  theta[2]  theta[3]  theta[4]  theta[5]  theta[6]  theta[7]  theta[8] \n 16463.24  19231.86  17606.27  18021.70  16214.02  10750.57  18628.96  17131.60 \n theta[9] theta[10] \n 18289.19  14186.49",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#a-2",
+    "href": "bayesian hw 3.html#a-2",
+    "title": "bayesian hw 3",
+    "section": "a",
+    "text": "a\n\nlibrary(MASS)\ndata(galaxies)\n?galaxies\nY &lt;- galaxies\n\nn &lt;- length(Y)\n\nhist(Y,breaks=25)\n\n\n\n\n\n\n\n\n\\(\\mu=20000\\)\n\\(\\sigma=5000\\)\n\\(k=15\\)",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#b-2",
+    "href": "bayesian hw 3.html#b-2",
+    "title": "bayesian hw 3",
+    "section": "b",
+    "text": "b\n\nlibrary(rjags)\nlibrary(coda)\n\nmodel_string &lt;- \"\nmodel {\n  for (i in 1:s) {\n    Y[i] ~ dt(mu, tau, k)\n  }\n  mu ~ dnorm(0, 1/10000^2)\n  tau ~ dgamma(0.01, 0.01)\n  k ~ dunif(1, 30)\n}\n\"\n\ndata_jags &lt;- list(Y =galaxies, s = length(galaxies))\n\n# 设置初始值\ninit_values &lt;- list(\n  list(mu = 0, tau = 100, k = 15)\n)\n\n# 创建模型\nmodel &lt;- jags.model(textConnection(model_string), data = data_jags, inits = init_values, n.chains = 1)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 82\n   Unobserved stochastic nodes: 3\n   Total graph size: 94\n\nInitializing model\n\n# 更新模型\nupdate(model, 10000)\n\n# 采样\nn_samples &lt;- 10000\nsamples &lt;- coda.samples(model, variable.names = c(\"mu\", \"tau\", \"k\"), n.iter = n_samples)\n\n# 绘制轨迹图\nplot(samples)",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 3.html#c-2",
+    "href": "bayesian hw 3.html#c-2",
+    "title": "bayesian hw 3",
+    "section": "c",
+    "text": "c\n\nposterior_means &lt;- apply(as.matrix(samples), 2, mean)\n\n# 从后验均值计算t分布\nmu_posterior &lt;- posterior_means[\"mu\"]\nsigma_posterior &lt;- 1/sqrt(posterior_means[\"tau\"])\nk_posterior &lt;- posterior_means[\"k\"]\n\n# 生成t分布的随机样本\nt_dist_samples &lt;- rt(10000, df = k_posterior, ncp = mu_posterior)\n\n# 绘制观察数据和t分布的对比图\nhist(galaxies, probability = TRUE, col = rgb(0, 0, 1, 0.5), main = \"Comparison of Data and t-distribution\", xlim = c(min(galaxies), max(galaxies)))\nlines(density(t_dist_samples), col = \"red\", lwd = 2,xlim=c(10000,35000))",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 3"
     ]
   }
 ]

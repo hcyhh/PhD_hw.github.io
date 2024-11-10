@@ -14,6 +14,7 @@ book:
       chapters: 
         - bayesian hw 1.qmd
         - bayesian hw 2.qmd
+        - bayesian hw 3.qmd
     - part: Survival.qmd
       chapters: 
         - survival hw 1.qmd
