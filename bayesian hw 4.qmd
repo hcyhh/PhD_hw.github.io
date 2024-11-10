@@ -1,0 +1,164 @@
+# bayesian hw 4 {.unnumbered}
+
+---
+title: Bayesian hw 4
+subtitle: chapter 3
+author: Congyuan He
+date: now
+
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    toc-expand: 1
+    number-depth: 3
+---
+
+# 2.4
+
+![](images/clipboard-468661734.png)
+
+## a
+
+```{r}
+set.seed(2024)
+n <- 50
+p <- 0.4
+sigma2 <- p*(1-p)/n
+
+p1 <- rnorm(10000,p,sqrt(sigma2))
+
+logit_trans <- function(x){log(x/(1-x))}
+inverse_logit <- function(x){exp(x)/(1+exp(x))}
+
+
+logit_p1 <- logit_trans(p1)
+
+logit_p_mean <- logit_trans(p)
+logit_p_sd <- sd(logit_p1)
+
+logCI <- c((logit_p_mean+qnorm(0.025)*logit_p_sd),
+           logit_p_mean,
+           (logit_p_mean+qnorm(0.975)*logit_p_sd)
+           )
+
+CI <- inverse_logit(logCI)
+CI
+
+
+```
+
+## b
+
+```{r}
+set.seed(2024)
+n <- 20
+p <- 8/20
+sigma2 <- p*(1-p)/n
+
+p1 <- rnorm(10000,p,sqrt(sigma2))
+
+logit_trans <- function(x){log(x/(1-x))}
+inverse_logit <- function(x){exp(x)/(1+exp(x))}
+
+
+logit_p1 <- logit_trans(p1)
+
+logit_p_mean <- logit_trans(p)
+logit_p_sd <- sd(logit_p1)
+
+logCI <- c((logit_p_mean+qnorm(0.025)*logit_p_sd),
+           logit_p_mean,
+           (logit_p_mean+qnorm(0.975)*logit_p_sd)
+           )
+
+CI <- inverse_logit(logCI)
+CI
+```
+
+# 2.5
+
+![](images/clipboard-2792866344.png)
+
+```{r}
+a <- 5;b <- 13;c <- 51;d <- 40
+logit_OR <- log(((a+0.5)*(d+0.5))/((b+0.5)*(c+0.5)))
+V <- (1/(a+0.5))+(1/(b+0.5))+(1/(c+0.5))+(1/(d+0.5))
+
+logCI <- c((logit_OR+qnorm(0.025)*sqrt(V)),
+           logit_p_mean,
+           (logit_OR+qnorm(0.975)*sqrt(V))
+           )
+
+inverse_logit <- function(x){exp(x)/(1+exp(x))}
+CI <- inverse_logit(logCI)
+CI
+
+```
+
+# 2.6
+
+![](images/clipboard-1586815850.png)
+
+```{r}
+odds_ratio <- 0.23
+ci_lower <- 0.07
+ci_upper <- 0.76
+z_value <- 1.96  
+
+log_odds_ratio <- log(odds_ratio)
+log_ci_lower <- log(ci_lower)
+log_ci_upper <- log(ci_upper)
+
+se_log_odds <- (log_ci_upper - log_odds_ratio) / 2*z_value
+
+ci_log_odds <- c(log_odds_ratio - z_value * se_log_odds, log_odds_ratio + z_value * se_log_odds)
+cat("对数优势比的95%置信区间:", ci_log_odds, "\n")
+
+```
+
+# 2.7
+
+![](images/clipboard-1711952159.png)
+
+```{r}
+n_HAI <- 51  
+n_systemic <- 49 
+d_HAI <- 44  
+d_systemic <- 46  
+
+# 计算死亡率
+p_HAI <- d_HAI / n_HAI
+p_systemic <- d_systemic / n_systemic
+
+# 计算对数风险比（log hazard ratio）
+log_HR <- log(log(p_HAI) / log(p_systemic))
+
+log_HR 
+
+```
+
+# 3.1
+
+![](images/clipboard-3993487024.png)
+
+# 3.2
+
+![](images/clipboard-683096660.png)
+
+# 3.4
+
+![](images/clipboard-1839408062.png)
+
+# 3.6
+
+![](images/clipboard-3398860335.png)
+
+# 3.7
+
+![](images/clipboard-2770587946.png)
+
+# 3.8
+
+![](images/clipboard-1319597745.png)

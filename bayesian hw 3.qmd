@@ -128,11 +128,8 @@ plot(samples)
 
 ```
 
-
-
-
-
 ## e
+
 ```{r}
 gelman.diag(samples)
 ```
@@ -149,21 +146,13 @@ acf(as.matrix(samples)[, "sigma2"])
 effectiveSize(samples)
 ```
 
-
-
-
-
 ## 第二题
 
 ![](images/clipboard-1198587299.png)
 
 ## a
 
-beta分布对于概率$\theta$来说是常规的先验分布设置手段。因为其足够灵活并且在0，1之间变化;
-其次，这样设置还有现实意义的解释，即beta分布中，a=命中多少个，b=未能命中的个数;
-最后，添加了一个exp(m)这样一个调节的量，表示在常规命中率的基础上引入变化
-
-
+beta分布对于概率$\theta$来说是常规的先验分布设置手段。因为其足够灵活并且在0，1之间变化; 其次，这样设置还有现实意义的解释，即beta分布中，a=命中多少个，b=未能命中的个数; 最后，添加了一个exp(m)这样一个调节的量，表示在常规命中率的基础上引入变化
 
 ```{r}
 
@@ -190,26 +179,19 @@ lines(density(probabilities), col = "red", lwd = 2)
 
 ```
 
-
-
-
-
 ## b
 
 m引入了不确定性
 
 ## c
 
-后验：
-$$
+后验： \$\$
 
-beta(y+exp(m)*q_{i}  , exp(m)*(1-q_i)+n-y)
- 
-$$
+beta(y+exp(m)*q\_{i} , exp(m)*(1-q_i)+n-y)
 
+\$\$
 
 ## d
-
 
 ```{r}
 
@@ -251,7 +233,6 @@ h <- apply(THETA,2,function(x){
 t(rbind(l,m,h))
 
 ```
-
 
 ## e
 
@@ -305,7 +286,6 @@ summary(samples)
 
 ```
 
-
 ## f
 
 自己的代码需要推导后验分布
@@ -316,20 +296,16 @@ summary(samples)
 gelman.diag(samples)
 ```
 
-
 ```{r}
 effectiveSize(samples)
 ```
-
-
-
-
 
 ## 第三题
 
 ![](images/clipboard-1294109230.png)
 
 ## a
+
 ```{r}
 library(MASS)
 data(galaxies)
@@ -343,15 +319,11 @@ hist(Y,breaks=25)
 
 ```
 
-
 $\mu=20000$
 
 $\sigma=5000$
 
 $k=15$
-
-
-
 
 ## b
 
@@ -391,10 +363,8 @@ samples <- coda.samples(model, variable.names = c("mu", "tau", "k"), n.iter = n_
 plot(samples)
 ```
 
-
-
-
 ## c
+
 ```{r}
 
 posterior_means <- apply(as.matrix(samples), 2, mean)
@@ -413,12 +383,3 @@ lines(density(t_dist_samples), col = "red", lwd = 2,xlim=c(10000,35000))
 
 
 ```
-
-
-
-
-
-
-
-
-

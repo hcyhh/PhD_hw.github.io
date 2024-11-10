@@ -66,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Survival.html" rel="next">
+<link href="./bayesian hw 4.html" rel="next">
 <link href="./bayesian hw 2.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -202,6 +202,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./bayesian hw 3.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Bayesian hw 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bayesian hw 4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian hw 4</span></a>
   </div>
 </li>
       </ul>
@@ -532,7 +538,7 @@ Multivariate psrf
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">effectiveSize</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   delta       mu   sigma2 
-5128.764 5055.603 8764.290 </code></pre>
+5024.495 4852.328 9014.855 </code></pre>
 </div>
 </div>
 </section>
@@ -733,30 +739,30 @@ Sample size per chain = 10000
    plus standard error of the mean:
 
             Mean      SD  Naive SE Time-series SE
-theta[1]  0.8535 0.04051 0.0002339      0.0003160
-theta[2]  0.7615 0.04278 0.0002470      0.0003085
-theta[3]  0.8733 0.04152 0.0002397      0.0003130
-theta[4]  0.6915 0.07111 0.0004106      0.0005305
-theta[5]  0.9034 0.03213 0.0001855      0.0002524
-theta[6]  0.9226 0.05102 0.0002946      0.0004932
-theta[7]  0.7322 0.04522 0.0002611      0.0003317
-theta[8]  0.8048 0.04271 0.0002466      0.0003280
-theta[9]  0.7403 0.05888 0.0003399      0.0004356
-theta[10] 0.8186 0.08984 0.0005187      0.0007585
+theta[1]  0.8532 0.04063 0.0002346      0.0003065
+theta[2]  0.7605 0.04285 0.0002474      0.0003274
+theta[3]  0.8725 0.04190 0.0002419      0.0003270
+theta[4]  0.6906 0.07193 0.0004153      0.0005359
+theta[5]  0.9039 0.03185 0.0001839      0.0002457
+theta[6]  0.9229 0.05088 0.0002938      0.0004945
+theta[7]  0.7330 0.04478 0.0002585      0.0003429
+theta[8]  0.8046 0.04287 0.0002475      0.0003218
+theta[9]  0.7413 0.05935 0.0003427      0.0004421
+theta[10] 0.8186 0.08916 0.0005148      0.0007476
 
 2. Quantiles for each variable:
 
             2.5%    25%    50%    75%  97.5%
-theta[1]  0.7657 0.8283 0.8564 0.8824 0.9230
-theta[2]  0.6734 0.7333 0.7629 0.7914 0.8410
-theta[3]  0.7815 0.8477 0.8774 0.9031 0.9426
-theta[4]  0.5447 0.6451 0.6951 0.7418 0.8207
-theta[5]  0.8317 0.8838 0.9068 0.9267 0.9560
-theta[6]  0.7962 0.8953 0.9329 0.9609 0.9897
-theta[7]  0.6395 0.7027 0.7338 0.7637 0.8165
-theta[8]  0.7157 0.7770 0.8073 0.8351 0.8808
-theta[9]  0.6156 0.7023 0.7431 0.7816 0.8471
-theta[10] 0.6110 0.7646 0.8310 0.8864 0.9560</code></pre>
+theta[1]  0.7655 0.8275 0.8559 0.8823 0.9235
+theta[2]  0.6720 0.7321 0.7624 0.7903 0.8389
+theta[3]  0.7802 0.8468 0.8765 0.9028 0.9426
+theta[4]  0.5411 0.6435 0.6934 0.7415 0.8207
+theta[5]  0.8343 0.8841 0.9073 0.9271 0.9569
+theta[6]  0.7960 0.8966 0.9335 0.9606 0.9896
+theta[7]  0.6403 0.7035 0.7348 0.7640 0.8162
+theta[8]  0.7126 0.7774 0.8073 0.8347 0.8814
+theta[9]  0.6162 0.7032 0.7442 0.7826 0.8478
+theta[10] 0.6135 0.7652 0.8309 0.8851 0.9552</code></pre>
 </div>
 </div>
 </section>
@@ -792,9 +798,9 @@ Multivariate psrf
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">effectiveSize</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> theta[1]  theta[2]  theta[3]  theta[4]  theta[5]  theta[6]  theta[7]  theta[8] 
- 16463.24  19231.86  17606.27  18021.70  16214.02  10750.57  18628.96  17131.60 
+ 17583.03  17296.29  16485.81  18027.44  16844.73  10661.30  17111.56  17745.82 
  theta[9] theta[10] 
- 18289.19  14186.49 </code></pre>
+ 18041.72  14355.20 </code></pre>
 </div>
 </div>
 </section>
@@ -1325,8 +1331,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Survival.html" class="pagination-link" aria-label="Survival">
-        <span class="nav-page-text">Survival</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./bayesian hw 4.html" class="pagination-link" aria-label="Bayesian hw 4">
+        <span class="nav-page-text">Bayesian hw 4</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

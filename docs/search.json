@@ -423,7 +423,7 @@
     "href": "bayesian hw 3.html#e",
     "title": "bayesian hw 3",
     "section": "e",
-    "text": "e\n\ngelman.diag(samples)\n\nPotential scale reduction factors:\n\n       Point est. Upper C.I.\ndelta           1          1\nmu              1          1\nsigma2          1          1\n\nMultivariate psrf\n\n1\n\n\n\n# 自相关\nacf(as.matrix(samples)[, \"mu\"])\n\n\n\n\n\n\n\nacf(as.matrix(samples)[, \"delta\"])\n\n\n\n\n\n\n\nacf(as.matrix(samples)[, \"sigma2\"])\n\n\n\n\n\n\n\n\n\n# 有效样本量\neffectiveSize(samples)\n\n   delta       mu   sigma2 \n5128.764 5055.603 8764.290",
+    "text": "e\n\ngelman.diag(samples)\n\nPotential scale reduction factors:\n\n       Point est. Upper C.I.\ndelta           1          1\nmu              1          1\nsigma2          1          1\n\nMultivariate psrf\n\n1\n\n\n\n# 自相关\nacf(as.matrix(samples)[, \"mu\"])\n\n\n\n\n\n\n\nacf(as.matrix(samples)[, \"delta\"])\n\n\n\n\n\n\n\nacf(as.matrix(samples)[, \"sigma2\"])\n\n\n\n\n\n\n\n\n\n# 有效样本量\neffectiveSize(samples)\n\n   delta       mu   sigma2 \n5024.495 4852.328 9014.855",
     "crumbs": [
       "Bayesian",
       "Bayesian hw 3"
@@ -478,7 +478,7 @@
     "href": "bayesian hw 3.html#e-1",
     "title": "bayesian hw 3",
     "section": "e",
-    "text": "e\n\nlibrary(rjags)\nlibrary(coda)\n\nmodel_string &lt;- \"\nmodel {\n  for (i in 1:n_players) {\n\n    clutch_makes[i] ~ dbin(theta[i], clutch_attempts[i])\n\n    theta[i] ~ dbeta(alpha[i], beta[i])\n\n    alpha[i] &lt;- exp(m[i]) * theta_i[i]\n    beta[i] &lt;- exp(m[i]) * (1 - theta_i[i]) \n  }\n}\n\"\n\ntheta_i &lt;- c(0.845, 0.847, 0.880, 0.674, 0.909, 0.898, 0.770, 0.801, 0.802, 0.875)\nclutch_makes &lt;- c(64, 72, 55, 27, 75, 24, 28, 66, 40, 13)\nclutch_attempts &lt;- c(75, 95, 63, 39, 83, 26, 41, 82, 54, 16)\nn_players &lt;- length(theta_i)\nm &lt;- rnorm(n_players*10,0,sqrt(10))\n\n\ndata_jags &lt;- list(\n  theta_i = theta_i,         \n  clutch_makes = clutch_makes,\n  clutch_attempts = clutch_attempts,\n  n_players = n_players,\n  m=m\n)\n\n\n\nmodel &lt;- jags.model(textConnection(model_string), data = data_jags,  n.chains = 3)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 10\n   Unobserved stochastic nodes: 10\n   Total graph size: 182\n\nInitializing model\n\nupdate(model, 10000)\n\nn_samples &lt;- 10000\nsamples &lt;- coda.samples(model, variable.names = c('theta'), n.iter = n_samples)\n\nplot(samples)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsummary(samples)\n\n\nIterations = 11001:21000\nThinning interval = 1 \nNumber of chains = 3 \nSample size per chain = 10000 \n\n1. Empirical mean and standard deviation for each variable,\n   plus standard error of the mean:\n\n            Mean      SD  Naive SE Time-series SE\ntheta[1]  0.8535 0.04051 0.0002339      0.0003160\ntheta[2]  0.7615 0.04278 0.0002470      0.0003085\ntheta[3]  0.8733 0.04152 0.0002397      0.0003130\ntheta[4]  0.6915 0.07111 0.0004106      0.0005305\ntheta[5]  0.9034 0.03213 0.0001855      0.0002524\ntheta[6]  0.9226 0.05102 0.0002946      0.0004932\ntheta[7]  0.7322 0.04522 0.0002611      0.0003317\ntheta[8]  0.8048 0.04271 0.0002466      0.0003280\ntheta[9]  0.7403 0.05888 0.0003399      0.0004356\ntheta[10] 0.8186 0.08984 0.0005187      0.0007585\n\n2. Quantiles for each variable:\n\n            2.5%    25%    50%    75%  97.5%\ntheta[1]  0.7657 0.8283 0.8564 0.8824 0.9230\ntheta[2]  0.6734 0.7333 0.7629 0.7914 0.8410\ntheta[3]  0.7815 0.8477 0.8774 0.9031 0.9426\ntheta[4]  0.5447 0.6451 0.6951 0.7418 0.8207\ntheta[5]  0.8317 0.8838 0.9068 0.9267 0.9560\ntheta[6]  0.7962 0.8953 0.9329 0.9609 0.9897\ntheta[7]  0.6395 0.7027 0.7338 0.7637 0.8165\ntheta[8]  0.7157 0.7770 0.8073 0.8351 0.8808\ntheta[9]  0.6156 0.7023 0.7431 0.7816 0.8471\ntheta[10] 0.6110 0.7646 0.8310 0.8864 0.9560",
+    "text": "e\n\nlibrary(rjags)\nlibrary(coda)\n\nmodel_string &lt;- \"\nmodel {\n  for (i in 1:n_players) {\n\n    clutch_makes[i] ~ dbin(theta[i], clutch_attempts[i])\n\n    theta[i] ~ dbeta(alpha[i], beta[i])\n\n    alpha[i] &lt;- exp(m[i]) * theta_i[i]\n    beta[i] &lt;- exp(m[i]) * (1 - theta_i[i]) \n  }\n}\n\"\n\ntheta_i &lt;- c(0.845, 0.847, 0.880, 0.674, 0.909, 0.898, 0.770, 0.801, 0.802, 0.875)\nclutch_makes &lt;- c(64, 72, 55, 27, 75, 24, 28, 66, 40, 13)\nclutch_attempts &lt;- c(75, 95, 63, 39, 83, 26, 41, 82, 54, 16)\nn_players &lt;- length(theta_i)\nm &lt;- rnorm(n_players*10,0,sqrt(10))\n\n\ndata_jags &lt;- list(\n  theta_i = theta_i,         \n  clutch_makes = clutch_makes,\n  clutch_attempts = clutch_attempts,\n  n_players = n_players,\n  m=m\n)\n\n\n\nmodel &lt;- jags.model(textConnection(model_string), data = data_jags,  n.chains = 3)\n\nCompiling model graph\n   Resolving undeclared variables\n   Allocating nodes\nGraph information:\n   Observed stochastic nodes: 10\n   Unobserved stochastic nodes: 10\n   Total graph size: 182\n\nInitializing model\n\nupdate(model, 10000)\n\nn_samples &lt;- 10000\nsamples &lt;- coda.samples(model, variable.names = c('theta'), n.iter = n_samples)\n\nplot(samples)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsummary(samples)\n\n\nIterations = 11001:21000\nThinning interval = 1 \nNumber of chains = 3 \nSample size per chain = 10000 \n\n1. Empirical mean and standard deviation for each variable,\n   plus standard error of the mean:\n\n            Mean      SD  Naive SE Time-series SE\ntheta[1]  0.8532 0.04063 0.0002346      0.0003065\ntheta[2]  0.7605 0.04285 0.0002474      0.0003274\ntheta[3]  0.8725 0.04190 0.0002419      0.0003270\ntheta[4]  0.6906 0.07193 0.0004153      0.0005359\ntheta[5]  0.9039 0.03185 0.0001839      0.0002457\ntheta[6]  0.9229 0.05088 0.0002938      0.0004945\ntheta[7]  0.7330 0.04478 0.0002585      0.0003429\ntheta[8]  0.8046 0.04287 0.0002475      0.0003218\ntheta[9]  0.7413 0.05935 0.0003427      0.0004421\ntheta[10] 0.8186 0.08916 0.0005148      0.0007476\n\n2. Quantiles for each variable:\n\n            2.5%    25%    50%    75%  97.5%\ntheta[1]  0.7655 0.8275 0.8559 0.8823 0.9235\ntheta[2]  0.6720 0.7321 0.7624 0.7903 0.8389\ntheta[3]  0.7802 0.8468 0.8765 0.9028 0.9426\ntheta[4]  0.5411 0.6435 0.6934 0.7415 0.8207\ntheta[5]  0.8343 0.8841 0.9073 0.9271 0.9569\ntheta[6]  0.7960 0.8966 0.9335 0.9606 0.9896\ntheta[7]  0.6403 0.7035 0.7348 0.7640 0.8162\ntheta[8]  0.7126 0.7774 0.8073 0.8347 0.8814\ntheta[9]  0.6162 0.7032 0.7442 0.7826 0.8478\ntheta[10] 0.6135 0.7652 0.8309 0.8851 0.9552",
     "crumbs": [
       "Bayesian",
       "Bayesian hw 3"
@@ -500,7 +500,7 @@
     "href": "bayesian hw 3.html#g",
     "title": "bayesian hw 3",
     "section": "g",
-    "text": "g\n\ngelman.diag(samples)\n\nPotential scale reduction factors:\n\n          Point est. Upper C.I.\ntheta[1]           1          1\ntheta[2]           1          1\ntheta[3]           1          1\ntheta[4]           1          1\ntheta[5]           1          1\ntheta[6]           1          1\ntheta[7]           1          1\ntheta[8]           1          1\ntheta[9]           1          1\ntheta[10]          1          1\n\nMultivariate psrf\n\n1\n\n\n\neffectiveSize(samples)\n\n theta[1]  theta[2]  theta[3]  theta[4]  theta[5]  theta[6]  theta[7]  theta[8] \n 16463.24  19231.86  17606.27  18021.70  16214.02  10750.57  18628.96  17131.60 \n theta[9] theta[10] \n 18289.19  14186.49",
+    "text": "g\n\ngelman.diag(samples)\n\nPotential scale reduction factors:\n\n          Point est. Upper C.I.\ntheta[1]           1          1\ntheta[2]           1          1\ntheta[3]           1          1\ntheta[4]           1          1\ntheta[5]           1          1\ntheta[6]           1          1\ntheta[7]           1          1\ntheta[8]           1          1\ntheta[9]           1          1\ntheta[10]          1          1\n\nMultivariate psrf\n\n1\n\n\n\neffectiveSize(samples)\n\n theta[1]  theta[2]  theta[3]  theta[4]  theta[5]  theta[6]  theta[7]  theta[8] \n 17583.03  17296.29  16485.81  18027.44  16844.73  10661.30  17111.56  17745.82 \n theta[9] theta[10] \n 18041.72  14355.20",
     "crumbs": [
       "Bayesian",
       "Bayesian hw 3"
@@ -537,6 +537,39 @@
     "crumbs": [
       "Bayesian",
       "Bayesian hw 3"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 4.html",
+    "href": "bayesian hw 4.html",
+    "title": "bayesian hw 4",
+    "section": "",
+    "text": "2.4",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 4"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 4.html#a",
+    "href": "bayesian hw 4.html#a",
+    "title": "bayesian hw 4",
+    "section": "a",
+    "text": "a\n\nset.seed(2024)\nn &lt;- 50\np &lt;- 0.4\nsigma2 &lt;- p*(1-p)/n\n\np1 &lt;- rnorm(10000,p,sqrt(sigma2))\n\nlogit_trans &lt;- function(x){log(x/(1-x))}\ninverse_logit &lt;- function(x){exp(x)/(1+exp(x))}\n\n\nlogit_p1 &lt;- logit_trans(p1)\n\nlogit_p_mean &lt;- logit_trans(p)\nlogit_p_sd &lt;- sd(logit_p1)\n\nlogCI &lt;- c((logit_p_mean+qnorm(0.025)*logit_p_sd),\n           logit_p_mean,\n           (logit_p_mean+qnorm(0.975)*logit_p_sd)\n           )\n\nCI &lt;- inverse_logit(logCI)\nCI\n\n[1] 0.2716469 0.4000000 0.5437262",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 4"
+    ]
+  },
+  {
+    "objectID": "bayesian hw 4.html#b",
+    "href": "bayesian hw 4.html#b",
+    "title": "bayesian hw 4",
+    "section": "b",
+    "text": "b\n\nset.seed(2024)\nn &lt;- 20\np &lt;- 8/20\nsigma2 &lt;- p*(1-p)/n\n\np1 &lt;- rnorm(10000,p,sqrt(sigma2))\n\nlogit_trans &lt;- function(x){log(x/(1-x))}\ninverse_logit &lt;- function(x){exp(x)/(1+exp(x))}\n\n\nlogit_p1 &lt;- logit_trans(p1)\n\nlogit_p_mean &lt;- logit_trans(p)\nlogit_p_sd &lt;- sd(logit_p1)\n\nlogCI &lt;- c((logit_p_mean+qnorm(0.025)*logit_p_sd),\n           logit_p_mean,\n           (logit_p_mean+qnorm(0.975)*logit_p_sd)\n           )\n\nCI &lt;- inverse_logit(logCI)\nCI\n\n[1] 0.2013291 0.4000000 0.6380887",
+    "crumbs": [
+      "Bayesian",
+      "Bayesian hw 4"
     ]
   }
 ]
