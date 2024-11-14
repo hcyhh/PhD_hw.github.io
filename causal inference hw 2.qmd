@@ -1,0 +1,123 @@
+# causal inference hw 2 {.unnumbered}
+
+# 高阶
+
+## 第一章
+
+![](images/clipboard-1850987032.png)
+
+```{r}
+z <- rbinom(10000,1,0.5)
+y <- rbinom(10000,1,0.3)
+
+t <- table(z,y)
+
+rd <- function(x){x[1,1]/(x[1,2]+x[1,1])-x[2,1]/(x[2,2]+x[2,1])}
+rr <- function(x){(x[1,1]/(x[1,2]+x[1,1]))/(x[2,1]/(x[2,2]+x[2,1]))}
+or <- function(x){(x[1,1]*x[2,2])/(x[2,1]*x[1,2]) }
+
+rd(t)
+rr(t)
+or(t)
+
+
+
+z <- rbinom(10000,1,0.5)
+y <- rbinom(10000,1,z*0.5+0.1)
+
+t <- table(z,y)
+
+rd <- function(x){x[1,1]/(x[1,2]+x[1,1])-x[2,1]/(x[2,2]+x[2,1])}
+rr <- function(x){(x[1,1]/(x[1,2]+x[1,1]))/(x[2,1]/(x[2,2]+x[2,1]))}
+or <- function(x){(x[1,1]*x[2,2])/(x[2,1]*x[1,2]) }
+
+rd(t)
+rr(t)
+or(t)
+
+```
+
+![![](images/clipboard-313495361.png)](images/clipboard-1380437724.png)
+
+![](images/IMG_0875.jpg)
+
+## 第二章
+
+![](images/clipboard-782342690.png)
+
+![](images/IMG_0876.jpg)
+
+```{r}
+-((dnorm(Inf)-dnorm(0.5))/(pnorm(Inf)-pnorm(0.5)))-(-((dnorm(0.5)-dnorm(-Inf))/(pnorm(0.5)-pnorm(-Inf))))+(-0.5)
+```
+
+![](images/clipboard-1446800230.png)
+
+![](images/IMG_0878.jpg)
+
+```{r}
+set.seed(2024)
+nsim <- 10 #只是为了多做几次结果看图
+outs <- matrix(NA,nsim,3)
+
+for(i in 1:nsim){
+  Y1 <- rnorm(10,1,1)
+  Y0 <- rnorm(10,-1,1)
+  delta1 <- median(Y1)-median(Y0)
+  delta2 <- median(Y1-Y0)
+  EY <- mean(Y1-Y0)
+  out <- c(delta1,delta2,EY )
+  outs[i,] <- out
+}
+outs <- data.frame(delta1=outs[,1],delta2=outs[,2],EY=outs[,3])
+
+plot(density(outs$EY))
+lines(density(outs$delta1),col ='red')
+lines(density(outs$delta2),col ='blue')
+
+```
+
+模拟可以看到当Y的样本量较小时，delta2 更贴近平均因果效应 Y的样本量较大时，delta1和dalta2无明显差异（改代码自己跑）
+
+但是MC多次后delta1和delta2 差别不大了
+
+## 第三章
+
+![](images/clipboard-935301964.png)
+
+![](images/clipboard-3056395892.png)
+
+![](images/IMG_0880.jpg)
+
+![](images/clipboard-3985521606.png)
+
+![](images/clipboard-1070697993.png)
+
+![](images/clipboard-1487885939.png)
+
+```{r}
+library(Matching)
+data(lalonde)
+# z = lalonde$treat
+# y = lalonde$re78
+
+model <- lm(re78~.,lalonde)
+#model$residuals
+
+tauhat = t.test(model$residuals[z == 1], model$residuals[z == 0], 
+                var.equal = TRUE)$p.value
+tauhat
+
+student = t.test(y[z == 1], y[z == 0],
+                 var.equal = FALSE)$p.value
+student
+
+W = wilcox.test(y[z == 1], y[z == 0])$p.value
+W
+
+D = ks.test(y[z == 1], y[z == 0])$p.value
+D
+
+summary(model)
+
+```

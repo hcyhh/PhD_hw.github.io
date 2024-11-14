@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>博士期间作业 - causal inference hw 1</title>
+<title>博士期间作业 - causal inference hw 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./causal inference hw 2.html" rel="next">
-<link href="./Causal inference.html" rel="prev">
+<link href="./Linear regression.html" rel="next">
+<link href="./causal inference hw 1.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Causal inference.html">Causal inference</a></li><li class="breadcrumb-item"><a href="./causal inference hw 1.html">causal inference hw 1</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Causal inference.html">Causal inference</a></li><li class="breadcrumb-item"><a href="./causal inference hw 2.html">causal inference hw 2</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -215,13 +215,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./causal inference hw 1.html" class="sidebar-item-text sidebar-link active">
+  <a href="./causal inference hw 1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">causal inference hw 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./causal inference hw 2.html" class="sidebar-item-text sidebar-link">
+  <a href="./causal inference hw 2.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">causal inference hw 2</span></a>
   </div>
 </li>
@@ -254,18 +254,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#作业内容" id="toc-作业内容" class="nav-link active" data-scroll-target="#作业内容">作业内容：</a></li>
-  <li><a href="#作业1" id="toc-作业1" class="nav-link" data-scroll-target="#作业1">作业1</a></li>
-  <li><a href="#作业2" id="toc-作业2" class="nav-link" data-scroll-target="#作业2">作业2</a></li>
+  <li><a href="#高阶" id="toc-高阶" class="nav-link active" data-scroll-target="#高阶">高阶</a>
+  <ul class="collapse">
+  <li><a href="#第一章" id="toc-第一章" class="nav-link" data-scroll-target="#第一章">第一章</a></li>
+  <li><a href="#第二章" id="toc-第二章" class="nav-link" data-scroll-target="#第二章">第二章</a></li>
+  <li><a href="#第三章" id="toc-第三章" class="nav-link" data-scroll-target="#第三章">第三章</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Causal inference.html">Causal inference</a></li><li class="breadcrumb-item"><a href="./causal inference hw 1.html">causal inference hw 1</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Causal inference.html">Causal inference</a></li><li class="breadcrumb-item"><a href="./causal inference hw 2.html">causal inference hw 2</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">causal inference hw 1</h1>
+<h1 class="title">causal inference hw 2</h1>
 </div>
 
 
@@ -282,46 +285,196 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="作业内容" class="level2">
-<h2 class="anchored" data-anchor-id="作业内容">作业内容：</h2>
-<p>作业1： 将B书6.1.2节（Standardization with a parametric outcome model）的2个案例代码翻译为计算公式，需标明代码与公式的对应关系。 截止时间：10月24日晚上10点</p>
-<p>作业2： 查看10.24“需阅读材料”，提前阅读文献，准备当次课讲解文献（无需做ppt）。</p>
-<p>B书《Fundamentals of Causal Inference With R (Babette A. Brumback) 》</p>
-<p>数据:</p>
-<p><a href="https://s3-eu-west-1.amazonaws.com/s3-euw1-ap-pe-ws4-cws-documents.ri-prod/9780367705053/Brumback_FOCI_Website_Material.zip" class="uri">https://s3-eu-west-1.amazonaws.com/s3-euw1-ap-pe-ws4-cws-documents.ri-prod/9780367705053/Brumback_FOCI_Website_Material.zip</a></p>
-</section>
-<section id="作业1" class="level2">
-<h2 class="anchored" data-anchor-id="作业1">作业1</h2>
-</section>
-<section id="作业2" class="level2">
-<h2 class="anchored" data-anchor-id="作业2">作业2</h2>
+<section id="高阶" class="level1">
+<h1>高阶</h1>
+<section id="第一章" class="level2">
+<h2 class="anchored" data-anchor-id="第一章">第一章</h2>
+<p><img src="images/clipboard-1850987032.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">10000</span>,<span class="dv">1</span>,<span class="fl">0.5</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">10000</span>,<span class="dv">1</span>,<span class="fl">0.3</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">'/Users/hcy/Documents/MyKeyData/300hobby/370professional_class_note/PhD_hw/Brumback FOCI Website Material/Chapter 6/simdr.r.RData'</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">table</span>(z,y)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">'/Users/hcy/Documents/MyKeyData/300hobby/370professional_class_note/PhD_hw/Brumback FOCI Website Material/Chapter 6/whatif2dat.RData'</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(whatif2dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>rd <span class="ot">&lt;-</span> <span class="cf">function</span>(x){x[<span class="dv">1</span>,<span class="dv">1</span>]<span class="sc">/</span>(x[<span class="dv">1</span>,<span class="dv">2</span>]<span class="sc">+</span>x[<span class="dv">1</span>,<span class="dv">1</span>])<span class="sc">-</span>x[<span class="dv">2</span>,<span class="dv">1</span>]<span class="sc">/</span>(x[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">+</span>x[<span class="dv">2</span>,<span class="dv">1</span>])}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>rr <span class="ot">&lt;-</span> <span class="cf">function</span>(x){(x[<span class="dv">1</span>,<span class="dv">1</span>]<span class="sc">/</span>(x[<span class="dv">1</span>,<span class="dv">2</span>]<span class="sc">+</span>x[<span class="dv">1</span>,<span class="dv">1</span>]))<span class="sc">/</span>(x[<span class="dv">2</span>,<span class="dv">1</span>]<span class="sc">/</span>(x[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">+</span>x[<span class="dv">2</span>,<span class="dv">1</span>]))}</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>or <span class="ot">&lt;-</span> <span class="cf">function</span>(x){(x[<span class="dv">1</span>,<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">2</span>,<span class="dv">2</span>])<span class="sc">/</span>(x[<span class="dv">2</span>,<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">1</span>,<span class="dv">2</span>]) }</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rd</span>(t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 165
-Columns: 11
-$ vl0      &lt;int&gt; 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0…
-$ vlcont0  &lt;int&gt; 20, 20, 61420, 600, 75510, 20, 40, 86200, 20, 20, 20, 20, 657…
-$ artad0   &lt;int&gt; 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, NA, 1, 0, 1, 1, NA, 1,…
-$ vl4      &lt;int&gt; 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1…
-$ vlcont4  &lt;int&gt; 420, 20, 20, 20, 184420, 30, 20, 1480, 20, 20, 100, 20, 59820…
-$ artad4   &lt;int&gt; 1, 1, 1, 1, 0, 0, 1, 1, 1, NA, 0, 1, 1, 1, 0, 1, 0, 1, NA, 1,…
-$ audit0   &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1…
-$ T        &lt;int&gt; 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0…
-$ A        &lt;int&gt; 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0…
-$ lvlcont0 &lt;dbl&gt; 2.995732, 2.995732, 11.025491, 6.396930, 11.232020, 2.995732,…
-$ lvlcont4 &lt;dbl&gt; 6.040255, 2.995732, 2.995732, 2.995732, 12.124971, 3.401197, …</code></pre>
+<pre><code>[1] -0.002015582</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rr</span>(t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9971382</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">or</span>(t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9903871</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">10000</span>,<span class="dv">1</span>,<span class="fl">0.5</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">10000</span>,<span class="dv">1</span>,z<span class="sc">*</span><span class="fl">0.5+0.1</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">table</span>(z,y)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>rd <span class="ot">&lt;-</span> <span class="cf">function</span>(x){x[<span class="dv">1</span>,<span class="dv">1</span>]<span class="sc">/</span>(x[<span class="dv">1</span>,<span class="dv">2</span>]<span class="sc">+</span>x[<span class="dv">1</span>,<span class="dv">1</span>])<span class="sc">-</span>x[<span class="dv">2</span>,<span class="dv">1</span>]<span class="sc">/</span>(x[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">+</span>x[<span class="dv">2</span>,<span class="dv">1</span>])}</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>rr <span class="ot">&lt;-</span> <span class="cf">function</span>(x){(x[<span class="dv">1</span>,<span class="dv">1</span>]<span class="sc">/</span>(x[<span class="dv">1</span>,<span class="dv">2</span>]<span class="sc">+</span>x[<span class="dv">1</span>,<span class="dv">1</span>]))<span class="sc">/</span>(x[<span class="dv">2</span>,<span class="dv">1</span>]<span class="sc">/</span>(x[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">+</span>x[<span class="dv">2</span>,<span class="dv">1</span>]))}</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>or <span class="ot">&lt;-</span> <span class="cf">function</span>(x){(x[<span class="dv">1</span>,<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">2</span>,<span class="dv">2</span>])<span class="sc">/</span>(x[<span class="dv">2</span>,<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">1</span>,<span class="dv">2</span>]) }</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rd</span>(t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5151879</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rr</span>(t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.31089</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">or</span>(t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15.27893</code></pre>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-1380437724.png" class="img-fluid figure-img"></p>
+<figcaption><img src="images/clipboard-313495361.png" class="img-fluid figure-img"></figcaption>
+</figure>
+</div>
+<p><img src="images/IMG_0875.jpg" class="img-fluid"></p>
+</section>
+<section id="第二章" class="level2">
+<h2 class="anchored" data-anchor-id="第二章">第二章</h2>
+<p><img src="images/clipboard-782342690.png" class="img-fluid"></p>
+<p><img src="images/IMG_0876.jpg" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span>((<span class="fu">dnorm</span>(<span class="cn">Inf</span>)<span class="sc">-</span><span class="fu">dnorm</span>(<span class="fl">0.5</span>))<span class="sc">/</span>(<span class="fu">pnorm</span>(<span class="cn">Inf</span>)<span class="sc">-</span><span class="fu">pnorm</span>(<span class="fl">0.5</span>)))<span class="sc">-</span>(<span class="sc">-</span>((<span class="fu">dnorm</span>(<span class="fl">0.5</span>)<span class="sc">-</span><span class="fu">dnorm</span>(<span class="sc">-</span><span class="cn">Inf</span>))<span class="sc">/</span>(<span class="fu">pnorm</span>(<span class="fl">0.5</span>)<span class="sc">-</span><span class="fu">pnorm</span>(<span class="sc">-</span><span class="cn">Inf</span>))))<span class="sc">+</span>(<span class="sc">-</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.150238</code></pre>
+</div>
+</div>
+<p><img src="images/clipboard-1446800230.png" class="img-fluid"></p>
+<p><img src="images/IMG_0878.jpg" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co">#只是为了多做几次结果看图</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>outs <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,nsim,<span class="dv">3</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  Y1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  Y0 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  delta1 <span class="ot">&lt;-</span> <span class="fu">median</span>(Y1)<span class="sc">-</span><span class="fu">median</span>(Y0)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  delta2 <span class="ot">&lt;-</span> <span class="fu">median</span>(Y1<span class="sc">-</span>Y0)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  EY <span class="ot">&lt;-</span> <span class="fu">mean</span>(Y1<span class="sc">-</span>Y0)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">c</span>(delta1,delta2,EY )</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  outs[i,] <span class="ot">&lt;-</span> out</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>outs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">delta1=</span>outs[,<span class="dv">1</span>],<span class="at">delta2=</span>outs[,<span class="dv">2</span>],<span class="at">EY=</span>outs[,<span class="dv">3</span>])</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(outs<span class="sc">$</span>EY))</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(outs<span class="sc">$</span>delta1),<span class="at">col =</span><span class="st">'red'</span>)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(outs<span class="sc">$</span>delta2),<span class="at">col =</span><span class="st">'blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="causal-inference-hw-2_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>模拟可以看到当Y的样本量较小时，delta2 更贴近平均因果效应 Y的样本量较大时，delta1和dalta2无明显差异（改代码自己跑）</p>
+<p>但是MC多次后delta1和delta2 差别不大了</p>
+</section>
+<section id="第三章" class="level2">
+<h2 class="anchored" data-anchor-id="第三章">第三章</h2>
+<p><img src="images/clipboard-935301964.png" class="img-fluid"></p>
+<p><img src="images/clipboard-3056395892.png" class="img-fluid"></p>
+<p><img src="images/IMG_0880.jpg" class="img-fluid"></p>
+<p><img src="images/clipboard-3985521606.png" class="img-fluid"></p>
+<p><img src="images/clipboard-1070697993.png" class="img-fluid"></p>
+<p><img src="images/clipboard-1487885939.png" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Matching)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: MASS</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>## 
+##  Matching (Version 4.10-15, Build Date: 2024-10-14)
+##  See https://www.jsekhon.com for additional documentation.
+##  Please cite software as:
+##   Jasjeet S. Sekhon. 2011. ``Multivariate and Propensity Score Matching
+##   Software with Automated Balance Optimization: The Matching package for R.''
+##   Journal of Statistical Software, 42(7): 1-52. 
+##</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(lalonde)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># z = lalonde$treat</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># y = lalonde$re78</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(re78<span class="sc">~</span>.,lalonde)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">#model$residuals</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>tauhat <span class="ot">=</span> <span class="fu">t.test</span>(model<span class="sc">$</span>residuals[z <span class="sc">==</span> <span class="dv">1</span>], model<span class="sc">$</span>residuals[z <span class="sc">==</span> <span class="dv">0</span>], </span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">var.equal =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>p.value</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>tauhat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.105625</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>student <span class="ot">=</span> <span class="fu">t.test</span>(y[z <span class="sc">==</span> <span class="dv">1</span>], y[z <span class="sc">==</span> <span class="dv">0</span>],</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">var.equal =</span> <span class="cn">FALSE</span>)<span class="sc">$</span>p.value</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>student</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>W <span class="ot">=</span> <span class="fu">wilcox.test</span>(y[z <span class="sc">==</span> <span class="dv">1</span>], y[z <span class="sc">==</span> <span class="dv">0</span>])<span class="sc">$</span>p.value</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>W</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>D <span class="ot">=</span> <span class="fu">ks.test</span>(y[z <span class="sc">==</span> <span class="dv">1</span>], y[z <span class="sc">==</span> <span class="dv">0</span>])<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in ks.test.default(y[z == 1], y[z == 0]): p-value will be approximate
+in the presence of ties</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>D</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = re78 ~ ., data = lalonde)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+ -9612  -4355  -1572   3054  53119 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)  2.567e+02  3.522e+03   0.073  0.94193   
+age          5.357e+01  4.581e+01   1.170  0.24284   
+educ         4.008e+02  2.288e+02   1.751  0.08058 . 
+black       -2.037e+03  1.174e+03  -1.736  0.08331 . 
+hisp         4.258e+02  1.565e+03   0.272  0.78562   
+married     -1.463e+02  8.823e+02  -0.166  0.86835   
+nodegr      -1.518e+01  1.006e+03  -0.015  0.98797   
+re74         1.234e-01  8.784e-02   1.405  0.16079   
+re75         1.974e-02  1.503e-01   0.131  0.89554   
+u74          1.380e+03  1.188e+03   1.162  0.24590   
+u75         -1.071e+03  1.025e+03  -1.045  0.29651   
+treat        1.671e+03  6.411e+02   2.606  0.00948 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6517 on 433 degrees of freedom
+Multiple R-squared:  0.05822,   Adjusted R-squared:  0.0343 
+F-statistic: 2.433 on 11 and 433 DF,  p-value: 0.005974</code></pre>
 </div>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -736,13 +889,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Causal inference.html" class="pagination-link" aria-label="Causal inference">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Causal inference</span>
+      <a href="./causal inference hw 1.html" class="pagination-link" aria-label="causal inference hw 1">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">causal inference hw 1</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./causal inference hw 2.html" class="pagination-link" aria-label="causal inference hw 2">
-        <span class="nav-page-text">causal inference hw 2</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Linear regression.html" class="pagination-link" aria-label="Linear regression">
+        <span class="nav-page-text">Linear regression</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

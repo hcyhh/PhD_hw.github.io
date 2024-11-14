@@ -1,22 +1,18 @@
 # causal inference hw 1 {.unnumbered}
 
 ## 作业内容：
-作业1：
-将B书6.1.2节（Standardization with a parametric outcome model）的2个案例代码翻译为计算公式，需标明代码与公式的对应关系。
-截止时间：10月24日晚上10点
 
-作业2：
-查看10.24“需阅读材料”，提前阅读文献，准备当次课讲解文献（无需做ppt）。
+作业1： 将B书6.1.2节（Standardization with a parametric outcome model）的2个案例代码翻译为计算公式，需标明代码与公式的对应关系。 截止时间：10月24日晚上10点
 
-B书《Fundamentals of Causal Inference With R (Babette A. Brumback)
-》
+作业2： 查看10.24“需阅读材料”，提前阅读文献，准备当次课讲解文献（无需做ppt）。
+
+B书《Fundamentals of Causal Inference With R (Babette A. Brumback) 》
 
 数据:
 
 <https://s3-eu-west-1.amazonaws.com/s3-euw1-ap-pe-ws4-cws-documents.ri-prod/9780367705053/Brumback_FOCI_Website_Material.zip>
 
-## 作业1 
-
+## 作业1
 
 ## 作业2
 
@@ -49,5 +45,3 @@ glimpse(whatif2dat)
 
 
 ```
-
-
