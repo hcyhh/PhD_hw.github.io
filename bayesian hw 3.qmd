@@ -29,7 +29,9 @@ format:
 
 ## b
 
-![](images/IMG_0871.jpg)
+![](images/clipboard-420108849.png)
+
+![](images/clipboard-4149099241.png)
 
 ## c
 
@@ -47,7 +49,7 @@ y <- c(y1,y2)
 
 # Gibbs
 set.seed(2024)
-S<-1000
+S<-10000
 PHI<-matrix(nrow=S,ncol=3)
 PHI[1,]<-phi<-c(0, 0, 4) # sigma2
 
@@ -68,7 +70,6 @@ phi[2]<-rnorm(1, delta_m, sqrt(s2_m) )
 a <- 0.01+(m+n)*0.5
 b <-0.01+(m+n)*0.5*((sum((y-mean(y))^2)/(m+n))+((mean(y)-(n*mu+m*(mu+delta))/(m+n))^2))
 phi[3]<- 1/rgamma(1, a, b)
-
 PHI[s,]<-phi         }
 
 
@@ -101,7 +102,7 @@ model {
   mu ~ dnorm(0, 1/10000)
   delta ~ dnorm(0, 1/10000)
   tau ~ dgamma(0.01, 0.01)
-  sigma2 = 1/tau
+  sigma2 =  1/tau
 }
 "
 
@@ -118,10 +119,10 @@ data_list <- list(Y = Y, n = n, m = m)
 
 
 
-model <- jags.model(textConnection(model_code), data = data_list, n.chains = 3, n.adapt = 1000)
+model <- jags.model(textConnection(model_code), data = data_list, n.chains = 3, n.adapt = 5000)
 
 # 运行 MCMC 采样
-update(model, 1000) # Burn-in阶段
+update(model, 5000) # Burn-in阶段
 samples <- coda.samples(model, variable.names = c("mu", "delta", "sigma2"), n.iter = 5000)
 
 plot(samples)
@@ -131,7 +132,7 @@ plot(samples)
 ## e
 
 ```{r}
-gelman.diag(samples)
+# gelman.diag(samples)
 ```
 
 ```{r}
@@ -185,11 +186,11 @@ m引入了不确定性
 
 ## c
 
-后验： \$\$
+后验： 
 
-beta(y+exp(m)*q\_{i} , exp(m)*(1-q_i)+n-y)
-
-\$\$
+$$
+beta(y+exp(m)*q_{i} , exp(m)*(1-q_i)+n-y)
+$$
 
 ## d
 
@@ -288,7 +289,7 @@ summary(samples)
 
 ## f
 
-自己的代码需要推导后验分布
+自己的代码需要推导后验分布或者用更复杂的M-H方法
 
 ## g
 
