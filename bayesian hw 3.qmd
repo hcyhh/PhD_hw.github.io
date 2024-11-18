@@ -31,9 +31,7 @@ format:
 
 ![](images/clipboard-420108849.png)
 
-![](images/clipboard-4149099241.png)
-
-## c
+## ![](images/clipboard-1116336066.png)c
 
 ```{r}
 # 先验参数
@@ -186,7 +184,7 @@ m引入了不确定性
 
 ## c
 
-后验： 
+后验：
 
 $$
 beta(y+exp(m)*q_{i} , exp(m)*(1-q_i)+n-y)
