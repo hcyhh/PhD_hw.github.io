@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Congyuan He">
-<meta name="dcterms.date" content="2024-11-08">
+<meta name="dcterms.date" content="2024-11-21">
 
 <title>博士期间作业 - bayesian hw 1</title>
 <style>
@@ -67,7 +67,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./bayesian hw 2.html" rel="next">
-<link href="./Bayesian.html" rel="prev">
+<link href="./bayesian hw 0.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -188,6 +188,12 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./bayesian hw 0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian hw 0</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./bayesian hw 1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Bayesian hw 1</span></a>
   </div>
@@ -201,7 +207,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./bayesian hw 3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bayesian hw 1</span></a>
+ <span class="menu-text">Bayesian hw 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bayesian hw 4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian hw 4</span></a>
   </div>
 </li>
       </ul>
@@ -242,6 +254,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./causal inference hw 1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">causal inference hw 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./causal inference hw 2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">causal inference hw 2</span></a>
   </div>
 </li>
       </ul>
@@ -306,7 +324,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 8, 2024</p>
+      <p class="date">November 21, 2024</p>
     </div>
   </div>
   
@@ -521,13 +539,13 @@ Start = 2001
 End = 2007 
 Thinning interval = 1 
         theta1    theta2
-[1,] 0.5082423 0.3153096
-[2,] 0.4995938 0.3589142
-[3,] 0.4962379 0.3091079
-[4,] 0.4325777 0.3250655
-[5,] 0.4181803 0.3353077
-[6,] 0.3788849 0.4116635
-[7,] 0.3470925 0.3698580</code></pre>
+[1,] 0.3969482 0.3254298
+[2,] 0.3778446 0.3078054
+[3,] 0.3361870 0.4074881
+[4,] 0.5368403 0.3798998
+[5,] 0.4577729 0.3840225
+[6,] 0.3611175 0.3369414
+[7,] 0.3826269 0.3301156</code></pre>
 </div>
 </div>
 </section>
@@ -586,18 +604,18 @@ Start = 1001
 End = 1007 
 Thinning interval = 1 
        theta1   theta2
-[1,] 5.068278 4.187043
-[2,] 5.484848 3.970771
-[3,] 5.158063 3.949658
-[4,] 4.720652 3.929965
-[5,] 4.692881 4.068471
-[6,] 4.858593 4.245358
-[7,] 5.125394 4.188519</code></pre>
+[1,] 4.621874 3.987827
+[2,] 4.652320 3.969086
+[3,] 4.814032 4.161160
+[4,] 4.758281 3.934268
+[5,] 5.134075 3.941226
+[6,] 4.907446 3.703599
+[7,] 4.428387 3.980672</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mcmc_samples[[<span class="dv">1</span>]],<span class="dv">2</span>,mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  theta1   theta2 
-5.007827 4.007279 </code></pre>
+5.007216 4.003709 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gamma分布均值为a/b</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -653,7 +671,7 @@ Initializing model</code></pre>
 <span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mcmc_samples[[<span class="dv">1</span>]],<span class="dv">2</span>,mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     prob     theta 
-0.0341000 0.1073693 </code></pre>
+0.0398000 0.1085897 </code></pre>
 </div>
 </div>
 </section>
@@ -702,12 +720,12 @@ Initializing model</code></pre>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mcmc_samples[[<span class="dv">1</span>]],<span class="dv">2</span>,mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     gamma      prob1      prob2     theta1     theta2    y1tilde    y2tilde 
- 0.1466940  0.9964000  0.7109000  0.2543524  0.1076584 25.4371000 10.8075000 </code></pre>
+ 0.1481885  0.9977000  0.7192000  0.2559697  0.1077813 25.5841000 10.7784000 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(mcmc_samples[[<span class="dv">1</span>]][,<span class="st">'gamma'</span>],<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%      97.5% 
-0.04619207 0.25089176 </code></pre>
+0.04459813 0.25300674 </code></pre>
 </div>
 </div>
 
@@ -1126,8 +1144,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Bayesian.html" class="pagination-link" aria-label="Bayesian">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Bayesian</span>
+      <a href="./bayesian hw 0.html" class="pagination-link" aria-label="Bayesian hw 0">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Bayesian hw 0</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

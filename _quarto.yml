@@ -12,6 +12,7 @@ book:
     - index.qmd
     - part: Bayesian.qmd
       chapters: 
+        - bayesian hw 0.qmd
         - bayesian hw 1.qmd
         - bayesian hw 2.qmd
         - bayesian hw 3.qmd

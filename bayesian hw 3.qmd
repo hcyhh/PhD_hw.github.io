@@ -31,7 +31,9 @@ format:
 
 ![](images/clipboard-420108849.png)
 
-## ![](images/clipboard-1116336066.png)c
+## c
+
+![](images/clipboard-1116336066.png)
 
 ```{r}
 # 先验参数
@@ -193,14 +195,14 @@ $$
 ## d
 
 ```{r}
-
+# 这里有问题 m应该从M-H法里面得到
 theta_i <- c(0.845, 0.847, 0.880, 0.674, 0.909, 0.898, 0.770, 0.801, 0.802, 0.875)
 clutch_makes <- c(64, 72, 55, 27, 75, 24, 28, 66, 40, 13)
 clutch_attempts <- c(75, 95, 63, 39, 83, 26, 41, 82, 54, 16)
 n_players <- length(theta_i)
 
 set.seed(2024)
-S<-1000000
+S<-10000
 THETA<-matrix(nrow=S,ncol=11)
 THETA[1,]<-theta<-c(0,rep(0.8,10)) # theta
 

@@ -1,0 +1,36 @@
+# bayesian hw 0 {.unnumbered}
+
+---
+title: Bayesian hw 0
+subtitle: chapter 2
+author: Congyuan He
+date: now
+
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    toc-expand: 1
+    number-depth: 3
+---
+
+![](images/clipboard-3007140446.png)
+
+![](images/clipboard-1564488160.png)
+
+![](images/clipboard-3165415051.png)
+
+![](images/clipboard-991448674.png)
+
+![](images/clipboard-1703534423.png)
+
+![](images/clipboard-3494481460.png)
+
+![](images/clipboard-59027971.png)
+
+![](images/clipboard-677019870.png)
+
+![](images/clipboard-2040279415.png)
+
+![](images/clipboard-2083553355.png)
