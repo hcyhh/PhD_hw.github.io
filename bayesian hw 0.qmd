@@ -15,22 +15,50 @@ format:
     number-depth: 3
 ---
 
-![](images/clipboard-3007140446.png)
+![](images/clipboard-669767457.png)
 
-![](images/clipboard-1564488160.png)
+![](images/clipboard-719215223.png)
+
+![](images/clipboard-1353296909.png)
+
+![](images/clipboard-2653865376.png)
+
+![](images/clipboard-2446558431.png)
+
+![](images/clipboard-2729460303.png)
 
 ![](images/clipboard-3165415051.png)
 
+![](images/clipboard-3333907505.png)
+
 ![](images/clipboard-991448674.png)
+
+![](images/clipboard-880965396.png)
 
 ![](images/clipboard-1703534423.png)
 
+beta分布的共轭先验也是beta分布 ，也叫数据增强型先验，可见随着 样本量/（a+b）越大，后验均值越偏向数据的均值。
+
+![](images/clipboard-376102874.png)
+
 ![](images/clipboard-3494481460.png)
+
+![](images/clipboard-1577745398.png)
 
 ![](images/clipboard-59027971.png)
 
+![](images/clipboard-1407382430.png)
+
 ![](images/clipboard-677019870.png)
+
+![](images/clipboard-409020373.png)
 
 ![](images/clipboard-2040279415.png)
 
 ![](images/clipboard-2083553355.png)
+
+![](images/clipboard-3467188759.png){width="902"}
+
+![](images/clipboard-2957348176.png){width="887"}
+
+![](images/clipboard-3030094150.png){width="883"}

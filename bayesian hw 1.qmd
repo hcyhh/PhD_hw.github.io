@@ -55,12 +55,14 @@ let $\frac{c}{3}=1$，then we have $c=3$
 
 \end{align}
 ```
-let $x=2$, then we have $$
+let $x=2$, then we have
+
+$$
 Pr(\theta>2) = e^{-3*2} = 0.002478752
 $$
 
 $$
-Pr(\theta > 4 | \theta > 2) = Pr(\theta>2) = e^{-3*2} = 0.002478752
+Pr(\theta > 4 | \theta > 2) = \frac{Pr(\theta > 4)*Pr(\theta > 2 | \theta > 4)}{(\theta > 2)} =  \frac{Pr(\theta > 4)}{(\theta > 2)} = e^{-3*2} = 0.002478752
 $$
 
 ```{r}
@@ -139,7 +141,9 @@ $$
 P(\theta_1 , \theta_2)=p_1(\theta_1)p_2(\theta_2)
 $$
 
-According to the above conclusion, we have $$
+According to the above conclusion, we have
+
+$$
 \theta_1,\theta_2 ～ Gamma(a + y_1,b+M_1)Gamma(a + y_2,b+M_2)
 $$
 
@@ -166,27 +170,39 @@ Finally,
 
 ```{=tex}
 \begin{align}
-p(\theta_1,\theta_2|y_1 =500,y_2=800)=[[100.1^501/\Gamma(501)]\theta_1 ^{500}e^{-100.1\theta_1}][[200.1^801/\Gamma(801)]\theta_2 ^{800-1}e^{-200.1\theta_2}]
+p(\theta_1,\theta_2|y_1 =500,y_2=800)=[[100.1^{501} / \Gamma(501)]\theta_1 ^{500}e^{-100.1\theta_1}][[200.1^{801} / \Gamma(801)]\theta_2 ^{800-1}e^{-200.1\theta_2}]
 
 
 \end{align}
 ```
 # EXERCISE 3.4.
 
+![](images/clipboard-806625442.png)
+
+![](images/clipboard-1606255967.png)
+
+![](images/clipboard-3597082599.png)
+
 Perform Example 3.1.3 in WinBUGS with $y_1 ∼ Bin(80,\theta1)$, $y_2 ∼ Bin(100,\theta_2)$ $\theta1 ∼ Beta(1, 1), \theta 2 ∼ Beta(2, 1)$ with observations $y_1 = 32$ and $y_2 = 35$. Put each term in the model on a separate line. There should still be only two list statements with entries separated by commas. See Exercises 3.6 and 3.7 for WinBUGS syntax.
 
 ```{r}
 suppressMessages(library(rjags))
 
+# step(x) : test for x > = 0 logical
+
 model_string <- "
 model {
+  # Likelihood
+  y1 ~ dbin(theta1, n1)
+  y2 ~ dbin(theta2, n2)
 
-    theta1 ~ dbeta(1, 1)
-    theta2 ~ dbeta(2, 1)
-    
-    y1 ~ dbin(theta1, n1)
-    y2 ~ dbin(theta2, n2)
-    
+  # Priors
+  theta1 ~ dbeta(1, 1)
+  theta2 ~ dbeta(2, 1)
+
+  # Derived parameter
+  gamma <- theta1 - theta2
+  p <- step(theta1 - theta2)
 }
 "
 
@@ -209,11 +225,32 @@ update(jags_model, 1000)
 
 mcmc_samples <- coda.samples(
     model = jags_model,
-    variable.names = c("theta1", "theta2", "gamma"),
+    variable.names = c("theta1", "theta2", "gamma",'p'),
     n.iter = 10000
 )
 
 head(mcmc_samples[[1]])
+mean(mcmc_samples[[1]][,'p'])
+# 还可以拿出来直接算
+mean(mcmc_samples[[1]][,'theta1']>=mcmc_samples[[1]][,'theta2'])
+
+# 知道后验分布 直接蒙特卡洛算
+data <- list(n1=80,n2=100,
+             a1=1,b1=1,
+             a2=2,b2=1,
+             y1=32,y2=35)
+
+nsim <- 1000
+rtheta1 <- rbeta(nsim,
+                 data$a1 + data$y1,
+                 data$b1 + data$n1 - data$y1,
+                 )
+
+rtheta2 <- rbeta(nsim,
+                 data$a2 + data$y2,
+                 data$b2 + data$n2 - data$y2,
+                 )
+mean(rtheta1>=rtheta2)
 ```
 
 # EXERCISE 3.5.
@@ -223,11 +260,11 @@ Perform a data analysis for the model in Exercise 3.3 using the data $y_1 = 500$
 ```{r}
 model_string <- "
 model {
-    theta1 ~ dgamma(a, b)
-    theta2 ~ dgamma(a, b)
-    
     y1 ~ dpois(theta1*M1)
     y2 ~ dpois(theta2*M2)
+    
+    theta1 ~ dgamma(a, b)
+    theta2 ~ dgamma(a, b)
 }
 "
 
@@ -259,7 +296,7 @@ head(mcmc_samples[[1]])
 
 apply(mcmc_samples[[1]],2,mean)
 
-# gamma分布均值为a/b
+# gamma分布均值为a/b 套用3.3中后验分布的结果
 
 501/100.1
 
@@ -268,6 +305,8 @@ apply(mcmc_samples[[1]],2,mean)
 ```
 
 # EXERCISE 3.6.
+
+![](images/clipboard-1721313652.png)
 
 ```{r}
 
@@ -289,18 +328,36 @@ jags_model <- jags.model(
     n.adapt = 1000
 )
 
-update(jags_model, 100)    
+update(jags_model, 1000)    
 
 mcmc_samples <- coda.samples(
     model = jags_model,
-    variable.names = c("theta",'prob'),
+    variable.names = c("theta",'prob','ytilde'),
     n.iter = 10000
 )
 
 apply(mcmc_samples[[1]],2,mean)
+
+# 不在JAGS里面算预测分布及概率的话可以这样
+nsim <- 10000
+
+# 预测分布
+ytilde <- rbinom(nsim,
+                 size = 100,# 每次试验重复100次对应前面的m=100
+                 prob = mcmc_samples[[1]][,'theta']
+                 )
+mean(ytilde)
+
+# y>=20概率
+mean(ytilde>=20)
+mean(mcmc_samples[[1]][,'ytilde']>=20)
+
+
 ```
 
 # EXERCISE 3.7.
+
+![](images/clipboard-2601788440.png)
 
 ```{r}
 model_string <- "
@@ -322,15 +379,15 @@ jags_model <- jags.model(
     textConnection(model_string),
     data = data_list,
     n.chains = 1,
-    n.adapt = 10000
+    n.adapt = 1000
 )
 
-update(jags_model, 5000)    
+update(jags_model, 1000)    
 
 mcmc_samples <- coda.samples(
     model = jags_model,
     variable.names = c("theta1","theta2",'prob1','prob2','gamma','y1tilde','y2tilde'),
-    n.iter = 10000
+    n.iter = 1000
 )
 apply(mcmc_samples[[1]],2,mean)
 quantile(mcmc_samples[[1]][,'gamma'],c(0.025,0.975))
