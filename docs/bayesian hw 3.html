@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Congyuan He">
-<meta name="dcterms.date" content="2024-11-21">
+<meta name="dcterms.date" content="2024-11-24">
 
 <title>博士期间作业 - bayesian hw 3</title>
 <style>
@@ -335,7 +335,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 21, 2024</p>
+      <p class="date">November 24, 2024</p>
     </div>
   </div>
   
@@ -538,7 +538,7 @@ Initializing model</code></pre>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">effectiveSize</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   delta       mu   sigma2 
-4900.068 4922.147 8226.751 </code></pre>
+5291.034 5010.672 9329.275 </code></pre>
 </div>
 </div>
 </section>
@@ -741,30 +741,30 @@ Sample size per chain = 10000
    plus standard error of the mean:
 
             Mean       SD  Naive SE Time-series SE
-theta[1]  0.8451 0.005634 3.253e-05      0.0000424
-theta[2]  0.7646 0.041524 2.397e-04      0.0003026
-theta[3]  0.8729 0.041361 2.388e-04      0.0003185
-theta[4]  0.6917 0.071498 4.128e-04      0.0005167
-theta[5]  0.9033 0.032753 1.891e-04      0.0002678
-theta[6]  0.9236 0.051023 2.946e-04      0.0004955
-theta[7]  0.6830 0.072333 4.176e-04      0.0005383
-theta[8]  0.8045 0.040278 2.325e-04      0.0003051
-theta[9]  0.7403 0.058590 3.383e-04      0.0004431
-theta[10] 0.8177 0.090332 5.215e-04      0.0007248
+theta[1]  0.8452 0.005708 3.295e-05      4.159e-05
+theta[2]  0.7642 0.041920 2.420e-04      3.139e-04
+theta[3]  0.8726 0.042072 2.429e-04      3.221e-04
+theta[4]  0.6917 0.071989 4.156e-04      5.393e-04
+theta[5]  0.9038 0.032282 1.864e-04      2.542e-04
+theta[6]  0.9230 0.050969 2.943e-04      4.886e-04
+theta[7]  0.6832 0.070888 4.093e-04      5.212e-04
+theta[8]  0.8039 0.041128 2.375e-04      3.099e-04
+theta[9]  0.7411 0.059118 3.413e-04      4.317e-04
+theta[10] 0.8158 0.090386 5.218e-04      7.673e-04
 
 2. Quantiles for each variable:
 
             2.5%    25%    50%    75%  97.5%
-theta[1]  0.8339 0.8414 0.8451 0.8489 0.8561
-theta[2]  0.6784 0.7378 0.7662 0.7934 0.8410
-theta[3]  0.7811 0.8470 0.8769 0.9028 0.9416
-theta[4]  0.5414 0.6448 0.6954 0.7425 0.8213
-theta[5]  0.8303 0.8834 0.9068 0.9268 0.9569
-theta[6]  0.7980 0.8969 0.9341 0.9618 0.9903
-theta[7]  0.5309 0.6360 0.6863 0.7341 0.8134
-theta[8]  0.7206 0.7784 0.8067 0.8327 0.8774
-theta[9]  0.6186 0.7017 0.7436 0.7816 0.8460
-theta[10] 0.6099 0.7631 0.8307 0.8855 0.9553</code></pre>
+theta[1]  0.8338 0.8414 0.8452 0.8491 0.8562
+theta[2]  0.6768 0.7367 0.7663 0.7931 0.8413
+theta[3]  0.7795 0.8464 0.8767 0.9029 0.9421
+theta[4]  0.5428 0.6448 0.6946 0.7423 0.8230
+theta[5]  0.8320 0.8840 0.9073 0.9269 0.9572
+theta[6]  0.7973 0.8961 0.9337 0.9613 0.9899
+theta[7]  0.5374 0.6358 0.6863 0.7331 0.8130
+theta[8]  0.7169 0.7772 0.8064 0.8331 0.8774
+theta[9]  0.6173 0.7024 0.7439 0.7829 0.8482
+theta[10] 0.6081 0.7608 0.8282 0.8832 0.9542</code></pre>
 </div>
 </div>
 </section>
@@ -800,9 +800,9 @@ Multivariate psrf
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">effectiveSize</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> theta[1]  theta[2]  theta[3]  theta[4]  theta[5]  theta[6]  theta[7]  theta[8] 
- 17686.16  18842.49  16875.78  19163.09  15019.67  10744.09  18052.39  17444.06 
+ 18868.76  17938.88  17155.16  17829.75  16164.55  10975.89  18536.28  17634.65 
  theta[9] theta[10] 
- 17727.11  15540.67 </code></pre>
+ 18782.59  13878.84 </code></pre>
 </div>
 </div>
 </section>
