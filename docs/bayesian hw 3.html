@@ -363,7 +363,7 @@ window.Quarto = {
 </section>
 <section id="c" class="level2">
 <h2 class="anchored" data-anchor-id="c">c</h2>
-<p><img src="images/clipboard-1116336066.png" class="img-fluid"></p>
+<p><img src="images/clipboard-1203345143.png" class="img-fluid"></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 先验参数</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> m <span class="ot">&lt;-</span> <span class="dv">50</span></span>
@@ -391,15 +391,17 @@ window.Quarto = {
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>phi[<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="fu">rnorm</span>(<span class="dv">1</span>, mu_n, <span class="fu">sqrt</span>(s2_n) )</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># generate a new delta value from its full conditional</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>delta_m<span class="ot">&lt;-</span>  ( m<span class="sc">*</span><span class="dv">100</span><span class="sc">*</span><span class="dv">100</span><span class="sc">*</span><span class="fu">mean</span>(y2)<span class="sc">/</span>(<span class="dv">4</span><span class="sc">+</span>m<span class="sc">*</span><span class="dv">100</span><span class="sc">*</span><span class="dv">100</span>))<span class="sc">-</span>( n<span class="sc">*</span><span class="dv">100</span><span class="sc">*</span><span class="dv">100</span><span class="sc">*</span><span class="fu">mean</span>(y1)<span class="sc">/</span>(<span class="dv">4</span><span class="sc">+</span>n<span class="sc">*</span><span class="dv">100</span><span class="sc">*</span><span class="dv">100</span>))</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>s2_m<span class="ot">&lt;-</span> (<span class="dv">100</span><span class="sc">*</span><span class="dv">100</span><span class="sc">*</span><span class="dv">4</span>)<span class="sc">/</span>(<span class="dv">4</span><span class="sc">+</span>m<span class="sc">*</span><span class="dv">100</span><span class="sc">*</span><span class="dv">100</span>)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>phi[<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="fu">rnorm</span>(<span class="dv">1</span>, delta_m, <span class="fu">sqrt</span>(s2_m) )</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># generate a new sigma^2 value from its full conditional</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fl">0.01</span><span class="sc">+</span>(m<span class="sc">+</span>n)<span class="sc">*</span><span class="fl">0.5</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span><span class="fl">0.01</span><span class="sc">+</span>(m<span class="sc">+</span>n)<span class="sc">*</span><span class="fl">0.5</span><span class="sc">*</span>((<span class="fu">sum</span>((y<span class="sc">-</span><span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(m<span class="sc">+</span>n))<span class="sc">+</span>((<span class="fu">mean</span>(y)<span class="sc">-</span>(n<span class="sc">*</span>mu<span class="sc">+</span>m<span class="sc">*</span>(mu<span class="sc">+</span>delta))<span class="sc">/</span>(m<span class="sc">+</span>n))<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>phi[<span class="dv">3</span>]<span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">rgamma</span>(<span class="dv">1</span>, a, b)</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>PHI[s,]<span class="ot">&lt;-</span>phi         }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># delta_m&lt;-  ( m*100*100*mean(y2)/(4+m*100*100))-( n*100*100*mean(y1)/(4+n*100*100))</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>delta_m<span class="ot">&lt;-</span>  (<span class="dv">100</span><span class="sc">*</span><span class="dv">100</span><span class="sc">*</span><span class="fu">sum</span>(y2<span class="sc">-</span>mu_n)<span class="sc">/</span>(<span class="dv">4</span><span class="sc">+</span>m<span class="sc">*</span><span class="dv">100</span><span class="sc">*</span><span class="dv">100</span>))</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>s2_m<span class="ot">&lt;-</span> (<span class="dv">100</span><span class="sc">*</span><span class="dv">100</span><span class="sc">*</span><span class="dv">4</span>)<span class="sc">/</span>(<span class="dv">4</span><span class="sc">+</span>m<span class="sc">*</span><span class="dv">100</span><span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>phi[<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="fu">rnorm</span>(<span class="dv">1</span>, delta_m, <span class="fu">sqrt</span>(s2_m) )</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># generate a new sigma^2 value from its full conditional</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fl">0.01</span><span class="sc">+</span>(m<span class="sc">+</span>n)<span class="sc">*</span><span class="fl">0.5</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span><span class="fl">0.01</span><span class="sc">+</span>(m<span class="sc">+</span>n)<span class="sc">*</span><span class="fl">0.5</span><span class="sc">*</span>((<span class="fu">sum</span>((y<span class="sc">-</span><span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(m<span class="sc">+</span>n))<span class="sc">+</span>((<span class="fu">mean</span>(y)<span class="sc">-</span>(n<span class="sc">*</span>mu<span class="sc">+</span>m<span class="sc">*</span>(mu<span class="sc">+</span>delta))<span class="sc">/</span>(m<span class="sc">+</span>n))<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>phi[<span class="dv">3</span>]<span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">rgamma</span>(<span class="dv">1</span>, a, b)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>PHI[s,]<span class="ot">&lt;-</span>phi         }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(PHI[,<span class="dv">1</span>]),<span class="at">main=</span><span class="st">'mu'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -538,7 +540,7 @@ Initializing model</code></pre>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">effectiveSize</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   delta       mu   sigma2 
-5291.034 5010.672 9329.275 </code></pre>
+5018.201 5152.865 8962.108 </code></pre>
 </div>
 </div>
 </section>
@@ -548,7 +550,7 @@ Initializing model</code></pre>
 </section>
 <section id="a-1" class="level2">
 <h2 class="anchored" data-anchor-id="a-1">a</h2>
-<p>beta分布对于概率<span class="math inline">\(\theta\)</span>来说是常规的先验分布设置手段。因为其足够灵活并且在0，1之间变化; 其次，这样设置还有现实意义的解释，即beta分布中，a=命中多少个，b=未能命中的个数; 最后，添加了一个exp(m)这样一个调节的量，表示在常规命中率的基础上引入变化</p>
+<p>首先共轭 beta分布对于概率<span class="math inline">\(\theta\)</span>来说是常规的先验分布设置手段。因为其足够灵活并且在0，1之间变化; 其次，这样设置还有现实意义的解释，即beta分布中，a=命中多少个，b=未能命中的个数; 最后，添加了一个exp(m)这样一个调节的量，表示在常规命中率的基础上引入变化 exp（m）等于试验总次数取exp保持其为正，exp(m)q/(a+b)=成功的概率刚好等于q，表示平时命中率用到了样本信息</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>theta_i <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.845</span>, <span class="fl">0.847</span>, <span class="fl">0.880</span>, <span class="fl">0.674</span>, <span class="fl">0.909</span>, <span class="fl">0.898</span>, <span class="fl">0.770</span>, <span class="fl">0.801</span>, <span class="fl">0.802</span>, <span class="fl">0.875</span>)</span>
@@ -581,7 +583,7 @@ Initializing model</code></pre>
 </section>
 <section id="b-1" class="level2">
 <h2 class="anchored" data-anchor-id="b-1">b</h2>
-<p>m引入了不确定性</p>
+<p>m引入了不确定性 exp(m)先验样本量</p>
 </section>
 <section id="c-1" class="level2">
 <h2 class="anchored" data-anchor-id="c-1">c</h2>
@@ -593,178 +595,178 @@ beta(y+exp(m)*q_{i} , exp(m)*(1-q_i)+n-y)
 <section id="d-1" class="level2">
 <h2 class="anchored" data-anchor-id="d-1">d</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 这里有问题 m应该从M-H法里面得到</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>theta_i <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.845</span>, <span class="fl">0.847</span>, <span class="fl">0.880</span>, <span class="fl">0.674</span>, <span class="fl">0.909</span>, <span class="fl">0.898</span>, <span class="fl">0.770</span>, <span class="fl">0.801</span>, <span class="fl">0.802</span>, <span class="fl">0.875</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>clutch_makes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">64</span>, <span class="dv">72</span>, <span class="dv">55</span>, <span class="dv">27</span>, <span class="dv">75</span>, <span class="dv">24</span>, <span class="dv">28</span>, <span class="dv">66</span>, <span class="dv">40</span>, <span class="dv">13</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>clutch_attempts <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">75</span>, <span class="dv">95</span>, <span class="dv">63</span>, <span class="dv">39</span>, <span class="dv">83</span>, <span class="dv">26</span>, <span class="dv">41</span>, <span class="dv">82</span>, <span class="dv">54</span>, <span class="dv">16</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>n_players <span class="ot">&lt;-</span> <span class="fu">length</span>(theta_i)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>S<span class="ot">&lt;-</span><span class="dv">10000</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>THETA<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="at">nrow=</span>S,<span class="at">ncol=</span><span class="dv">11</span>)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>THETA[<span class="dv">1</span>,]<span class="ot">&lt;-</span>theta<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">rep</span>(<span class="fl">0.8</span>,<span class="dv">10</span>)) <span class="co"># theta</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>S) {</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>theta[<span class="dv">1</span>]<span class="ot">&lt;-</span> m <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="fu">sqrt</span>(<span class="dv">10</span>))</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>theta[i<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>,</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>                  clutch_makes[i]<span class="sc">+</span><span class="fu">exp</span>(m)<span class="sc">*</span>theta_i[i],</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">exp</span>(m)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>theta_i[i])<span class="sc">+</span>clutch_attempts[i]<span class="sc">-</span>clutch_makes[i])</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>THETA[s,]<span class="ot">&lt;-</span>theta   }</span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(THETA) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'m'</span>,<span class="fu">paste0</span>(<span class="st">'theta'</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>))</span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>m  <span class="ot">&lt;-</span> <span class="fu">apply</span>(THETA,<span class="dv">2</span>,<span class="cf">function</span>(x){</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">quantile</span>(x,<span class="fl">0.5</span>)</span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">apply</span>(THETA,<span class="dv">2</span>,<span class="cf">function</span>(x){</span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">quantile</span>(x,<span class="fl">0.025</span>)</span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">apply</span>(THETA,<span class="dv">2</span>,<span class="cf">function</span>(x){</span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">quantile</span>(x,<span class="fl">0.975</span>)</span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">rbind</span>(l,m,h))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="do">### data input</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.845</span>,<span class="fl">0.847</span>,<span class="fl">0.880</span>,<span class="fl">0.674</span>,<span class="fl">0.909</span>,<span class="fl">0.898</span>,<span class="fl">0.770</span>,<span class="fl">0.801</span>,<span class="fl">0.801</span>,<span class="fl">0.875</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">64</span>,<span class="dv">72</span>,<span class="dv">55</span>,<span class="dv">27</span>,<span class="dv">75</span>,<span class="dv">24</span>,<span class="dv">28</span>,<span class="dv">66</span>,<span class="dv">40</span>,<span class="dv">13</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">75</span>,<span class="dv">95</span>,<span class="dv">63</span>,<span class="dv">39</span>,<span class="dv">83</span>,<span class="dv">26</span>,<span class="dv">41</span>,<span class="dv">82</span>,<span class="dv">54</span>,<span class="dv">16</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="do">### prior</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>mu_m <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>tau_m_2 <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="do">### Metropolis + Gibbs sampling</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>S<span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>PHI<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="at">nrow=</span>S,<span class="at">ncol=</span><span class="fu">length</span>(n)<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>PHI[<span class="dv">1</span>,]<span class="ot">&lt;-</span>phi<span class="ot">&lt;-</span><span class="fu">c</span>(q, <span class="dv">0</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co"># help function for Metropolis step</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>log_m <span class="ot">&lt;-</span> <span class="cf">function</span>(theta,m){</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  like  <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">dbeta</span>(theta,<span class="fu">exp</span>(m)<span class="sc">*</span>q,<span class="fu">exp</span>(m)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>q),<span class="at">log=</span><span class="cn">TRUE</span>))</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  prior <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(m,mu_m,<span class="fu">sqrt</span>(tau_m_2),<span class="at">log=</span><span class="cn">TRUE</span>)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(like<span class="sc">+</span>prior)}</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="co"># proposal candidate standard deviation</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>can_sd <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="co"># monitoring acceptance rate</span></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>acs <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>S){</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Metropolis for m</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>  can    <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>,phi[<span class="dv">11</span>],can_sd)</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>  logR   <span class="ot">&lt;-</span> <span class="fu">log_m</span>(phi[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>],can)<span class="sc">-</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">log_m</span>(phi[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>],phi[<span class="dv">11</span>])</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">log</span>(<span class="fu">runif</span>(<span class="dv">1</span>))<span class="sc">&lt;</span>logR){</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>    phi[<span class="dv">11</span>] <span class="ot">&lt;-</span> can; acs <span class="ot">&lt;-</span> acs<span class="sc">+</span><span class="dv">1</span> </span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Gibbs for theta</span></span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(n) ) {</span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    phi[i] <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>, <span class="fu">exp</span>(phi[<span class="dv">11</span>])<span class="sc">*</span>q[i]<span class="sc">+</span>y[i],<span class="fu">exp</span>(phi[<span class="dv">11</span>])<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>q[i])<span class="sc">+</span>n[i]<span class="sc">-</span>y[i] )</span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>  PHI[s,] <span class="ot">&lt;-</span> phi</span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>acs<span class="sc">/</span>S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                 l          m         h
-m       -6.1497608 -0.0436406 6.1522360
-theta1   0.7692842  0.8537667 0.9221640
-theta2   0.6720688  0.7675458 0.8465951
-theta3   0.7869519  0.8781092 0.9407620
-theta4   0.5473253  0.6894088 0.8156575
-theta5   0.8363182  0.9067686 0.9554855
-theta6   0.8107664  0.9255316 0.9878943
-theta7   0.5489381  0.7000458 0.8130150
-theta8   0.7175611  0.8066776 0.8793668
-theta9   0.6295750  0.7550732 0.8458728
-theta10  0.6171985  0.8422602 0.9536693</code></pre>
+<pre><code>[1] 0.2802</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 目标接受率</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># • 0.2 到 0.5：</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 这是 Metropolis 算法的常见推荐范围。一般来说，较低的接受率可能意味着步长太大，</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 导致大量候选值被拒绝；较高的接受率可能意味着步长太小，导致缺乏足够的探索。适中的接受率通常是最理想的。</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 如何调整接受率？</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co"># • 调整候选分布的标准差（can_sd）：</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 如果接受率较低，可以尝试增大 can_sd，从而让候选值更有可能接受。</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 如果接受率较高，可以尝试减小 can_sd，以避免候选值过于接近当前值，从而增加采样的多样性。</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 在Metropolis-Hastings算法中，can_sd 是用来生成候选值（candidate values）的标准差，它决定了每次提议的新候选点（can）与当前点（phi[11]）之间的距离。</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 这是一个非常重要的超参数，它影响了算法的收敛速度和效率。具体来说，它决定了提议的新参数值的“步长”，即每次更新时的幅度</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(PHI[<span class="dv">5000</span><span class="sc">:</span><span class="dv">10000</span>, ], <span class="dv">2</span>, </span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>      <span class="cf">function</span>(x) <span class="fu">quantile</span>(x,<span class="fu">c</span>(<span class="fl">0.05</span>,<span class="fl">0.5</span>,<span class="fl">0.95</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]
+5%  0.8104456 0.7615902 0.8440256 0.6295148 0.8784673 0.8660099 0.6932799
+50% 0.8461988 0.8272104 0.8800869 0.6763726 0.9087521 0.9002698 0.7609262
+95% 0.8804987 0.8538625 0.9106061 0.7280584 0.9333923 0.9352580 0.7931326
+         [,8]      [,9]     [,10]    [,11]
+5%  0.7627631 0.7299636 0.8242682 3.746227
+50% 0.8018394 0.7935902 0.8730267 5.535272
+95% 0.8407672 0.8249428 0.9063106 8.804084</code></pre>
 </div>
 </div>
 </section>
 <section id="e-1" class="level2">
 <h2 class="anchored" data-anchor-id="e-1">e</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rjags)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(coda)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>model_string <span class="ot">&lt;-</span> <span class="st">"</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="st">model {</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="st">  for (i in 1:n_players) {</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="st">    clutch_makes[i] ~ dbin(theta[i], clutch_attempts[i])</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="st">    theta[i] ~ dbeta(alpha[i], beta[i])</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="st">    alpha[i] &lt;- exp(m[i]) * theta_i[i]</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="st">    beta[i] &lt;- exp(m[i]) * (1 - theta_i[i]) </span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>theta_i <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.845</span>, <span class="fl">0.847</span>, <span class="fl">0.880</span>, <span class="fl">0.674</span>, <span class="fl">0.909</span>, <span class="fl">0.898</span>, <span class="fl">0.770</span>, <span class="fl">0.801</span>, <span class="fl">0.802</span>, <span class="fl">0.875</span>)</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>clutch_makes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">64</span>, <span class="dv">72</span>, <span class="dv">55</span>, <span class="dv">27</span>, <span class="dv">75</span>, <span class="dv">24</span>, <span class="dv">28</span>, <span class="dv">66</span>, <span class="dv">40</span>, <span class="dv">13</span>)</span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>clutch_attempts <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">75</span>, <span class="dv">95</span>, <span class="dv">63</span>, <span class="dv">39</span>, <span class="dv">83</span>, <span class="dv">26</span>, <span class="dv">41</span>, <span class="dv">82</span>, <span class="dv">54</span>, <span class="dv">16</span>)</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>n_players <span class="ot">&lt;-</span> <span class="fu">length</span>(theta_i)</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_players<span class="sc">*</span><span class="dv">10</span>,<span class="dv">0</span>,<span class="fu">sqrt</span>(<span class="dv">10</span>))</span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>data_jags <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">theta_i =</span> theta_i,         </span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">clutch_makes =</span> clutch_makes,</span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">clutch_attempts =</span> clutch_attempts,</span>
-<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_players =</span> n_players,</span>
-<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">m=</span>m</span>
-<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">jags.model</span>(<span class="fu">textConnection</span>(model_string), <span class="at">data =</span> data_jags,  <span class="at">n.chains =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rjags)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(coda)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>model_string <span class="ot">&lt;-</span> <span class="st">"</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="st">model {</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="st">  for (i in 1:n_players) {</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="st">    clutch_makes[i] ~ dbin(theta[i], clutch_attempts[i])</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="st">    theta[i] ~ dbeta(alpha[i], beta[i])</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="st">    alpha[i] &lt;- exp(m) * theta_i[i]</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="st">    beta[i] &lt;- exp(m) * (1 - theta_i[i]) </span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="st">   m ~ dnorm(0,1/10)</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>theta_i <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.845</span>, <span class="fl">0.847</span>, <span class="fl">0.880</span>, <span class="fl">0.674</span>, <span class="fl">0.909</span>, <span class="fl">0.898</span>, <span class="fl">0.770</span>, <span class="fl">0.801</span>, <span class="fl">0.802</span>, <span class="fl">0.875</span>)</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>clutch_makes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">64</span>, <span class="dv">72</span>, <span class="dv">55</span>, <span class="dv">27</span>, <span class="dv">75</span>, <span class="dv">24</span>, <span class="dv">28</span>, <span class="dv">66</span>, <span class="dv">40</span>, <span class="dv">13</span>)</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>clutch_attempts <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">75</span>, <span class="dv">95</span>, <span class="dv">63</span>, <span class="dv">39</span>, <span class="dv">83</span>, <span class="dv">26</span>, <span class="dv">41</span>, <span class="dv">82</span>, <span class="dv">54</span>, <span class="dv">16</span>)</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>n_players <span class="ot">&lt;-</span> <span class="fu">length</span>(theta_i)</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>data_jags <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">theta_i =</span> theta_i,         </span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">clutch_makes =</span> clutch_makes,</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">clutch_attempts =</span> clutch_attempts,</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_players =</span> n_players</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">jags.model</span>(<span class="fu">textConnection</span>(model_string), <span class="at">data =</span> data_jags)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Compiling model graph
    Resolving undeclared variables
    Allocating nodes
 Graph information:
    Observed stochastic nodes: 10
-   Unobserved stochastic nodes: 10
-   Total graph size: 182
+   Unobserved stochastic nodes: 11
+   Total graph size: 77
 
 Initializing model</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update</span>(model, <span class="dv">10000</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>n_samples <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">coda.samples</span>(model, <span class="at">variable.names =</span> <span class="fu">c</span>(<span class="st">'theta'</span>), <span class="at">n.iter =</span> n_samples)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="bayesian-hw-3_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="bayesian-hw-3_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="bayesian-hw-3_files/figure-html/unnamed-chunk-9-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="bayesian-hw-3_files/figure-html/unnamed-chunk-9-4.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update</span>(model, <span class="dv">10000</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>n_samples <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">coda.samples</span>(model, <span class="at">variable.names =</span> <span class="fu">c</span>(<span class="st">'theta'</span>,<span class="st">'m'</span>), <span class="at">n.iter =</span> n_samples)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(samples)</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Iterations = 11001:21000
 Thinning interval = 1 
-Number of chains = 3 
+Number of chains = 1 
 Sample size per chain = 10000 
 
 1. Empirical mean and standard deviation for each variable,
    plus standard error of the mean:
 
-            Mean       SD  Naive SE Time-series SE
-theta[1]  0.8452 0.005708 3.295e-05      4.159e-05
-theta[2]  0.7642 0.041920 2.420e-04      3.139e-04
-theta[3]  0.8726 0.042072 2.429e-04      3.221e-04
-theta[4]  0.6917 0.071989 4.156e-04      5.393e-04
-theta[5]  0.9038 0.032282 1.864e-04      2.542e-04
-theta[6]  0.9230 0.050969 2.943e-04      4.886e-04
-theta[7]  0.6832 0.070888 4.093e-04      5.212e-04
-theta[8]  0.8039 0.041128 2.375e-04      3.099e-04
-theta[9]  0.7411 0.059118 3.413e-04      4.317e-04
-theta[10] 0.8158 0.090386 5.218e-04      7.673e-04
+            Mean      SD  Naive SE Time-series SE
+m         5.6468 1.45783 0.0145783      0.0868771
+theta[1]  0.8471 0.02170 0.0002170      0.0002935
+theta[2]  0.8189 0.03000 0.0003000      0.0010050
+theta[3]  0.8789 0.02011 0.0002011      0.0002743
+theta[4]  0.6768 0.03189 0.0003189      0.0004417
+theta[5]  0.9075 0.01738 0.0001738      0.0002581
+theta[6]  0.9013 0.02185 0.0002185      0.0003296
+theta[7]  0.7539 0.03360 0.0003360      0.0008675
+theta[8]  0.8015 0.02322 0.0002322      0.0003117
+theta[9]  0.7871 0.02933 0.0002933      0.0007309
+theta[10] 0.8688 0.02783 0.0002783      0.0005046
 
 2. Quantiles for each variable:
 
             2.5%    25%    50%    75%  97.5%
-theta[1]  0.8338 0.8414 0.8452 0.8491 0.8562
-theta[2]  0.6768 0.7367 0.7663 0.7931 0.8413
-theta[3]  0.7795 0.8464 0.8767 0.9029 0.9421
-theta[4]  0.5428 0.6448 0.6946 0.7423 0.8230
-theta[5]  0.8320 0.8840 0.9073 0.9269 0.9572
-theta[6]  0.7973 0.8961 0.9337 0.9613 0.9899
-theta[7]  0.5374 0.6358 0.6863 0.7331 0.8130
-theta[8]  0.7169 0.7772 0.8064 0.8331 0.8774
-theta[9]  0.6173 0.7024 0.7439 0.7829 0.8482
-theta[10] 0.6081 0.7608 0.8282 0.8832 0.9542</code></pre>
+m         3.3132 4.6310 5.4553 6.4217 9.1306
+theta[1]  0.8012 0.8359 0.8468 0.8590 0.8915
+theta[2]  0.7472 0.8019 0.8255 0.8417 0.8596
+theta[3]  0.8326 0.8687 0.8798 0.8900 0.9184
+theta[4]  0.6096 0.6604 0.6760 0.6935 0.7463
+theta[5]  0.8683 0.8985 0.9085 0.9176 0.9404
+theta[6]  0.8539 0.8911 0.9005 0.9127 0.9472
+theta[7]  0.6693 0.7391 0.7609 0.7738 0.8061
+theta[8]  0.7521 0.7893 0.8018 0.8144 0.8486
+theta[9]  0.7124 0.7733 0.7933 0.8052 0.8333
+theta[10] 0.7983 0.8585 0.8727 0.8831 0.9155</code></pre>
 </div>
 </div>
 </section>
@@ -775,34 +777,12 @@ theta[10] 0.6081 0.7608 0.8282 0.8832 0.9542</code></pre>
 <section id="g" class="level2">
 <h2 class="anchored" data-anchor-id="g">g</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gelman.diag</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">effectiveSize</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Potential scale reduction factors:
-
-          Point est. Upper C.I.
-theta[1]           1          1
-theta[2]           1          1
-theta[3]           1          1
-theta[4]           1          1
-theta[5]           1          1
-theta[6]           1          1
-theta[7]           1          1
-theta[8]           1          1
-theta[9]           1          1
-theta[10]          1          1
-
-Multivariate psrf
-
-1</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">effectiveSize</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> theta[1]  theta[2]  theta[3]  theta[4]  theta[5]  theta[6]  theta[7]  theta[8] 
- 18868.76  17938.88  17155.16  17829.75  16164.55  10975.89  18536.28  17634.65 
- theta[9] theta[10] 
- 18782.59  13878.84 </code></pre>
+<pre><code>        m  theta[1]  theta[2]  theta[3]  theta[4]  theta[5]  theta[6]  theta[7] 
+ 281.5805 5462.2535  891.0153 5375.9382 5214.3595 4531.7621 4394.1540 1500.3891 
+ theta[8]  theta[9] theta[10] 
+5548.9675 1610.5162 3042.1324 </code></pre>
 </div>
 </div>
 </section>
@@ -813,18 +793,18 @@ Multivariate psrf
 <section id="a-2" class="level2">
 <h2 class="anchored" data-anchor-id="a-2">a</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(galaxies)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>?galaxies</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> galaxies</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(Y)</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Y,<span class="at">breaks=</span><span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(galaxies)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>?galaxies</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> galaxies</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(Y)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Y,<span class="at">breaks=</span><span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="bayesian-hw-3_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="bayesian-hw-3_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -836,29 +816,29 @@ Multivariate psrf
 <section id="b-2" class="level2">
 <h2 class="anchored" data-anchor-id="b-2">b</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rjags)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(coda)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>model_string <span class="ot">&lt;-</span> <span class="st">"</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="st">model {</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="st">  for (i in 1:s) {</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="st">    Y[i] ~ dt(mu, tau, k)</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="st">  mu ~ dnorm(0, 1/10000^2)</span></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="st">  tau ~ dgamma(0.01, 0.01)</span></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="st">  k ~ dunif(1, 30)</span></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>data_jags <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Y =</span>galaxies, <span class="at">s =</span> <span class="fu">length</span>(galaxies))</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置初始值</span></span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>init_values <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">mu =</span> <span class="dv">0</span>, <span class="at">tau =</span> <span class="dv">100</span>, <span class="at">k =</span> <span class="dv">15</span>)</span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 创建模型</span></span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">jags.model</span>(<span class="fu">textConnection</span>(model_string), <span class="at">data =</span> data_jags, <span class="at">inits =</span> init_values, <span class="at">n.chains =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rjags)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(coda)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>model_string <span class="ot">&lt;-</span> <span class="st">"</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="st">model {</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="st">  for (i in 1:s) {</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="st">    Y[i] ~ dt(mu, tau, k)</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="st">  mu ~ dnorm(0, 1/10000^2)</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="st">  tau ~ dgamma(0.01, 0.01)</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="st">  k ~ dunif(1, 30)</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>data_jags <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Y =</span>galaxies, <span class="at">s =</span> <span class="fu">length</span>(galaxies))</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置初始值</span></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>init_values <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">mu =</span> <span class="dv">0</span>, <span class="at">tau =</span> <span class="dv">100</span>, <span class="at">k =</span> <span class="dv">15</span>)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 创建模型</span></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">jags.model</span>(<span class="fu">textConnection</span>(model_string), <span class="at">data =</span> data_jags, <span class="at">inits =</span> init_values, <span class="at">n.chains =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Compiling model graph
    Resolving undeclared variables
@@ -870,19 +850,19 @@ Graph information:
 
 Initializing model</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 更新模型</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">update</span>(model, <span class="dv">10000</span>)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 采样</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>n_samples <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">coda.samples</span>(model, <span class="at">variable.names =</span> <span class="fu">c</span>(<span class="st">"mu"</span>, <span class="st">"tau"</span>, <span class="st">"k"</span>), <span class="at">n.iter =</span> n_samples)</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 绘制轨迹图</span></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 更新模型</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">update</span>(model, <span class="dv">10000</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 采样</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>n_samples <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">coda.samples</span>(model, <span class="at">variable.names =</span> <span class="fu">c</span>(<span class="st">"mu"</span>, <span class="st">"tau"</span>, <span class="st">"k"</span>), <span class="at">n.iter =</span> n_samples)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 绘制轨迹图</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="bayesian-hw-3_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="bayesian-hw-3_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -891,23 +871,23 @@ Initializing model</code></pre>
 <section id="c-2" class="level2">
 <h2 class="anchored" data-anchor-id="c-2">c</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>posterior_means <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">as.matrix</span>(samples), <span class="dv">2</span>, mean)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 从后验均值计算t分布</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>mu_posterior <span class="ot">&lt;-</span> posterior_means[<span class="st">"mu"</span>]</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>sigma_posterior <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(posterior_means[<span class="st">"tau"</span>])</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>k_posterior <span class="ot">&lt;-</span> posterior_means[<span class="st">"k"</span>]</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 生成t分布的随机样本</span></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>t_dist_samples <span class="ot">&lt;-</span> <span class="fu">rt</span>(<span class="dv">10000</span>, <span class="at">df =</span> k_posterior, <span class="at">ncp =</span> mu_posterior)</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 绘制观察数据和t分布的对比图</span></span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(galaxies, <span class="at">probability =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.5</span>), <span class="at">main =</span> <span class="st">"Comparison of Data and t-distribution"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fu">min</span>(galaxies), <span class="fu">max</span>(galaxies)))</span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(t_dist_samples), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">10000</span>,<span class="dv">35000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>posterior_means <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">as.matrix</span>(samples), <span class="dv">2</span>, mean)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 从后验均值计算t分布</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>mu_posterior <span class="ot">&lt;-</span> posterior_means[<span class="st">"mu"</span>]</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>sigma_posterior <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(posterior_means[<span class="st">"tau"</span>])</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>k_posterior <span class="ot">&lt;-</span> posterior_means[<span class="st">"k"</span>]</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 生成t分布的随机样本</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>t_dist_samples <span class="ot">&lt;-</span> <span class="fu">rt</span>(<span class="dv">10000</span>, <span class="at">df =</span> k_posterior, <span class="at">ncp =</span> mu_posterior)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 绘制观察数据和t分布的对比图</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(galaxies, <span class="at">probability =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.5</span>), <span class="at">main =</span> <span class="st">"Comparison of Data and t-distribution"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fu">min</span>(galaxies), <span class="fu">max</span>(galaxies)))</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(t_dist_samples), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">10000</span>,<span class="dv">35000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="bayesian-hw-3_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="bayesian-hw-3_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
