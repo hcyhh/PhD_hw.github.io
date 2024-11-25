@@ -1,0 +1,122 @@
+# survival hw 6 {.unnumbered}
+
+![](images/clipboard-2512413188.png)
+
+**a**
+
+```{r}
+library(survival)
+library(ClinicalTrialSummary)
+data(ggas)
+# group 0: Chemotherapy only; 1: Chemotherapy plus radiotherapy
+dat <- ggas
+dat$time <- dat$time * 365
+
+# 暴露组： Chemotherapy only 对照组：Chemotherapy plus radiotherapy
+dat$therapy <- ifelse(dat$group == 0, 1, 0) 
+
+model_a <- coxph(Surv(time, event) ~ therapy, dat)
+summary(model_a)
+
+```
+
+::: callout-note
+## 结果解读
+
+Cox模型结果显示，治疗（therapy）对事件风险的影响不显著（HR = 0.90, 95% CI: 0.58–1.40, p = 0.638），风险比接近1，说明治疗效果较弱且无统计学意义。模型的一致性指数为0.562，预测能力较低，三个检验（似然比、Wald和对数秩）p值均为0.6，进一步支持治疗的作用不显著。需更大样本或更明确的治疗方案验证其临床意义。
+:::
+
+**b**
+
+```{r}
+# 这里t由coxph直接传入了
+model_b <- coxph(Surv(time, event) ~ therapy + tt(therapy), dat,
+               tt = function(x, t, ...)x*log(t))
+summary(model_b)
+```
+
+```{r}
+# KK书上引入时依变量的方法
+dat.cp <- survSplit(dat,cut = dat$time[dat$event==1],
+                    end = 'time',event = 'event',start = 'start',id='id')
+
+dat.cp$logttherapy <- dat.cp$therapy *log(dat.cp$time)
+
+coxph(Surv(dat.cp$start,dat.cp$time,dat.cp$event)~
+        logttherapy+therapy+cluster(id),data=dat.cp)
+
+```
+
+**c**
+
+```{r}
+# KK书上关于时依变量的代码
+# load("/Users/hcy/Zotero/storage/CE9IAU3S/addicts.rda")
+# head(addicts)
+#  
+#  
+# addicts.cp <- survSplit(addicts,cut = addicts$survt[addicts$status==1],end = 'survt',
+#                        event = 'status',start = 'start')
+#  
+# head(addicts.cp)
+#  
+# addicts.cp$logtdose <- addicts.cp$dose*log(addicts.cp$survt)
+#  
+# addicts.cp[addicts.cp$id==1,]
+# addicts[addicts$id==1,]
+#  
+# coxph(Surv(addicts.cp$start,addicts.cp$survt,addicts.cp$status)~
+#         prison+dose+clinic+logtdose+cluster(id),data=addicts.cp)
+# 
+# addicts.cp365 <- survSplit(addicts,cut = 365,end = 'survt',
+#                         event = 'status',start = 'start')
+# 
+# addicts.cp365$hv1 <- addicts.cp365$clinic*(addicts.cp365$start<365)
+# 
+# addicts.cp365$hv2 <- addicts.cp365$clinic*(addicts.cp365$start>=365)
+# 
+# Y365=Surv(addicts.cp365$start,addicts.cp365$survt, addicts.cp365$status)
+# 
+# coxph(Y365 ~ prison + dose + hv1 + hv2 + cluster(id), data=addicts.cp365)
+# 
+# coxph(Y365 ~ prison + dose + hv1 + hv2 + cluster(id), data=addicts.cp365,method = 'breslow')
+# 
+# coxph(Y365 ~ prison + dose + clinc + hv1 + hv2 + cluster(id), data=addicts.cp365,method = 'breslow')
+
+```
+
+```{r}
+tao <- unique(sort(dat$time[dat$event==1]))
+l <- numeric(length(tao))
+for (i in 1:length(tao)) {
+  temp <- survSplit(Surv(time, event) ~ group, data= dat, cut=c(tao[i]),
+                    episode= "tgroup", id="id",start='tstart')
+  fit <- coxph(Surv(tstart, time, event) ~ group +
+                 group:factor(tgroup), data=temp)
+  l[i] <- logLik(fit)
+}
+(taoHat <- tao[which.max(l)])
+
+```
+
+**d**
+
+```{r}
+temp_d <- survSplit(Surv(time, event) ~ group, data= dat, cut=254,
+                  episode= "tgroup", id="id")
+temp_d$group1 <- ifelse(temp_d$group==0 & temp_d$tgroup==1,1,0)
+temp_d$group2 <- ifelse(temp_d$group==0 & temp_d$tgroup==2,1,0)
+fit_d2 <- coxph(Surv(tstart, time, event) ~ group1 + group2, data=temp_d)
+summary(fit_d2)
+
+```
+
+![](images/clipboard-75550934.png)
+
+![](images/clipboard-1219060010.png)
+
+![](images/clipboard-1907947812.png)
+
+![](images/clipboard-303463622.png)
+
+![](images/clipboard-1641260892.png)

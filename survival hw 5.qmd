@@ -1,4 +1,4 @@
-# survival hw 1 {.unnumbered}
+# survival hw 5 {.unnumbered}
 
 KK书，chapter 3 Practice Exercises KM书 8.1，8.5 1）使用软件built-in函数，完成题目 2）使用自编code，完成题目中的Wald test, Likelihood ratio test 3）使用软件built-in函数，相持计算的argument更换为“exact”、“efron”、“descrete”，重复分析，看看结果差得大不大 R user 可加载下面的包导入数据 library(KMsurv) data(hodg)
 
@@ -31,7 +31,6 @@ summary(model)
 
 ```
 
-
 **(c) Suppose that we have the following model for the hazard rates in the four groups:**
 
 ```{=tex}
@@ -44,33 +43,29 @@ h(t|HOD Auto) &= h_0(t)exp(0.5) \\
 ```
 What are the risk coefficients, $\beta_i$ , i = 1, 2, 3, for the interaction model in part b ?
 
-
 $$
 h(t)=h_0(t)exp(\beta_1Auto + \beta_2 HOD + \beta3 Auto*HOD)
-$$
-allo_nhl 0 0 
+$$ allo_nhl 0 0
 
-allo_hod 0 1 
+allo_hod 0 1
 
 nhl_auto 1 0
 
-hod__auto 1 1
+hod\_\_auto 1 1
 
+```{=tex}
 \begin{align}
 \beta_1 & = 1.5 \\
 \beta_2 &= 2 \\
 \beta_1 + beta_2 +\beta_3 &= 0.5 \\
 \beta_3 &= 0.5-1.5-2 =-3
 \end{align}
-
-
-
+```
 ## KM 8.5
 
+Using the data set in Exercise 1, using the Breslow method of handling ties,
 
-Using the data set in Exercise 1, using the Breslow method of handling ties,  
-
-(a) Analyze the data by performing a global test of no effect of group as defined in Exercise 8.1(a) on survival. Construct an ANOVA table to summarize estimates of the risk coefficients and the results of the one degree of freedom tests for each covariate in the model. 
+(a) Analyze the data by performing a global test of no effect of group as defined in Exercise 8.1(a) on survival. Construct an ANOVA table to summarize estimates of the risk coefficients and the results of the one degree of freedom tests for each covariate in the model.
 
 ```{r}
 model1 <- coxph(Surv(time,delta)~new,data=hodg,ties = 'breslow')
@@ -83,8 +78,6 @@ anova(model1, model2)
 
 ```
 
-
-
 (b) Repeat part (a) using the coding as described in Exercise 8.1(b). Furthermore, test the hypothesis of disease type by transplant interaction using a likelihood ratio rest based on this coding. Repeat using the Wald test.
 
 ```{r}
@@ -94,8 +87,7 @@ anova(model2, model3)
 
 ```
 
-
-(c) Find point estimates and 95% confidence intervals for the relative risk of death for an NHL Auto transplant patient as compared to an NHL Allo transplant patient.  
+(c) Find point estimates and 95% confidence intervals for the relative risk of death for an NHL Auto transplant patient as compared to an NHL Allo transplant patient.
 
 ```{r}
 coef(model1)[2]
@@ -103,8 +95,7 @@ confint(model1)[2, ]
 
 ```
 
-
-(d) Find the p-value of a test of the hypothesis that the hazard rates are the same for HOD Allo transplants and NHL Allo patients, using the Wald test. Repeat a similar test for Auto patients. 
+(d) Find the p-value of a test of the hypothesis that the hazard rates are the same for HOD Allo transplants and NHL Allo patients, using the Wald test. Repeat a similar test for Auto patients.
 
 ```{r}
 library(aod) # wald.test
@@ -112,9 +103,7 @@ wald.test(b = coef(model3), Sigma = vcov(model3), Terms = 1)
 
 ```
 
-
-(e) Test the hypothesis, using the Wald test, that the hazard rates for Auto transplant and Allo transplant patients are the same for each disease group against the alternative that the hazard rates for Auto transplant and Allo transplant patients for at least one group are different using a two-degree of freedom test of H0 : h(t | NHL Allo)  h(t | NHL Auto) and H0 : h(t | HOD Allo)  h(t | HOD Auto).
-
+(e) Test the hypothesis, using the Wald test, that the hazard rates for Auto transplant and Allo transplant patients are the same for each disease group against the alternative that the hazard rates for Auto transplant and Allo transplant patients for at least one group are different using a two-degree of freedom test of H0 : h(t \| NHL Allo)  h(t \| NHL Auto) and H0 : h(t \| HOD Allo)  h(t \| HOD Auto).
 
 ```{r}
 library(aod) # wald.test
@@ -124,26 +113,3 @@ ws.e <- t(coef(model3)[2:3]-0) %*% solve(vcov(model3)[2:3,2:3]) %*% (coef(model3
 pchisq(q = ws.e, df = 2, lower.tail = F)
 
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -19,8 +19,8 @@ book:
         - bayesian hw 4.qmd
     - part: Survival.qmd
       chapters: 
-        - survival hw 1.qmd
-        - survival hw 2.qmd
+        - survival hw 5.qmd
+        - survival hw 6.qmd
     - part: Causal inference.qmd
       chapters: 
         - causal inference hw 1.qmd
