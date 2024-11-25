@@ -2,6 +2,16 @@
 
 KK书，chapter 3 Practice Exercises KM书 8.1，8.5 1）使用软件built-in函数，完成题目 2）使用自编code，完成题目中的Wald test, Likelihood ratio test 3）使用软件built-in函数，相持计算的argument更换为“exact”、“efron”、“descrete”，重复分析，看看结果差得大不大 R user 可加载下面的包导入数据 library(KMsurv) data(hodg)
 
+## KK书 3 Practice Exercises
+
+![](images/clipboard-3990348013.png)
+
+![](images/clipboard-70447289.png)
+
+![](images/clipboard-1079670449.png)
+
+![](images/clipboard-604287900.png){width="701"}
+
 ## KM 8.1
 
 In section 1.10, times to death or relapse (in days) are given for 23 nonHodgkin’s lymphoma (NHL) patients, 11 receiving an allogenic (Allo) transplant from an HLA-matched sibling donor and 12 patients receiving an autologous (Auto) transplant. Also, data on 20 Hodgkin’s lymphoma (HOD) patients, 5 receiving an allogenic (Allo) transplant from an HLAmatched sibling donor and 15 patients receiving an autologous (Auto) transplant is given.
