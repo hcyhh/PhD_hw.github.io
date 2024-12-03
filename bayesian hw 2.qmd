@@ -656,6 +656,8 @@ plot(theta1,theta2)
 
 ![](images/clipboard-1708985237.png)
 
+直接把两个数据相加，用原始的先验
+
 ```{r}
 # 重复5.14 计算出 theta1 2 的后验分布
 model_string <- "

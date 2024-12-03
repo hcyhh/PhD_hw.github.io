@@ -154,9 +154,8 @@ effectiveSize(samples)
 ![](images/clipboard-1198587299.png)
 
 ## a
-首先共轭
-beta分布对于概率$\theta$来说是常规的先验分布设置手段。因为其足够灵活并且在0，1之间变化; 其次，这样设置还有现实意义的解释，即beta分布中，a=命中多少个，b=未能命中的个数; 最后，添加了一个exp(m)这样一个调节的量，表示在常规命中率的基础上引入变化
-exp（m）等于试验总次数取exp保持其为正，exp(m)q/(a+b)=成功的概率刚好等于q，表示平时命中率用到了样本信息
+
+首先共轭 beta分布对于概率$\theta$来说是常规的先验分布设置手段。因为其足够灵活并且在0，1之间变化; 其次，这样设置还有现实意义的解释，即beta分布中，a=命中多少个，b=未能命中的个数; 最后，添加了一个exp(m)这样一个调节的量，表示在常规命中率的基础上引入变化 exp（m）等于试验总次数取exp保持其为正，exp(m)q/(a+b)=成功的概率刚好等于q，表示平时命中率用到了样本信息
 
 ```{r}
 
@@ -185,8 +184,7 @@ lines(density(probabilities), col = "red", lwd = 2)
 
 ## b
 
-m引入了不确定性
-exp(m)先验样本量
+m引入了不确定性 exp(m)先验样本量
 
 ## c
 
@@ -203,31 +201,24 @@ $$
 q <- c(0.845,0.847,0.880,0.674,0.909,0.898,0.770,0.801,0.801,0.875)
 y <- c(64,72,55,27,75,24,28,66,40,13)
 n <- c(75,95,63,39,83,26,41,82,54,16)
-
 ### prior
 mu_m <- 0
 tau_m_2 <- 10
-
 ### Metropolis + Gibbs sampling
 set.seed(1)
 S<-10000
 PHI<-matrix(nrow=S,ncol=length(n)+1)
 PHI[1,]<-phi<-c(q, 0)
-
 # help function for Metropolis step
 log_m <- function(theta,m){
   like  <- sum(dbeta(theta,exp(m)*q,exp(m)*(1-q),log=TRUE))
   prior <- dnorm(m,mu_m,sqrt(tau_m_2),log=TRUE)
   return(like+prior)}
-
 # proposal candidate standard deviation
 can_sd <- 2
-
 # monitoring acceptance rate
 acs <- 0
-
 for(s in 2:S){
-  
   # Metropolis for m
   can    <- rnorm(1,phi[11],can_sd)
   logR   <- log_m(phi[1:10],can)-
@@ -235,28 +226,13 @@ for(s in 2:S){
   if(log(runif(1))<logR){
     phi[11] <- can; acs <- acs+1 
   }
-  
   # Gibbs for theta
   for (i in 1:length(n) ) {
     phi[i] <- rbeta(1, exp(phi[11])*q[i]+y[i],exp(phi[11])*(1-q[i])+n[i]-y[i] )
   }
-  
   PHI[s,] <- phi
 }
-
 acs/S
-
-# 目标接受率
-# 
-# •	0.2 到 0.5：
-# 这是 Metropolis 算法的常见推荐范围。一般来说，较低的接受率可能意味着步长太大，
-# 导致大量候选值被拒绝；较高的接受率可能意味着步长太小，导致缺乏足够的探索。适中的接受率通常是最理想的。
-# 
-# 如何调整接受率？
-# 
-# •	调整候选分布的标准差（can_sd）：
-# 如果接受率较低，可以尝试增大 can_sd，从而让候选值更有可能接受。
-# 如果接受率较高，可以尝试减小 can_sd，以避免候选值过于接近当前值，从而增加采样的多样性。
 
 # 在Metropolis-Hastings算法中，can_sd 是用来生成候选值（candidate values）的标准差，它决定了每次提议的新候选点（can）与当前点（phi[11]）之间的距离。
 # 这是一个非常重要的超参数，它影响了算法的收敛速度和效率。具体来说，它决定了提议的新参数值的“步长”，即每次更新时的幅度
@@ -272,29 +248,21 @@ apply(PHI[5000:10000, ], 2,
 ```{r}
 library(rjags)
 library(coda)
-
 model_string <- "
 model {
-
-
   for (i in 1:n_players) {
-
     clutch_makes[i] ~ dbin(theta[i], clutch_attempts[i])
-
     theta[i] ~ dbeta(alpha[i], beta[i])
-
     alpha[i] <- exp(m) * theta_i[i]
     beta[i] <- exp(m) * (1 - theta_i[i]) 
   }
    m ~ dnorm(0,1/10)
 }
 "
-
 theta_i <- c(0.845, 0.847, 0.880, 0.674, 0.909, 0.898, 0.770, 0.801, 0.802, 0.875)
 clutch_makes <- c(64, 72, 55, 27, 75, 24, 28, 66, 40, 13)
 clutch_attempts <- c(75, 95, 63, 39, 83, 26, 41, 82, 54, 16)
 n_players <- length(theta_i)
-
 
 data_jags <- list(
   theta_i = theta_i,         
@@ -302,8 +270,6 @@ data_jags <- list(
   clutch_attempts = clutch_attempts,
   n_players = n_players
 )
-
-
 
 model <- jags.model(textConnection(model_string), data = data_jags)
 
@@ -315,8 +281,6 @@ samples <- coda.samples(model, variable.names = c('theta','m'), n.iter = n_sampl
 # plot(samples)
 summary(samples)
 
-
-
 ```
 
 ## f
@@ -324,7 +288,6 @@ summary(samples)
 自己的代码需要推导后验分布或者用更复杂的M-H方法
 
 ## g
-
 
 ```{r}
 effectiveSize(samples)

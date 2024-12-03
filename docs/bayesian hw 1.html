@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Congyuan He">
-<meta name="dcterms.date" content="2024-11-24">
+<meta name="dcterms.date" content="2024-11-28">
 
 <title>博士期间作业 - bayesian hw 1</title>
 <style>
@@ -229,14 +229,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./survival hw 1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">survival hw 1</span></a>
+  <a href="./survival hw 5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">survival hw 5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./survival hw 2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">survival hw 2</span></a>
+  <a href="./survival hw 6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">survival hw 6</span></a>
   </div>
 </li>
       </ul>
@@ -324,7 +324,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 24, 2024</p>
+      <p class="date">November 28, 2024</p>
     </div>
   </div>
   
@@ -547,22 +547,22 @@ Start = 2001
 End = 2007 
 Thinning interval = 1 
            gamma p    theta1    theta2
-[1,] -0.01314264 0 0.3846431 0.3977858
-[2,] -0.03317147 0 0.3616940 0.3948654
-[3,]  0.04888723 1 0.3944410 0.3455537
-[4,]  0.05529894 1 0.4600567 0.4047577
-[5,]  0.16454941 1 0.4537861 0.2892367
-[6,]  0.07728503 1 0.3546241 0.2773390
-[7,]  0.02552126 1 0.3679511 0.3424299</code></pre>
+[1,] 0.023010830 1 0.4000277 0.3770169
+[2,] 0.018173025 1 0.3901233 0.3719502
+[3,] 0.003834567 1 0.3489312 0.3450966
+[4,] 0.018618141 1 0.4363264 0.4177083
+[5,] 0.101206763 1 0.4050952 0.3038884
+[6,] 0.039708602 1 0.3476874 0.3079788
+[7,] 0.112117808 1 0.4311559 0.3190381</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mcmc_samples[[<span class="dv">1</span>]][,<span class="st">'p'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7322</code></pre>
+<pre><code>[1] 0.7259</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 还可以拿出来直接算</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mcmc_samples[[<span class="dv">1</span>]][,<span class="st">'theta1'</span>]<span class="sc">&gt;=</span>mcmc_samples[[<span class="dv">1</span>]][,<span class="st">'theta2'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7322</code></pre>
+<pre><code>[1] 0.7259</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 知道后验分布 直接蒙特卡洛算</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">n1=</span><span class="dv">80</span>,<span class="at">n2=</span><span class="dv">100</span>,</span>
@@ -641,18 +641,18 @@ Start = 1001
 End = 1007 
 Thinning interval = 1 
        theta1   theta2
-[1,] 4.982242 4.072660
-[2,] 4.899128 4.244573
-[3,] 4.608520 3.815802
-[4,] 5.010644 4.030740
-[5,] 5.120616 3.797872
-[6,] 5.157256 4.041501
-[7,] 5.251766 3.925010</code></pre>
+[1,] 4.855552 4.025151
+[2,] 4.852221 4.008059
+[3,] 5.160709 3.929361
+[4,] 4.924075 4.312788
+[5,] 4.952397 3.982148
+[6,] 4.760714 3.999971
+[7,] 5.021981 4.076147</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mcmc_samples[[<span class="dv">1</span>]],<span class="dv">2</span>,mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  theta1   theta2 
-5.009201 4.005673 </code></pre>
+5.010653 4.006890 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gamma分布均值为a/b 套用3.3中后验分布的结果</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -709,7 +709,7 @@ Initializing model</code></pre>
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mcmc_samples[[<span class="dv">1</span>]],<span class="dv">2</span>,mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      prob      theta     ytilde 
- 0.0343000  0.1078326 10.8098000 </code></pre>
+ 0.0377000  0.1079444 10.7894000 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 不在JAGS里面算预测分布及概率的话可以这样</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
@@ -721,16 +721,16 @@ Initializing model</code></pre>
 <span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>                 )</span>
 <span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(ytilde)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.7717</code></pre>
+<pre><code>[1] 10.7913</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y&gt;=20概率</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(ytilde<span class="sc">&gt;=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0341</code></pre>
+<pre><code>[1] 0.0359</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mcmc_samples[[<span class="dv">1</span>]][,<span class="st">'ytilde'</span>]<span class="sc">&gt;=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0343</code></pre>
+<pre><code>[1] 0.0377</code></pre>
 </div>
 </div>
 </section>
@@ -780,12 +780,12 @@ Initializing model</code></pre>
 <span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mcmc_samples[[<span class="dv">1</span>]],<span class="dv">2</span>,mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     gamma      prob1      prob2     theta1     theta2    y1tilde    y2tilde 
- 0.1498037  0.9950000  0.7370000  0.2567140  0.1069103 25.9640000 10.6920000 </code></pre>
+ 0.1490780  0.9950000  0.7370000  0.2561037  0.1070257 25.8040000 10.6490000 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(mcmc_samples[[<span class="dv">1</span>]][,<span class="st">'gamma'</span>],<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%      97.5% 
-0.04468984 0.25586514 </code></pre>
+0.03813197 0.25362877 </code></pre>
 </div>
 </div>
 

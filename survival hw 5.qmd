@@ -14,26 +14,47 @@ KK书，chapter 3 Practice Exercises KM书 8.1，8.5 1）使用软件built-in函
 
 ## KM 8.1
 
-In section 1.10, times to death or relapse (in days) are given for 23 nonHodgkin’s lymphoma (NHL) patients, 11 receiving an allogenic (Allo) transplant from an HLA-matched sibling donor and 12 patients receiving an autologous (Auto) transplant. Also, data on 20 Hodgkin’s lymphoma (HOD) patients, 5 receiving an allogenic (Allo) transplant from an HLAmatched sibling donor and 15 patients receiving an autologous (Auto) transplant is given.
+![](images/clipboard-4110751215.png)
 
-**(a) Treating NHL Allo as the baseline hazard function, state the appropriate coding which would allow the investigator to test for any difference in survival functions for the four groups, treating them as four independent groups.**
+**(a)**
 
 ```{r}
+# 自己的代码 结果对 但是用了factor 题目问编码
 rm(list = ls())
 pkgs <- c('tidyverse','skimr','survival','KMsurv')
 invisible(lapply(pkgs, function(x) suppressMessages(library(x,character.only = TRUE)) ))
 
 data(hodg)
-skim(hodg)
 
 hodg$new <- ifelse(hodg$gtype==1 & hodg$dtype==1,'allo_nhl',
                             ifelse(hodg$gtype==2 & hodg$dtype==1,'autlo_nhl',ifelse(hodg$gtype==1 & hodg$dtype==2,'allo_hod','auto_hod'))) %>% factor() %>% relevel(.,ref = "allo_nhl")
 
 model <- coxph(Surv(time,delta)~new,data=hodg,ties = 'breslow')
 summary(model)
+
+
+# 编码的做法
+library(survival)
+library(KMsurv)
+data(hodg)
+
+# NhlAllo: baseline hazard
+HodAllo <- hodg$dtype==2 & hodg$gtype==1
+NhlAuto <- hodg$dtype==1 & hodg$gtype==2
+HodAuto <- hodg$dtype==2 & hodg$gtype==2
+
+fitA <- coxph(Surv(time, delta) ~ HodAllo + NhlAuto + HodAuto, 
+              ties="breslow", data = hodg)
+fitA
+
+# compare breslow, exact, efron
+fitA.exact <- update(fitA, ties="exact")
+fitA.efron <- update(fitA, ties="efron")
+cbind(coef(fitA), coef(fitA.exact), coef(fitA.efron))
+
 ```
 
-**(b) Treating NHL Allo as the baseline hazard function, state the appropriate coding which would allow the investigator to test for an interaction between type of transplant and disease type using main effects and interaction terms.**
+**(b)**
 
 ```{r}
 model <- coxph(Surv(time,delta)~gtype * dtype,data=hodg,ties = 'breslow')
@@ -41,21 +62,12 @@ summary(model)
 
 ```
 
-**(c) Suppose that we have the following model for the hazard rates in the four groups:**
-
-```{=tex}
-\begin{align}
-h(t|NHL Allo) &= h_0(t) \\
-h(t|HOD Allo) &= h_0(t)exp(2) \\
-h(t|NHL Auto) &= h_0(t)exp(1.5) \\
-h(t|HOD Auto) &= h_0(t)exp(0.5) \\
-\end{align}
-```
-What are the risk coefficients, $\beta_i$ , i = 1, 2, 3, for the interaction model in part b ?
+**(c)**
 
 $$
 h(t)=h_0(t)exp(\beta_1Auto + \beta_2 HOD + \beta3 Auto*HOD)
-$$ allo_nhl 0 0
+$$ 
+allo_nhl 0 0
 
 allo_hod 0 1
 
@@ -71,24 +83,29 @@ hod\_\_auto 1 1
 \beta_3 &= 0.5-1.5-2 =-3
 \end{align}
 ```
+
 ## KM 8.5
 
-Using the data set in Exercise 1, using the Breslow method of handling ties,
+![](images/clipboard-910235539.png)
 
-(a) Analyze the data by performing a global test of no effect of group as defined in Exercise 8.1(a) on survival. Construct an ANOVA table to summarize estimates of the risk coefficients and the results of the one degree of freedom tests for each covariate in the model.
+(a) 
 
 ```{r}
+hodg$new <- ifelse(hodg$gtype==1 & hodg$dtype==1,'allo_nhl',
+                            ifelse(hodg$gtype==2 & hodg$dtype==1,'autlo_nhl',ifelse(hodg$gtype==1 & hodg$dtype==2,'allo_hod','auto_hod'))) %>% factor() %>% relevel(.,ref = "allo_nhl")
+
 model1 <- coxph(Surv(time,delta)~new,data=hodg,ties = 'breslow')
 summary(model)
+
 
 model2 <- coxph(Surv(time, delta) ~ 1, 
               ties="breslow", data = hodg)
 anova(model1, model2)
-# anova(model1)
+anova(model1)
 
 ```
 
-(b) Repeat part (a) using the coding as described in Exercise 8.1(b). Furthermore, test the hypothesis of disease type by transplant interaction using a likelihood ratio rest based on this coding. Repeat using the Wald test.
+(b) 
 
 ```{r}
 model3 <- coxph(Surv(time,delta)~gtype * dtype,data=hodg,ties = 'breslow')
@@ -97,7 +114,7 @@ anova(model2, model3)
 
 ```
 
-(c) Find point estimates and 95% confidence intervals for the relative risk of death for an NHL Auto transplant patient as compared to an NHL Allo transplant patient.
+(c) 
 
 ```{r}
 coef(model1)[2]
@@ -105,7 +122,7 @@ confint(model1)[2, ]
 
 ```
 
-(d) Find the p-value of a test of the hypothesis that the hazard rates are the same for HOD Allo transplants and NHL Allo patients, using the Wald test. Repeat a similar test for Auto patients.
+(d) 
 
 ```{r}
 library(aod) # wald.test
@@ -113,7 +130,7 @@ wald.test(b = coef(model3), Sigma = vcov(model3), Terms = 1)
 
 ```
 
-(e) Test the hypothesis, using the Wald test, that the hazard rates for Auto transplant and Allo transplant patients are the same for each disease group against the alternative that the hazard rates for Auto transplant and Allo transplant patients for at least one group are different using a two-degree of freedom test of H0 : h(t \| NHL Allo)  h(t \| NHL Auto) and H0 : h(t \| HOD Allo)  h(t \| HOD Auto).
+(e) 
 
 ```{r}
 library(aod) # wald.test

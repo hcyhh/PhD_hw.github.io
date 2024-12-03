@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Congyuan He">
-<meta name="dcterms.date" content="2024-11-24">
+<meta name="dcterms.date" content="2024-11-28">
 
 <title>博士期间作业 - bayesian hw 3</title>
 <style>
@@ -229,14 +229,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./survival hw 1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">survival hw 1</span></a>
+  <a href="./survival hw 5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">survival hw 5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./survival hw 2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">survival hw 2</span></a>
+  <a href="./survival hw 6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">survival hw 6</span></a>
   </div>
 </li>
       </ul>
@@ -335,7 +335,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 24, 2024</p>
+      <p class="date">November 28, 2024</p>
     </div>
   </div>
   
@@ -540,7 +540,7 @@ Initializing model</code></pre>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">effectiveSize</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   delta       mu   sigma2 
-4887.925 5041.441 9048.816 </code></pre>
+5249.571 5011.195 8744.733 </code></pre>
 </div>
 </div>
 </section>
@@ -741,32 +741,32 @@ Sample size per chain = 10000
    plus standard error of the mean:
 
             Mean      SD  Naive SE Time-series SE
-m         5.5815 1.36984 0.0136984      0.0722424
-theta[1]  0.8474 0.02290 0.0002290      0.0003410
-theta[2]  0.8179 0.02997 0.0002997      0.0009239
-theta[3]  0.8780 0.02097 0.0002097      0.0003357
-theta[4]  0.6776 0.03336 0.0003336      0.0005467
-theta[5]  0.9075 0.01746 0.0001746      0.0002750
-theta[6]  0.9014 0.02174 0.0002174      0.0003343
-theta[7]  0.7535 0.03209 0.0003209      0.0007105
-theta[8]  0.8024 0.02395 0.0002395      0.0003566
-theta[9]  0.7874 0.02925 0.0002925      0.0006021
-theta[10] 0.8687 0.02691 0.0002691      0.0004726
+m         5.6291 1.38623 0.0138623      0.0745150
+theta[1]  0.8467 0.02182 0.0002182      0.0003428
+theta[2]  0.8191 0.02868 0.0002868      0.0009502
+theta[3]  0.8780 0.02128 0.0002128      0.0003354
+theta[4]  0.6782 0.03142 0.0003142      0.0004753
+theta[5]  0.9073 0.01722 0.0001722      0.0002340
+theta[6]  0.9015 0.02116 0.0002116      0.0003171
+theta[7]  0.7543 0.03338 0.0003338      0.0007306
+theta[8]  0.8027 0.02357 0.0002357      0.0003387
+theta[9]  0.7879 0.02918 0.0002918      0.0006779
+theta[10] 0.8692 0.02708 0.0002708      0.0004883
 
 2. Quantiles for each variable:
 
             2.5%    25%    50%    75%  97.5%
-m         3.3655 4.6127 5.4175 6.3568 8.7737
-theta[1]  0.7969 0.8358 0.8472 0.8599 0.8944
-theta[2]  0.7461 0.8014 0.8243 0.8405 0.8589
-theta[3]  0.8291 0.8679 0.8794 0.8899 0.9176
-theta[4]  0.6051 0.6612 0.6767 0.6946 0.7486
-theta[5]  0.8674 0.8985 0.9087 0.9178 0.9399
-theta[6]  0.8559 0.8905 0.9008 0.9130 0.9467
-theta[7]  0.6758 0.7374 0.7594 0.7734 0.8043
-theta[8]  0.7520 0.7897 0.8024 0.8157 0.8507
-theta[9]  0.7161 0.7735 0.7931 0.8056 0.8337
-theta[10] 0.8008 0.8577 0.8724 0.8832 0.9153</code></pre>
+m         3.3911 4.6504 5.4322 6.4312 8.9092
+theta[1]  0.8014 0.8354 0.8465 0.8586 0.8909
+theta[2]  0.7512 0.8025 0.8253 0.8410 0.8586
+theta[3]  0.8285 0.8678 0.8794 0.8901 0.9178
+theta[4]  0.6167 0.6611 0.6764 0.6945 0.7472
+theta[5]  0.8672 0.8985 0.9087 0.9174 0.9396
+theta[6]  0.8573 0.8910 0.9007 0.9131 0.9464
+theta[7]  0.6681 0.7393 0.7611 0.7744 0.8072
+theta[8]  0.7519 0.7901 0.8027 0.8157 0.8516
+theta[9]  0.7171 0.7736 0.7934 0.8058 0.8358
+theta[10] 0.8034 0.8578 0.8725 0.8837 0.9172</code></pre>
 </div>
 </div>
 </section>
@@ -780,9 +780,9 @@ theta[10] 0.8008 0.8577 0.8724 0.8832 0.9153</code></pre>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">effectiveSize</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        m  theta[1]  theta[2]  theta[3]  theta[4]  theta[5]  theta[6]  theta[7] 
- 359.5457 4509.2843 1052.2862 3903.3634 3723.7012 4029.9380 4227.0248 2039.9464 
+ 346.0851 4050.9905  911.1794 4024.1671 4369.1464 5413.8186 4454.2546 2087.0520 
  theta[8]  theta[9] theta[10] 
-4509.7564 2360.9132 3243.3178 </code></pre>
+4842.3959 1852.5650 3074.5285 </code></pre>
 </div>
 </div>
 </section>
